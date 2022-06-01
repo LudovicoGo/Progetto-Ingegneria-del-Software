@@ -1,16 +1,38 @@
-# This is a sample Python script.
+import sys
+from PySide6 import QtWidgets
+from random import *
+from Viste.MainVistaMobile import VistaMobile
+from Viste.MainVistaPreparazione import VistaPreparazione
+from Viste.MainVistaSala import VistaSala
+from GestioneAttività import Tavolo
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# main
+if __name__ == "__main__":
+    app = QtWidgets.QApplication([])
+    app.setStyle('Fusion')
+
+    #generazione dati di prova random
+    for i in range(0, 10):
+        rand = randint(0, 10)
+        stat = "Libero"
+        if (rand == 0 and randint(0, 1) == 1):
+            stat = "prenotato"
+        elif (rand > 0):
+            stat = "occupato"
+        tavolo=Tavolo(randint(1,10),stat)
+        tavolo.aggiungitavolo()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    widgetPreparazione = VistaPreparazione()
+    widgetPreparazione.resize(1280, 720)
+    widgetPreparazione.show()
 
+    widgetSala = VistaSala()
+    widgetSala.resize(1280, 720)
+    widgetSala.show()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    widgetMobile = VistaMobile()
+    widgetMobile.resize(540, 640)
+    widgetMobile.show()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    sys.exit(app.exec())
