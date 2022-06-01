@@ -1,11 +1,10 @@
 from PySide6.QtCore import Slot,Signal
-
-from Viste.FlowLayout import FlowLayout
-from random import *
-from Viste.Blocks.BlockTavolo import BlockTavolo
-from Model.StatoSala import StatoSala
 from PySide6 import QtWidgets
-from Model.Tavolo import Tavolo
+from random import *
+from RistoMatic.Viste.FlowLayout import FlowLayout
+from RistoMatic.Viste.Blocks.BlockTavolo import BlockTavolo
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
+from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 
 class VistaMobile(QtWidgets.QWidget):
 

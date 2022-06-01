@@ -1,5 +1,5 @@
 import datetime
-from ..GestioneAttività import ElementoMenu
+import ElementoMenu
 
 class Menu:
     def __init__(self,):

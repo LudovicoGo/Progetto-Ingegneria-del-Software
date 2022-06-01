@@ -1,5 +1,6 @@
 import ElementoComanda
 import Tavolo
+import OrdineAsporto
 
 class Comanda:
 

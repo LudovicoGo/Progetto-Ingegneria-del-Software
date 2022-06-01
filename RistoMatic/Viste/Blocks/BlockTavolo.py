@@ -1,11 +1,9 @@
 from PySide6 import QtWidgets
 from random import *
-
-from Model.Tavolo import Tavolo
-from Viste.Blocks.BlockDettaglioTavolo import VistaTavolo
-from Viste.Blocks._BlockElementiComanda import BlockListaElementiComanda
-from Model.Tavolo import Tavolo
 from PySide6.QtCore import Signal,Slot
+from RistoMatic.Viste.Blocks.BlockDettaglioTavolo import VistaTavolo
+from RistoMatic.Viste.Blocks._BlockElementiComanda import BlockListaElementiComanda
+
 
 class BlockTavolo(QtWidgets.QPushButton):
 

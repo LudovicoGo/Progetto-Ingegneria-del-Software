@@ -4,14 +4,14 @@ from random import *
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
-from GestioneAttività import Tavolo
+from GestioneAttivita.Tavolo import Tavolo
 
 # main
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     app.setStyle('Fusion')
 
-    #generazione dati di prova random
+#generazione dati di esempio
     for i in range(0, 10):
         rand = randint(0, 10)
         stat = "Libero"

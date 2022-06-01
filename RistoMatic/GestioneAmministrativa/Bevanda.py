@@ -1,4 +1,4 @@
-from ElementoMenu import ElementoMenu
+import ElementoMenu
 
 class Bevanda(ElementoMenu):
     def __init__(self,):

@@ -1,6 +1,6 @@
 from PySide6 import QtCore
 from PySide6.QtCore import Signal,Slot
-from StatoSala import StatoSala
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 
 class Tavolo(QtCore.QObject):
     numero = 1
