@@ -1,12 +1,19 @@
 class ElementoMenu():
 
-    def __init__(self, areaPreparazione, nomeElemento, prezzo):
+    def __init__(self, nomeElemento, areaPreparazione, prezzo):
         self.areaPreparazione = areaPreparazione
         self.nomeElemento = nomeElemento
         self.prezzoElemento = prezzo
 
     def __eq__(self, name):
         return self.nomeElemento == name
+
+    def getInfoElementoMenu(self):
+        return {
+            "nomeElemento": self.nomeElemento,
+            "prezzoElemento": self.prezzoElemento,
+            "areaPreparazione": self.areaPreparazione
+        }
 
     def getAreaPreparazione(self):
         return self.areaPreparazione
