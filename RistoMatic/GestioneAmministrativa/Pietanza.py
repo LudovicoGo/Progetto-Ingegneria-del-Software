@@ -3,6 +3,15 @@ from ElementoMenu import ElementoMenu
 
 class Pietanza(ElementoMenu):
     def __init__(self, listaAllergeni, listaIngredienti, prezzoPietanza, nome):
+        super().__init__(areaPreparazione="cucina", prezzoElemento=prezzoPietanza, nomeElemento=nome)
+        self.allergeni = [] + listaAllergeni
+        self.ingredienti = [] + listaIngredienti
+
+    def getInfoPietanza(self):
+        info = self.getInfoElementoMenu()
+        info['allergeni'] = self.allergeni
+        info['ingredienti'] = self.ingredienti
+        return info
 
     def aggiungiAllergene(self, allergene):
         self.allergeni.append(allergene)
