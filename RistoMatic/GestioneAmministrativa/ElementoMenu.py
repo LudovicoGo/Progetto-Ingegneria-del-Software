@@ -1,8 +1,8 @@
 class ElementoMenu():
 
-    def __init__(self, area, nome, prezzo):
-        self.areaPreparazione = area
-        self.nomeElemento = nome
+    def __init__(self, areaPreparazione, nomeElemento, prezzo):
+        self.areaPreparazione = areaPreparazione
+        self.nomeElemento = nomeElemento
         self.prezzoElemento = prezzo
 
     def __eq__(self, name):
