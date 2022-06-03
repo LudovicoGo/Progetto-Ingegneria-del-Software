@@ -72,3 +72,11 @@ class Comanda:
 
     def stampaPreconto(self):
         pass
+
+    def getTotale(self):
+        tot=0
+        for elemento in self.elementiComanda:
+            qnt = elemento.getQuantita()
+            info = elemento.getInfoElementoComanda()
+            tot = tot+ (qnt*info["Prezzo"])
+        return tot
