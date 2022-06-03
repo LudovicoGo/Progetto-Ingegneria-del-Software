@@ -4,6 +4,7 @@ class StatoSala():
     OrdiniAsporto =[]
     Tavoli = []
     Prenotazioni = []
+    Comande = []
 
 
     def __init__(self):

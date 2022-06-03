@@ -1,5 +1,5 @@
 from RistoMatic.GestioneAmministrativa.ElementoMenu import ElementoMenu
-from Enum import Zone
+from RistoMatic.GestioneAttivita.Enum import Zone
 
 
 class ElementoComanda():
@@ -9,9 +9,6 @@ class ElementoComanda():
         self.quantita=quantita
         self.isPronta = False
         #self.visibilita = False
-
-    def __init__(self):
-        pass #perchè esiste questo costruttore?
 
     def getInfoElementoComanda(self) -> dict:
         return {"Nome":self.elemento.nomeElemento,

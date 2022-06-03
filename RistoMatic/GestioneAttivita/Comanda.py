@@ -1,7 +1,7 @@
-import ElementoComanda
-from Tavolo import Tavolo
-from OrdineAsporto import OrdineAsporto
-from Enum import StatoComanda
+from RistoMatic.GestioneAttivita.ElementoComanda import ElementoComanda
+from RistoMatic.GestioneAttivita.Tavolo import Tavolo
+from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
+from RistoMatic.GestioneAttivita.Enum import StatoComanda
 import datetime
 
 class Comanda:
@@ -10,7 +10,7 @@ class Comanda:
 
     def __init__(self, rif):
         self.dataCreazione = datetime.datetime.now()
-        self.ElementiComanda= []
+        self.elementiComanda= []
         self.rif=rif
         self.sincronizzata=False
         self.numeroComanda = Comanda.counter_n_comanda
@@ -20,7 +20,7 @@ class Comanda:
         pass
 
     def aggiungiElementoComanda(self, elementoDaAggiungere : ElementoComanda):
-        self.ElementiComanda.append(elementoDaAggiungere)
+        self.elementiComanda.append(elementoDaAggiungere)
 
     def getComandaSincronizzata(self):
         return self.sincronizzata
@@ -43,11 +43,11 @@ class Comanda:
 
     def getStatoPrenotazione(self):
         count=0
-        for elemento in self.ElementiComanda:
+        for elemento in self.elementiComanda:
             if elemento.getIsPronto():
                 count=count+1
 
-        if count==self.ElementiComanda.count():
+        if count==self.elementiComanda.count():
             return StatoComanda.COMPLETATA
         elif count > 0:
             return StatoComanda.AVVIATA
@@ -58,13 +58,13 @@ class Comanda:
         pass
 
     def rimuoviElementoComanda(self, daEliminare : ElementoComanda):
-        self.ElementiComanda.remove(daEliminare)
+        self.elementiComanda.remove(daEliminare)
 
     def setComandaSincronizzata(self, comandaSincronizzata : bool):
         self.sincronizzata=comandaSincronizzata
 
     def setStatoPreparazione(self, stato : StatoComanda):
-        for elemento in self.ElementiComanda:
+        for elemento in self.elementiComanda:
             if stato==StatoComanda.COMPLETATA:
                 elemento.setIsPronta(True)
             elif stato==StatoComanda.NON_AVVIATA:
