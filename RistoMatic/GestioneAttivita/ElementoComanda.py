@@ -1,5 +1,5 @@
 from RistoMatic.GestioneAmministrativa.ElementoMenu import ElementoMenu
-from EnumZone import Zone
+from Enum import Zone
 
 
 class ElementoComanda():

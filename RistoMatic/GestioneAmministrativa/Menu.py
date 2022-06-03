@@ -17,9 +17,6 @@ class Menu:
     def eliminaElementoMenu(self, nome: str):
         del(self.listaElementi[nome])
 
-    def eliminaElementoMenu(self, elemento: ElementoMenu):
-        del(self.listaElementi[elemento.nomeElemento])
-
     def getCostoCoperto(self):
         return self.costoCoperto
 
