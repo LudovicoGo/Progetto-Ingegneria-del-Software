@@ -1,49 +1,59 @@
 from PySide6 import QtCore
 from PySide6.QtCore import Signal,Slot
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
+import datetime
 
-class Tavolo(QtCore.QObject):
-    numero = 1
-    update_ui = Signal()
+class Tavolo():
+    counter = 1
 
-
-    def __init__(self, coperti, stat):
+    def __init__(self, coperti):
         super(Tavolo, self).__init__()
-        self.numero=Tavolo.numero
-        Tavolo.numero =Tavolo.numero+1
+        self.riferimentoTavolo=Tavolo.counter
+        Tavolo.counter = Tavolo.counter + 1
         self.coperti=coperti
-        self.stat =stat
-
-    def aggiungitavolo(self,):
-        StatoSala.Tavoli.append(self)
-        self.update_ui.emit()
+        self.isLibero = True
+        #self.isPrenotato = False
+        self.nomeTavolo=""
 
     def getInfoTavolo(self) -> dict:
-        pass
+        return {
+            "riferimentoTavolo": self.riferimentoTavolo,
+            "coperti": self.coperti,
+            "libero": self.isLibero
+        }
 
     def getIsLibero(self) -> bool:
-        pass
+        return self.isLibero
 
     def getIsPrenotato(self) -> bool:
-        pass
+        prenotazioni=StatoSala.getListaPrenotazioni()
+        now = datetime.datetime.now()
+        for prenotazione in prenotazioni:
+            tavoloprenotato=prenotazione.getTavoloPrenotato()
+            dataprenotazione= prenotazione.dataPrenotazione()
+            diff = (now - dataprenotazione)
+            if tavoloprenotato.riferimentoTavolo == self.riferimentoTavolo and (diff.total_seconds()/3600 < 4):
+                return True
+
+        return False
 
     def getNomeTavolo(self) -> str:
-        pass
+        return self.nomeTavolo
 
     def getNumeroCoperti(self) -> int:
-        pass
+        return self.coperti
 
     def getRiferimentoTavolo(self) -> int:
-        pass
+        return self.riferimentoTavolo
 
     def setIsLibero(self, tavoloLibero : bool):
-        pass
+        self.isLibero=tavoloLibero
 
-    def setIsPrenotato(self,tavoloPrenotato : bool):
-        pass
+    #def setIsPrenotato(self,tavoloPrenotato : bool):
+        #pass
 
     def setNomeTavolo(self,nomeTavolo : str):
-        pass
+        self.nomeTavolo=nomeTavolo
 
     def setNumeroCoperti(self, numeroCoperti : int):
-        pass
+        self.coperti=numeroCoperti

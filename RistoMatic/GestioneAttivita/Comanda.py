@@ -1,6 +1,6 @@
 import ElementoComanda
-import Tavolo
-import OrdineAsporto
+from Tavolo import Tavolo
+from OrdineAsporto import OrdineAsporto
 from Enum import StatoComanda
 import datetime
 
@@ -26,7 +26,17 @@ class Comanda:
         return self.sincronizzata
 
     def getInfoComanda(self) -> dict:
-        pass
+        rif=""
+        if isinstance(self.rif, Tavolo):
+            rif = "Tavolo "+ str(self.rif.getRiferimentoTavolo())
+        elif isinstance(self.rif,OrdineAsporto):
+            rif = "Asporto " + str(self.rif.getNumeroOrdine())
+        return {
+            "rif": rif,
+            "dataCreazione": self.dataCreazione,
+            "numeroComanda": self.numeroComanda,
+            "sincronizzata": self.sincronizzata
+        }
 
     def getNumeroComanda(self) -> int:
         return self.numeroComanda

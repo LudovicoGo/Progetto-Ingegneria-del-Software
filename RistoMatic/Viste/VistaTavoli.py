@@ -12,7 +12,7 @@ class VistaTavoli(QtWidgets.QWidget):
 
         self.layout = FlowLayout(self)
         for tavolo in StatoSala.Tavoli:
-            self.layout.addWidget(BlockTavolo(tavolo.numero,tavolo.stat))
+            self.layout.addWidget(BlockTavolo(tavolo.numero, tavolo.stat))
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.aggiorna)
