@@ -9,6 +9,9 @@ class StatoSala():
     def __init__(self):
         pass
 
+    def aggiungiTavolo(tavolo):
+        StatoSala.Tavoli.append(tavolo)
+
     def aggiungiOrdineAsporto(self,oraConsegna : datetime):
         pass
 

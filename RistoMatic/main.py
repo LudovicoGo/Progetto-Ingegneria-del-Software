@@ -5,6 +5,7 @@ from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
 from GestioneAttivita.Tavolo import Tavolo
+from GestioneAttivita.StatoSala import StatoSala
 
 # main
 if __name__ == "__main__":
@@ -13,14 +14,8 @@ if __name__ == "__main__":
 
 #generazione dati di esempio
     for i in range(0, 10):
-        rand = randint(0, 10)
-        stat = "Libero"
-        if (rand == 0 and randint(0, 1) == 1):
-            stat = "prenotato"
-        elif (rand > 0):
-            stat = "occupato"
-        tavolo=Tavolo(randint(1,10),stat)
-        tavolo.aggiungitavolo()
+        tavolo=Tavolo(randint(1,10))
+        StatoSala.aggiungiTavolo(tavolo=tavolo)
 
 
     widgetPreparazione = VistaPreparazione()
