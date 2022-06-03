@@ -10,3 +10,8 @@ class StatoComanda(Enum):
     NON_AVVIATA = 0
     AVVIATA = 1
     COMPLETATA = 2
+
+class StatoTavolo(Enum):
+    UTILIZZABILE =0
+    OCCUPATO = 1
+    PRENOTATO = 2
