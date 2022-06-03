@@ -17,20 +17,12 @@ class VistaComande(QtWidgets.QWidget):
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
 
-        for i in range(0,10):
-            self.layout.addWidget(BlockComandaSala(randint(1, 10), randint(0, 100), randint(0, 100)))
+        for comanda in StatoSala.Comande:
+            self.layout.addWidget(BlockComandaSala(comanda))
 
     def aggiorna(self):
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
 
-        for tavolo in StatoSala.Comande:
-            self.aggiungi(BlockComandaSala(tavolo.numero, tavolo.stat))
-
-    def aggiungi(self, comanda):
-        self.layout.addWidget(comanda)
-        self.update()
-
-    def rimuovi(self, wcomanda):
-        self.layout.removeWidget(wcomanda)
-        self.update()
+        for comanda in StatoSala.Comande:
+            self.layout.addWidget(BlockComandaSala(comanda))
