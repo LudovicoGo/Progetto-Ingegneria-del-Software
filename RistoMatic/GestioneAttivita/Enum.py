@@ -12,6 +12,6 @@ class StatoComanda(Enum):
     COMPLETATA = 2
 
 class StatoTavolo(Enum):
-    UTILIZZABILE =0
-    OCCUPATO = 1
-    PRENOTATO = 2
+    UTILIZZABILE = "Libero"
+    OCCUPATO = "Occupato"
+    PRENOTATO = "Prenotato"

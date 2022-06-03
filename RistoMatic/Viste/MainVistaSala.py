@@ -1,8 +1,8 @@
 from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QScrollArea
 
-from Viste.VistaComande import VistaComande
-from Viste.VistaPrenotazioni import VistaPrenotazioni
-from Viste.VistaTavoli import VistaTavoli
+from RistoMatic.Viste.VistaComande import VistaComande
+from RistoMatic.Viste.VistaPrenotazioni import VistaPrenotazioni
+from RistoMatic.Viste.VistaTavoli import VistaTavoli
 from PySide6 import QtWidgets
 
 
