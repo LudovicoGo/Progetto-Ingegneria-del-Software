@@ -13,7 +13,8 @@ class ElementoComanda():
     def getInfoElementoComanda(self) -> dict:
         return {"Nome":self.elemento.nomeElemento,
                 "Note":self.note,
-                "Quantita":self.quantita}
+                "Quantita":self.quantita,
+                "Prezzo": self.elemento.prezzoElemento}
 
     def getIsPronta(self) -> bool:
         return self.stato
