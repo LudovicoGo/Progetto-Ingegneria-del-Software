@@ -17,7 +17,7 @@ class ElementoComanda():
                 "Prezzo": self.elemento.prezzoElemento}
 
     def getIsPronta(self) -> bool:
-        return self.stato
+        return self.isPronta
 
     def getNote(self) -> str:
         return self.note
@@ -29,7 +29,7 @@ class ElementoComanda():
     #    return self.visibilita
 
     def setIsPronta(self,isPronta : bool):
-        self.stato=isPronta
+        self.isPronta=isPronta
 
     def setNote(self,note : str) :
         self.note=note

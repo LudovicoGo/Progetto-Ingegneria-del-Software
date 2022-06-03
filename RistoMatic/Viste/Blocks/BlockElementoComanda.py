@@ -13,9 +13,9 @@ class BlockElementoComanda(QtWidgets.QPushButton):
         self.elem = elem
         self.comanda = comanda
 
-        self.clicked.connect(self.rimuoviElemento)
+        self.clicked.connect(self.contrassegnaElemento)
 
 
-    def rimuoviElemento(self):
-        self.comanda.rimuoviElementoComanda(self.elem)
+    def contrassegnaElemento(self):
+        self.elem.setIsPronta(True)
         self.deleteLater()

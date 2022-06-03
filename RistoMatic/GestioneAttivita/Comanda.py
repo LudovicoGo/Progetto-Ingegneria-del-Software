@@ -41,13 +41,13 @@ class Comanda:
     def getNumeroComanda(self) -> int:
         return self.numeroComanda
 
-    def getStatoPrenotazione(self):
+    def getStato(self):
         count=0
         for elemento in self.elementiComanda:
-            if elemento.getIsPronto():
+            if elemento.getIsPronta():
                 count=count+1
 
-        if count==self.elementiComanda.count():
+        if count==len(self.elementiComanda):
             return StatoComanda.COMPLETATA
         elif count > 0:
             return StatoComanda.AVVIATA

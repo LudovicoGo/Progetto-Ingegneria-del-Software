@@ -7,6 +7,7 @@ from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.GestioneAttivita.Comanda import Comanda
 from RistoMatic.GestioneAmministrativa.ElementoMenu import ElementoMenu
 from RistoMatic.GestioneAttivita.ElementoComanda import ElementoComanda
+from RistoMatic.GestioneAttivita.Enum import StatoComanda
 from random import *
 
 class VistaPreparazione(QtWidgets.QWidget):
@@ -36,5 +37,5 @@ class VistaPreparazione(QtWidgets.QWidget):
             self.layout.itemAt(i).widget().setParent(None)
 
         for comanda in StatoSala.Comande:
-            if len(comanda.elementiComanda) >0:
+            if not comanda.getStato()==StatoComanda.COMPLETATA:
                 self.layout.addWidget(BlockComandaPreparazione(comanda))

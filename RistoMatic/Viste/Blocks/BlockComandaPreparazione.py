@@ -17,8 +17,9 @@ class BlockComandaPreparazione(QtWidgets.QGroupBox):
         self.vbox.addStretch(1)
 
         for elem in comanda.elementiComanda:
-            btn = BlockElementoComanda(elem, comanda)
-            self.vbox.addWidget(btn)
+            if not elem.getIsPronta():
+                btn = BlockElementoComanda(elem, comanda)
+                self.vbox.addWidget(btn)
 
         self.setLayout(self.vbox)
 
