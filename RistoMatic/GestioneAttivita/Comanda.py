@@ -1,49 +1,64 @@
 import ElementoComanda
 import Tavolo
 import OrdineAsporto
+from Enum import StatoComanda
+import datetime
 
 class Comanda:
 
-    numerocomanda=1
+    counter_n_comanda=1
 
-    def __init__(self, tavolo : Tavolo):
-        self.ElementoComanda= []
-        self.tavolo=tavolo
-        Comanda.numerocomanda = Comanda.numerocomanda +1
-
-    def __init__(self, ordineasp: OrdineAsporto):
-        self.ElementoComanda = []
-        self.OrdineAsporto = ordineasp
+    def __init__(self, rif):
+        self.dataCreazione = datetime.datetime.now()
+        self.ElementiComanda= []
+        self.rif=rif
+        self.sincronizzata=False
+        self.numeroComanda = Comanda.counter_n_comanda
+        Comanda.counter_n_comanda = Comanda.counter_n_comanda +1
 
     def aggiornaElementoComanda(self, daAggiornare):
         pass
 
     def aggiungiElementoComanda(self, elementoDaAggiungere : ElementoComanda):
-        self.ElementoComanda.append(elementoDaAggiungere)
+        self.ElementiComanda.append(elementoDaAggiungere)
 
     def getComandaSincronizzata(self):
-        pass
+        return self.sincronizzata
 
     def getInfoComanda(self) -> dict:
         pass
 
     def getNumeroComanda(self) -> int:
-        pass
+        return self.numeroComanda
 
-    def getStatoPrenotazione(self) -> bool:
-        pass
+    def getStatoPrenotazione(self):
+        count=0
+        for elemento in self.ElementiComanda:
+            if elemento.getIsPronto():
+                count=count+1
+
+        if count==self.ElementiComanda.count():
+            return StatoComanda.COMPLETATA
+        elif count > 0:
+            return StatoComanda.AVVIATA
+        else:
+            return StatoComanda.NON_AVVIATA
 
     def inviaNotificaBar(self):
         pass
 
     def rimuoviElementoComanda(self, daEliminare : ElementoComanda):
-        self.ElementoComanda.remove(daEliminare)
+        self.ElementiComanda.remove(daEliminare)
 
     def setComandaSincronizzata(self, comandaSincronizzata : bool):
-        pass
+        self.sincronizzata=comandaSincronizzata
 
-    def setStatoPreparazione(self, stato : bool):
-        pass
+    def setStatoPreparazione(self, stato : StatoComanda):
+        for elemento in self.ElementiComanda:
+            if stato==StatoComanda.COMPLETATA:
+                elemento.setIsPronta(True)
+            elif stato==StatoComanda.NON_AVVIATA:
+                elemento.setIsPronta(False)
 
     def stampaPreconto(self):
         pass
