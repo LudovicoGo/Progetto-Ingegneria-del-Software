@@ -1,6 +1,7 @@
 from PySide6 import QtCore
 from PySide6.QtCore import Signal,Slot
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
+from RistoMatic.GestioneAttivita.Enum import StatoTavolo
 import datetime
 
 class Tavolo():
@@ -26,7 +27,7 @@ class Tavolo():
         return self.isLibero
 
     def getIsPrenotato(self) -> bool:
-        prenotazioni=StatoSala.getListaPrenotazioni()
+        prenotazioni=StatoSala.Prenotazioni
         now = datetime.datetime.now()
         for prenotazione in prenotazioni:
             tavoloprenotato=prenotazione.getTavoloPrenotato()
@@ -57,3 +58,10 @@ class Tavolo():
 
     def setNumeroCoperti(self, numeroCoperti : int):
         self.coperti=numeroCoperti
+
+    def getStato(self):
+        if(self.getIsPrenotato()):
+            return StatoTavolo.PRENOTATO
+        elif(not self.isLibero):
+            return StatoTavolo.OCCUPATO
+        return StatoTavolo.UTILIZZABILE
