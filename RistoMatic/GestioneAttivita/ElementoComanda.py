@@ -3,20 +3,20 @@ from EnumZone import Zone
 
 
 class ElementoComanda():
-    def __init__(self, elementoMenu : ElementoMenu, note, quantita):
+    def __init__(self, elementoMenu : ElementoMenu, note: str, quantita: int):
         self.elemento = elementoMenu
         self.note = note
         self.quantita=quantita
-        self.stato = False
-        #self.visibilita =
+        self.isPronta = False
+        #self.visibilita = False
 
     def __init__(self):
-        pass
+        pass #perchè esiste questo costruttore?
 
     def getInfoElementoComanda(self) -> dict:
-        return {"Nome":self.elemento,
+        return {"Nome":self.elemento.nomeElemento,
                 "Note":self.note,
-                "qty":self.quantita}
+                "Quantita":self.quantita}
 
     def getIsPronta(self) -> bool:
         return self.stato
