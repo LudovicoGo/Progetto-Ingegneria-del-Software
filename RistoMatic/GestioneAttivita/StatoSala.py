@@ -10,8 +10,13 @@ class StatoSala():
     def __init__(self):
         pass
 
+    @staticmethod
     def aggiungiTavolo(tavolo):
         StatoSala.Tavoli.append(tavolo)
+
+    @staticmethod
+    def aggiungiComanda(comanda):
+        StatoSala.Comande.append(comanda)
 
     def aggiungiOrdineAsporto(self,oraConsegna : datetime):
         pass

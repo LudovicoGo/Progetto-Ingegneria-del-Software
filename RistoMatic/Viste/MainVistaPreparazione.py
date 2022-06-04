@@ -23,8 +23,6 @@ class VistaPreparazione(QtWidgets.QWidget):
             comanda.elementiComanda.append(ElementoComanda(ElementoMenu("asddd", "", 22), "", 1))
             comanda.elementiComanda.append(ElementoComanda(ElementoMenu("cacc", "", 3), "", 3))
             comanda.elementiComanda.append(ElementoComanda(ElementoMenu("qqqq", "", 3), "", 3))
-            StatoSala.Comande.append(comanda)
-            StatoSala.Tavoli.append(tavolo)
 
         self.layout = FlowLayout(self)
         self.timer = QTimer()

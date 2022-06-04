@@ -16,6 +16,7 @@ class Comanda:
         self.sincronizzata=False
         self.numeroComanda = Comanda.counter_n_comanda
         Comanda.counter_n_comanda = Comanda.counter_n_comanda +1
+        StatoSala.aggiungiComanda(self)
 
     def aggiornaElementoComanda(self, daAggiornare):
         pass
@@ -88,3 +89,8 @@ class Comanda:
             if isinstance(comanda.rif,Tavolo) and comanda.rif.riferimentoTavolo==riferimentoTavolo:
                 return comanda
         return None
+
+    def rimuoviComanda(self):
+        #salvare?
+        StatoSala.Comande.remove(self)
+        del self

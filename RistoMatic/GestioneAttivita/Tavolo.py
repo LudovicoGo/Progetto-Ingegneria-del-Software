@@ -15,6 +15,7 @@ class Tavolo():
         self.isLibero = True
         #self.isPrenotato = False
         self.nomeTavolo=""
+        StatoSala.Tavoli.append(self)
 
     def getInfoTavolo(self) -> dict:
         return {

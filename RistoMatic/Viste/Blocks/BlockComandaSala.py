@@ -24,15 +24,20 @@ class BlockComandaSala(QtWidgets.QGroupBox):
         self.setMinimumWidth(300)
 
         self.vbox = QVBoxLayout()
+        self.addbtn = QPushButton("Aggiungi elemento")
+        self.addbtn.clicked.connect(self.aggiungi_elemento)
+        self.vbox.addWidget(self.addbtn)
         #self.vbox.addStretch(1)
 
         for elemento in comanda.elementiComanda:
             block = BlockElementoComandaSala(elemento)
             block.aggiorna_comanda.connect(self.aggiorna_totale)
+            block.elimina_elemento.connect(self.elimina_elemento)
             self.vbox.addLayout(block)
 
         self.totline = QHBoxLayout()
         self.tot = QLabel("Totale: "+ str(self.comanda.getTotale()) +" €")
+        self.tot.setStyleSheet("QLabel {font-size:16px; font-weight: bold}")
         self.totline.addWidget(self.tot)
         self.totline.setAlignment(Qt.AlignRight)
         self.vbox.addLayout(self.totline)
@@ -40,3 +45,9 @@ class BlockComandaSala(QtWidgets.QGroupBox):
 
     def aggiorna_totale(self):
         self.tot.setText("Totale: "+ str(self.comanda.getTotale()) +" €")
+
+    def aggiungi_elemento(self):
+        pass
+
+    def elimina_elemento(self,elemento,block):
+        self.comanda.rimuoviElementoComanda(elemento)
