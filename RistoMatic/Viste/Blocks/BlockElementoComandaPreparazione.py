@@ -2,7 +2,7 @@ from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QGroupBox, QPushButton, QVBoxLayout
 from PySide6.QtCore import Slot,Signal
 
-class BlockElementoComanda(QtWidgets.QPushButton):
+class BlockElementoComandaPreparazione(QtWidgets.QPushButton):
 
     remove = Signal()
 

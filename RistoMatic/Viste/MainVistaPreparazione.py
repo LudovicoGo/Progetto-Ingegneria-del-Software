@@ -21,6 +21,8 @@ class VistaPreparazione(QtWidgets.QWidget):
             comanda = Comanda(tavolo)
             comanda.elementiComanda.append(ElementoComanda(ElementoMenu("asd", "", 2),"nota",2))
             comanda.elementiComanda.append(ElementoComanda(ElementoMenu("asddd", "", 22), "", 1))
+            comanda.elementiComanda.append(ElementoComanda(ElementoMenu("cacc", "", 3), "", 3))
+            comanda.elementiComanda.append(ElementoComanda(ElementoMenu("qqqq", "", 3), "", 3))
             StatoSala.Comande.append(comanda)
             StatoSala.Tavoli.append(tavolo)
 

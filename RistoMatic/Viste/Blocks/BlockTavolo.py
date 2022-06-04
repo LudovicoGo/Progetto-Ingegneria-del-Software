@@ -1,20 +1,19 @@
 from PySide6 import QtWidgets
 from random import *
 from PySide6.QtCore import Signal, Slot, QTimer
-from RistoMatic.Viste.Blocks.BlockDettaglioTavolo import VistaTavolo
-from RistoMatic.Viste.Blocks._BlockElementiComanda import BlockListaElementiComanda
+from RistoMatic.Viste.Blocks.BlockDettaglioTavolo import BlockDettaglioTavolo
+from RistoMatic.Viste.Blocks.BlockComandaSala import BlockComandaSala
 from RistoMatic.GestioneAttivita.Enum import StatoTavolo
+from RistoMatic.GestioneAttivita.Comanda import Comanda
 
 class BlockTavolo(QtWidgets.QPushButton):
-
-    #update_ui=Signal()
 
     def __init__(self,tavolo):
         super().__init__()
 
         self.tavolo = tavolo
 
-        self.detail=VistaTavolo()
+        self.detail=None
         self.timer = QTimer()
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
@@ -25,9 +24,8 @@ class BlockTavolo(QtWidgets.QPushButton):
         self.clicked.connect(self.show_detail)
 
     def show_detail(self):
-        self.detail.crea(BlockListaElementiComanda())
+        self.detail=BlockDettaglioTavolo(self.tavolo)
         self.detail.show()
-        #self.update_ui.emit()
 
 
     @Slot()
