@@ -2,6 +2,7 @@ from RistoMatic.GestioneAttivita.ElementoComanda import ElementoComanda
 from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
 from RistoMatic.GestioneAttivita.Enum import StatoComanda
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 import datetime
 
 class Comanda:
@@ -80,3 +81,10 @@ class Comanda:
             info = elemento.getInfoElementoComanda()
             tot = tot+ (qnt*info["Prezzo"])
         return tot
+
+    @staticmethod
+    def ricercaComanda(riferimentoTavolo : int):
+        for comanda in StatoSala.Comande:
+            if isinstance(comanda.rif,Tavolo) and comanda.rif.riferimentoTavolo==riferimentoTavolo:
+                return comanda
+        return None
