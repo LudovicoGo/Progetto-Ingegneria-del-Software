@@ -52,9 +52,6 @@ class StatoSala():
     def notificaDisponibilita(self,numeroCellulareCliente : str, nomeCliente : str):
         pass
 
-    def ricercaComanda(self, riferimentoTavolo : int):
-        pass
-
     def ricercaPrenotazione(self, nomeCliente : str, dataPrenotazione : datetime):
         pass
 
