@@ -22,8 +22,8 @@ if __name__ == "__main__":
     widgetSala.resize(1280, 720)
     widgetSala.show()
 
-    #widgetMobile = VistaMobile()
-    #widgetMobile.resize(540, 640)
-    #widgetMobile.show()
+    widgetMobile = VistaMobile()
+    widgetMobile.resize(540, 640)
+    widgetMobile.show()
 
     sys.exit(app.exec())

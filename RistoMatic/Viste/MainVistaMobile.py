@@ -14,15 +14,9 @@ class VistaMobile(QtWidgets.QWidget):
 
         self.layout = FlowLayout(self)
         for tavolo in StatoSala.Tavoli:
-            btn=BlockTavolo(tavolo.numero, tavolo.stat)
-            btn.update_ui.connect(self.aggiungi)
+            btn=BlockTavolo(tavolo)
+            #btn.update_ui.connect(self.aggiungi)
             self.layout.addWidget(btn)
-
-    @Slot()
-    def aggiungi(self):
-        tavolo = Tavolo(99,"Libero")
-        tavolo.aggiungitavolo()
-        self.aggiorna()
 
     def aggiorna(self):
         for i in reversed(range(self.layout.count())):
