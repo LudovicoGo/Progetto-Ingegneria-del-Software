@@ -41,6 +41,9 @@ class BlockComandaSala(QtWidgets.QGroupBox):
         self.totline.addWidget(self.tot)
         self.totline.setAlignment(Qt.AlignRight)
         self.vbox.addLayout(self.totline)
+        self.stampa = QPushButton("Stampa preconto")
+        self.stampa.clicked.connect(self.stampa_preconto)
+        self.vbox.addWidget(self.stampa)
         self.setLayout(self.vbox)
 
     def aggiorna_totale(self):
@@ -51,3 +54,6 @@ class BlockComandaSala(QtWidgets.QGroupBox):
 
     def elimina_elemento(self,elemento,block):
         self.comanda.rimuoviElementoComanda(elemento)
+
+    def stampa_preconto(self):
+        pass #manda i dati alla stampante

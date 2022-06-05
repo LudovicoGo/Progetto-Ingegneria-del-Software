@@ -9,7 +9,7 @@ from PySide6 import QtWidgets
 class VistaSala(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-
+        self.setWindowTitle("Vista Sala")
         self.layout = QVBoxLayout(self)
 
         self.tabTavoli = VistaTavoli()

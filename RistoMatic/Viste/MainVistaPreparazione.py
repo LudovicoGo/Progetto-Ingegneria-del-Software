@@ -14,7 +14,7 @@ class VistaPreparazione(QtWidgets.QWidget):
 
     def __init__(self):
         super().__init__()
-
+        self.setWindowTitle("Vista Cucina")
         # generazione dati di esempio
         for i in range(0, 10):
             tavolo = Tavolo(randint(1, 10))
@@ -30,7 +30,8 @@ class VistaPreparazione(QtWidgets.QWidget):
         self.timer.start(5000)
 
         for comanda in StatoSala.Comande:
-            self.layout.addWidget(BlockComandaPreparazione(comanda))
+            if not comanda.getStato() == StatoComanda.COMPLETATA:
+                self.layout.addWidget(BlockComandaPreparazione(comanda))
 
     def aggiorna(self):
         for i in reversed(range(self.layout.count())):
