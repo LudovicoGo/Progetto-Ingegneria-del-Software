@@ -68,7 +68,7 @@ class BlockComandaSala(QtWidgets.QGroupBox):
         self.aggiorna_totale()
 
 
-    def elimina_elemento(self,elemento,block):
+    def elimina_elemento(self,elemento):
         self.comanda.rimuoviElementoComanda(elemento)
 
     def stampa_preconto(self):

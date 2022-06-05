@@ -1,10 +1,8 @@
 from PySide6 import QtWidgets
-from random import *
-from PySide6.QtCore import Signal, Slot, QTimer
-from RistoMatic.Viste.Blocks.BlockDettaglioTavolo import BlockDettaglioTavolo
-from RistoMatic.Viste.Blocks.BlockComandaSala import BlockComandaSala
+from PySide6.QtCore import Slot, QTimer
+from RistoMatic.Viste.VistaDettaglioTavolo import BlockDettaglioTavolo
 from RistoMatic.GestioneAttivita.Enum import StatoTavolo
-from RistoMatic.GestioneAttivita.Comanda import Comanda
+
 
 class BlockTavolo(QtWidgets.QPushButton):
 
