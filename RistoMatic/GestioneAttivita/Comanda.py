@@ -16,6 +16,10 @@ class Comanda:
         self.sincronizzata=False
         self.numeroComanda = Comanda.counter_n_comanda
         Comanda.counter_n_comanda = Comanda.counter_n_comanda +1
+
+        if isinstance(self.rif, Tavolo):
+            self.rif.setIsLibero(False)
+
         StatoSala.aggiungiComanda(self)
 
     def aggiornaElementoComanda(self, daAggiornare):
@@ -75,12 +79,20 @@ class Comanda:
     def stampaPreconto(self):
         pass
 
+    def getCostoCoperto(self):
+        if isinstance(self.rif, Tavolo):
+            tot=self.rif.getNumeroCoperti()*StatoSala.Menu.getCostoCoperto()
+            return tot
+        return 0
+
     def getTotale(self):
         tot=0
         for elemento in self.elementiComanda:
             qnt = elemento.getQuantita()
             info = elemento.getInfoElementoComanda()
             tot = tot+ (qnt*info["Prezzo"])
+
+        tot = tot+ self.getCostoCoperto()
         return tot
 
     @staticmethod

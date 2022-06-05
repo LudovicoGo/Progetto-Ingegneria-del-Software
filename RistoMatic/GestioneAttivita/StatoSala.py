@@ -1,11 +1,12 @@
 import datetime
+from RistoMatic.GestioneAmministrativa.Menu import Menu
 
 class StatoSala():
     OrdiniAsporto =[]
     Tavoli = []
     Prenotazioni = []
     Comande = []
-
+    Menu = Menu(2,"summer")
 
     def __init__(self):
         pass

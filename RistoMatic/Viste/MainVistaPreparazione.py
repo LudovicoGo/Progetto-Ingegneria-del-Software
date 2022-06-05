@@ -15,14 +15,10 @@ class VistaPreparazione(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Vista Cucina")
+
         # generazione dati di esempio
         for i in range(0, 10):
             tavolo = Tavolo(randint(1, 10))
-            comanda = Comanda(tavolo)
-            comanda.elementiComanda.append(ElementoComanda(ElementoMenu("asd", "", 2),"nota",2))
-            comanda.elementiComanda.append(ElementoComanda(ElementoMenu("asddd", "", 22), "", 1))
-            comanda.elementiComanda.append(ElementoComanda(ElementoMenu("cacc", "", 3), "", 3))
-            comanda.elementiComanda.append(ElementoComanda(ElementoMenu("qqqq", "", 3), "", 3))
 
         self.layout = FlowLayout(self)
         self.timer = QTimer()
