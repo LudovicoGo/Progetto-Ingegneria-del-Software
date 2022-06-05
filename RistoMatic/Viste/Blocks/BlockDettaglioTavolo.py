@@ -22,8 +22,8 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
 
         self.coperti = QLineEdit()
         self.coperti.setFixedSize(25, 25)
+        self.coperti.setText(str(0))
         self.coperti.textChanged.connect(self.modifica_coperti)
-        self.coperti.setText(str(tavolo.getNumeroCoperti()))
         self.coperti.setAlignment(Qt.AlignLeft)
 
         self.lbl_coperti = QLabel("Coperti ")
@@ -68,6 +68,8 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
         try:
             if not self.coperti.text() =="":
                 self.tavolo.setNumeroCoperti(int(self.coperti.text()))
+                if not self.wcomanda ==None:
+                    self.wcomanda.aggiorna_totale()
         except:
             print("Not int")
             self.tavolo.setNumeroCoperti(1)

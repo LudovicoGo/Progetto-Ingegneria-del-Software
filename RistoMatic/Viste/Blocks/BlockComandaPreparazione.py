@@ -18,7 +18,7 @@ class BlockComandaPreparazione(QtWidgets.QGroupBox):
 
         for elem in comanda.elementiComanda:
             if not elem.getIsPronta():
-                btn = BlockElementoComandaPreparazione(elem, comanda)
+                btn = BlockElementoComandaPreparazione(elem)
                 self.vbox.addWidget(btn)
 
         self.setLayout(self.vbox)

@@ -1,10 +1,9 @@
-from PySide6 import QtCore, QtWidgets
+from PySide6 import QtWidgets
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QGroupBox, QPushButton, QVBoxLayout,QListWidget,QListWidgetItem, QHBoxLayout, QLabel,QLineEdit, QSizePolicy
+from PySide6.QtWidgets import QPushButton, QVBoxLayout, QHBoxLayout, QLabel
 from RistoMatic.GestioneAttivita.Comanda import Comanda
 from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.Viste.Blocks.BlockElementoComandaSala import BlockElementoComandaSala
-from RistoMatic.Viste.Blocks.LineSeparator import QHSeperationLine
 from RistoMatic.Viste.VistaAggiungiElemento import VistaAggiungiElemento
 
 class BlockComandaSala(QtWidgets.QGroupBox):
@@ -18,7 +17,7 @@ class BlockComandaSala(QtWidgets.QGroupBox):
                 f"Comanda {comanda.numeroComanda} - Tavolo {comanda.rif.riferimentoTavolo} - {comanda.dataCreazione.strftime('%H:%M')}")
         else:
             self.setTitle(
-                f"Comanda {comanda.numeroComanda} - Asporto {comanda.rif.riferimentoTavolo} - {comanda.dataCreazione.strftime('%H:%M')}")
+                f"Comanda {comanda.numeroComanda} - Asporto  - {comanda.dataCreazione.strftime('%H:%M')}")
             self.setStyleSheet("QGroupBox {background-color: blue;}")
 
         self.setMinimumWidth(300)
@@ -53,6 +52,7 @@ class BlockComandaSala(QtWidgets.QGroupBox):
         self.waggiungi=None
 
     def aggiorna_totale(self):
+        self.coperto.setText("Coperto: " + str(self.comanda.getCostoCoperto()) + " €  ")
         self.tot.setText("Totale: "+ str(self.comanda.getTotale()) +" €")
 
     def aggiungi_elemento(self):

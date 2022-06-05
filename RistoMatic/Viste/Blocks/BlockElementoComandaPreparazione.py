@@ -6,15 +6,13 @@ class BlockElementoComandaPreparazione(QtWidgets.QPushButton):
 
     remove = Signal()
 
-    def __init__(self, elem, comanda):
+    def __init__(self, elem):
         dic = elem.getInfoElementoComanda()
         super().__init__(f"{dic['Quantita']} x {dic['Nome']} \n Nota: {dic['Note']}")
 
         self.elem = elem
-        self.comanda = comanda
 
         self.clicked.connect(self.contrassegnaElemento)
-
 
     def contrassegnaElemento(self):
         self.elem.setIsPronta(True)

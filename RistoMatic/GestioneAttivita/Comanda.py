@@ -105,5 +105,6 @@ class Comanda:
     def rimuoviComanda(self):
         if isinstance(self.rif, Tavolo):
             self.rif.setIsLibero(True)
+            self.rif.setNumeroCoperti(0)
         StatoSala.Comande.remove(self)
         del self

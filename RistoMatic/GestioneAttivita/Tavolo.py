@@ -14,7 +14,6 @@ class Tavolo():
         self.posti=posti
         self.coperti=0
         self.isLibero = True
-        #self.isPrenotato = False
         self.nomeTavolo=""
         StatoSala.Tavoli.append(self)
 
@@ -51,9 +50,6 @@ class Tavolo():
 
     def setIsLibero(self, tavoloLibero : bool):
         self.isLibero=tavoloLibero
-
-    #def setIsPrenotato(self,tavoloPrenotato : bool):
-        #pass
 
     def setNomeTavolo(self,nomeTavolo : str):
         self.nomeTavolo=nomeTavolo
