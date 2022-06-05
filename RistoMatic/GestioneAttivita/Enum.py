@@ -5,7 +5,6 @@ class Zone(Enum):
     BAR = 2
     FORNO = 3
 
-
 class StatoComanda(Enum):
     NON_AVVIATA = 0
     AVVIATA = 1

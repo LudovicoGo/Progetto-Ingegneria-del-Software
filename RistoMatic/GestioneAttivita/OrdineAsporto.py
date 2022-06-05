@@ -1,17 +1,26 @@
+from GestioneAttivita.Cliente import Cliente
+
+
 class OrdineAsporto():
     id = 0
 
-    def __init__(self, oraConsegna, oraOrdine):
+    def __init__(self, oraConsegna, oraOrdine, cliente):
         self.numeroOrdine = self.id
         self.id += 1
         self.oraConsegna = oraConsegna
         self.oraOrdine = oraOrdine
 
+        self.cliente = cliente
+
     def getInfoOrdineAsporto(self):
         return {
             "numeroOrdine": self.numeroOrdine,
             "oraOrdine": self.oraOrdine,
-            "oraConsegna": self.oraConsegna
+            "oraConsegna": self.oraConsegna,
+
+            "nomeCliente": self.cliente.getNomeCliente(),
+            "recapitoTelefonico": self.cliente.getRecapitoTelefonico(),
+            "idCliente": self.cliente.getIdCliente()
         }
 
     def getNumeroOrdine(self):

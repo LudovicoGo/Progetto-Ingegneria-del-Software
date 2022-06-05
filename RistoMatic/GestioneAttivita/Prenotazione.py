@@ -1,13 +1,20 @@
+from GestioneAttivita.Cliente import Cliente
+
+
 class Prenotazione():
 
     id = 0
 
-    def __init__(self, dataPrenotazione, numeroPersone, statoPrenotazione):
+    def __init__(self, dataPrenotazione, numeroPersone, statoPrenotazione, cliente: Cliente, riferimentoTavolo):
         self.idPrenotazione = self.id
         self.id += 1
         self.dataPrenotazione = dataPrenotazione
         self.numeroPersone = numeroPersone
         self.statoPrenotazione = statoPrenotazione
+
+        self.cliente = cliente
+        self.riferimentoTavolo = riferimentoTavolo
+
 
     def getInfoPrenotazione(self):
         return {
