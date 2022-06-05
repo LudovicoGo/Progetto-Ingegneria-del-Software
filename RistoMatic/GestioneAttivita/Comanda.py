@@ -103,6 +103,7 @@ class Comanda:
         return None
 
     def rimuoviComanda(self):
-        #salvare?
+        if isinstance(self.rif, Tavolo):
+            self.rif.setIsLibero(True)
         StatoSala.Comande.remove(self)
         del self
