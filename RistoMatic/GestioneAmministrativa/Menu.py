@@ -1,5 +1,7 @@
 import datetime
-import ElementoMenu
+from RistoMatic.GestioneAmministrativa.ElementoMenu import ElementoMenu
+from RistoMatic.GestioneAttivita.Enum import Zone
+
 
 class Menu:
     def __init__(self, costo_coperto=0, nome_menu=""):
@@ -7,6 +9,11 @@ class Menu:
         self.dataCreazione = datetime.datetime.now()
         self.nomeMenu=nome_menu
         self.listaElementi = dict()
+
+        #dati esempio
+        self.aggiungiElementoMenu(ElementoMenu("pizza", Zone.CUCINA, 10))
+        self.aggiungiElementoMenu(ElementoMenu("birra", Zone.BAR, 3))
+        self.aggiungiElementoMenu(ElementoMenu("pasta", Zone.CUCINA, 6))
 
     def aggiungiElementoMenu(self, elemento: ElementoMenu):
         self.listaElementi[elemento.nomeElemento] = elemento
