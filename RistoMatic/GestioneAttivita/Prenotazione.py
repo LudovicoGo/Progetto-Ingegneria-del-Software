@@ -1,4 +1,4 @@
-from GestioneAttivita.Cliente import Cliente
+from RistoMatic.GestioneAttivita.Cliente import Cliente
 
 
 class Prenotazione():
@@ -44,4 +44,10 @@ class Prenotazione():
 
     def setStatoPrenotazione(self, statoPrenotazione):
         self.StatoPrenotazione = statoPrenotazione
+
+    def getRiferimentoTavolo(self):
+        return self.riferimentoTavolo
+
+    def setRiferimentoTavolo(self, riferimentoTavolo):
+        self.riferimentoTavolo = riferimentoTavolo
 

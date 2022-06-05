@@ -1,6 +1,5 @@
 import sys
 from PySide6 import QtWidgets
-from random import *
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
@@ -16,7 +15,7 @@ if __name__ == "__main__":
 
     widgetPreparazione = VistaPreparazione()
     widgetPreparazione.resize(1280, 720)
-    widgetPreparazione.show()
+    #widgetPreparazione.show()
 
     widgetSala = VistaSala()
     widgetSala.resize(1280, 720)
@@ -24,6 +23,6 @@ if __name__ == "__main__":
 
     widgetMobile = VistaMobile()
     widgetMobile.resize(540, 640)
-    widgetMobile.show()
+    #widgetMobile.show()
 
     sys.exit(app.exec())
