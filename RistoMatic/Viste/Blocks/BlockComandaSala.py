@@ -5,7 +5,7 @@ from RistoMatic.GestioneAttivita.Comanda import Comanda
 from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.Viste.Blocks.BlockElementoComandaSala import BlockElementoComandaSala
 from RistoMatic.Viste.Blocks.LineSeparator import QHSeperationLine
-
+from RistoMatic.Viste.VistaAggiungiElemento import VistaAggiungiElemento
 
 class BlockComandaSala(QtWidgets.QGroupBox):
 
@@ -28,26 +28,49 @@ class BlockComandaSala(QtWidgets.QGroupBox):
         self.addbtn.clicked.connect(self.aggiungi_elemento)
         self.vbox.addWidget(self.addbtn)
         #self.vbox.addStretch(1)
+        self.list=QVBoxLayout()
 
         for elemento in comanda.elementiComanda:
             block = BlockElementoComandaSala(elemento)
             block.aggiorna_comanda.connect(self.aggiorna_totale)
             block.elimina_elemento.connect(self.elimina_elemento)
-            self.vbox.addLayout(block)
+            self.list.addLayout(block)
 
+        self.vbox.addLayout(self.list)
         self.totline = QHBoxLayout()
+        self.coperto = QLabel("Coperto: " + str(self.comanda.getCostoCoperto()) + " €  ")
         self.tot = QLabel("Totale: "+ str(self.comanda.getTotale()) +" €")
         self.tot.setStyleSheet("QLabel {font-size:16px; font-weight: bold}")
+        self.totline.addWidget(self.coperto)
         self.totline.addWidget(self.tot)
         self.totline.setAlignment(Qt.AlignRight)
         self.vbox.addLayout(self.totline)
+        self.stampa = QPushButton("Stampa preconto")
+        self.stampa.clicked.connect(self.stampa_preconto)
+        self.vbox.addWidget(self.stampa)
         self.setLayout(self.vbox)
+
+        self.waggiungi=None
 
     def aggiorna_totale(self):
         self.tot.setText("Totale: "+ str(self.comanda.getTotale()) +" €")
 
     def aggiungi_elemento(self):
-        pass
+        self.waggiungi=VistaAggiungiElemento(self.comanda)
+        self.waggiungi.update_ui.connect(self.aggiungi_block)
+        self.waggiungi.show()
+
+    def aggiungi_block(self):
+        block = BlockElementoComandaSala(self.comanda.elementiComanda[-1])
+        block.aggiorna_comanda.connect(self.aggiorna_totale)
+        block.elimina_elemento.connect(self.elimina_elemento)
+        self.list.addLayout(block)
+        self.aggiorna_totale()
+
 
     def elimina_elemento(self,elemento,block):
         self.comanda.rimuoviElementoComanda(elemento)
+
+    def stampa_preconto(self):
+        pass #manda i dati alla stampante
+

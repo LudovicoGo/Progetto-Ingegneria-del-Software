@@ -7,11 +7,12 @@ import datetime
 class Tavolo():
     counter = 1
 
-    def __init__(self, coperti):
+    def __init__(self, posti):
         super(Tavolo, self).__init__()
         self.riferimentoTavolo=Tavolo.counter
         Tavolo.counter = Tavolo.counter + 1
-        self.coperti=coperti
+        self.posti=posti
+        self.coperti=0
         self.isLibero = True
         #self.isPrenotato = False
         self.nomeTavolo=""
