@@ -15,7 +15,7 @@ class Tavolo():
         self.coperti=0
         self.isLibero = True
         self.nomeTavolo=""
-        StatoSala.Tavoli.append(self)
+        StatoSala.aggiungiTavolo(self)
 
     def getInfoTavolo(self) -> dict:
         return {
@@ -63,3 +63,20 @@ class Tavolo():
         elif(not self.isLibero):
             return StatoTavolo.OCCUPATO
         return StatoTavolo.UTILIZZABILE
+
+    def rimuoviTavolo(self):
+        StatoSala.rimuoviTavolo(self)
+        del self
+
+    @staticmethod
+    def ricercaTavolo(tavolo_ricerca):
+        rif=0
+        if isinstance(tavolo_ricerca, Tavolo):
+            rif= tavolo_ricerca.riferimentoTavolo
+        elif isinstance(tavolo_ricerca, int):
+            rif = tavolo_ricerca
+
+        for tavolo in StatoSala.getTavoli():
+            if tavolo.riferimentoTavolo == rif:
+                return tavolo
+        return None

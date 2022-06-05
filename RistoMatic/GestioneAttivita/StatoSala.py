@@ -1,12 +1,12 @@
 import datetime
-from RistoMatic.GestioneAmministrativa.Menu import Menu
 
 class StatoSala():
     OrdiniAsporto =[]
     Tavoli = []
     Prenotazioni = []
     Comande = []
-    Menu = Menu(2,"summer")
+    Menu = ""
+    ListaMenu = []
 
     def __init__(self):
         pass
@@ -19,6 +19,42 @@ class StatoSala():
     def aggiungiComanda(comanda):
         StatoSala.Comande.append(comanda)
 
+    @staticmethod
+    def aggiungiMenu(menu):
+        StatoSala.ListaMenu.append(menu)
+
+    @staticmethod
+    def getTavoli():
+        return StatoSala.Tavoli
+
+    @staticmethod
+    def getComande():
+        return StatoSala.Comande
+
+    @staticmethod
+    def getMenuAttivo():
+        return StatoSala.Menu
+
+    @staticmethod
+    def setMenuAttivo(menu):
+        StatoSala.Menu=menu
+
+    @staticmethod
+    def getListaMenu():
+        return StatoSala.ListaMenu
+
+    @staticmethod
+    def rimuoviTavolo(tavolo):
+        StatoSala.Tavoli.remove(tavolo)
+
+    @staticmethod
+    def rimuoviComanda(comanda):
+        StatoSala.Comande.remove(comanda)
+
+    @staticmethod
+    def rimuoviMenu(menu):
+        StatoSala.ListaMenu.remove(menu)
+
     def aggiungiOrdineAsporto(self,oraConsegna : datetime):
         pass
 
@@ -26,9 +62,6 @@ class StatoSala():
         pass
 
     def createPrenotazione(self, daCreare):
-        pass
-
-    def getComanda(self) -> dict:
         pass
 
     def getListaAsporto(self) -> dict:
@@ -43,16 +76,10 @@ class StatoSala():
     def getPrenotazione(self,nomeCliente : str, data : datetime):
         pass
 
-    def getTavolo(self,riferimento : int) -> dict:
-        pass
-
     def inviaRisposta(self) :
         pass
 
     def modificaOrdineAsporto(self,nomeCliente : str):
-        pass
-
-    def modificaTavolo(self,riferimentoTavolo : int):
         pass
 
     def notificaDisponibilita(self,numeroCellulareCliente : str, nomeCliente : str):
@@ -61,14 +88,9 @@ class StatoSala():
     def ricercaPrenotazione(self, nomeCliente : str, dataPrenotazione : datetime):
         pass
 
-    def ricercaTavolo(self,riferimentoTavolo : int):
-        pass
-
     def rimuoviOrdineAsporto(self,nomeCliente : str):
         pass
 
     def rimuoviPrenotazioniNonConfermate(self):
         pass
 
-    def rimuoviTavolo(self,riferimentoTavolo : int):
-        pass

@@ -81,7 +81,7 @@ class Comanda:
 
     def getCostoCoperto(self):
         if isinstance(self.rif, Tavolo):
-            tot=self.rif.getNumeroCoperti()*StatoSala.Menu.getCostoCoperto()
+            tot=self.rif.getNumeroCoperti()*StatoSala.getMenuAttivo().getCostoCoperto()
             return tot
         return 0
 
@@ -97,7 +97,7 @@ class Comanda:
 
     @staticmethod
     def ricercaComanda(riferimentoTavolo : int):
-        for comanda in StatoSala.Comande:
+        for comanda in StatoSala.getComande():
             if isinstance(comanda.rif,Tavolo) and comanda.rif.riferimentoTavolo==riferimentoTavolo:
                 return comanda
         return None
@@ -106,5 +106,5 @@ class Comanda:
         if isinstance(self.rif, Tavolo):
             self.rif.setIsLibero(True)
             self.rif.setNumeroCoperti(0)
-        StatoSala.Comande.remove(self)
+        StatoSala.rimuoviComanda(self)
         del self

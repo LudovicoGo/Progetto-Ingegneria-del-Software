@@ -25,7 +25,7 @@ class VistaAggiungiElemento(QtWidgets.QWidget):
         self.list.setSelectionBehavior(QAbstractItemView.SelectItems)
         self.list.setSelectionMode(QAbstractItemView.SingleSelection)
 
-        menu = StatoSala.Menu.getListaElementi()
+        menu = StatoSala.getMenuAttivo().getListaElementi()
         for elementomenu in menu:
             item = BlockMenuItem(menu[elementomenu])
             self.list.addItem(item)
@@ -33,7 +33,7 @@ class VistaAggiungiElemento(QtWidgets.QWidget):
         self.elementocomanda=None
 
         self.layout = QVBoxLayout()
-        self.layout.addWidget(QLabel(f"Menu attivo: {StatoSala.Menu.getNomeMenu()}"))
+        self.layout.addWidget(QLabel(f"Menu attivo: {StatoSala.getMenuAttivo().getNomeMenu()}"))
         self.layout.addWidget(self.list)
 
 
