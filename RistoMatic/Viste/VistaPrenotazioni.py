@@ -1,4 +1,5 @@
 from PySide6 import QtWidgets
+from PySide6.QtGui import QStandardItemModel, QStandardItem
 from PySide6.QtWidgets import QAbstractItemView, QGridLayout, QPushButton, QSizePolicy, QHBoxLayout, QListView
 from PySide6.QtWidgets import QLabel, QVBoxLayout, QTableWidget, QTableWidgetItem
 
@@ -23,40 +24,38 @@ class VistaPrenotazioni(QtWidgets.QWidget):
                              Prenotazione('Oggi', 8, 'Confermata', self.cliente2, 47),
                              Prenotazione(dataPrenotazione='Oggi', numeroPersone=21, statoPrenotazione='Confermata', cliente=self.cliente2, riferimentoTavolo=7)]
 
+        self.PRENOTAZIONI.sort(key=lambda x: x.cliente.getNomeCliente())       #mette in ordine alfabetico le prenotazioni riferendosi al nome dei clienti che le hanno effettuate
 
+        hLayout = QHBoxLayout()
+        self.listView = QListView()
+        self.aggiornaUi()
+        hLayout.addWidget(self.listView)
 
-        lenght = len(self.PRENOTAZIONI)
-        self.table = QTableWidget(lenght, 6)
-        self.table.setObjectName('table')
-        self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.table.setSelectionBehavior(QAbstractItemView.SelectRows)
-
-        i = 0
-        for prenotazione in self.PRENOTAZIONI:
-            self.table.setItem(i, 0, QTableWidgetItem(prenotazione.cliente.getNomeCliente()))
-            self.table.setItem(i, 1, QTableWidgetItem(prenotazione.getDataPrenotazione()))
-            self.table.setItem(i, 2, QTableWidgetItem(str(prenotazione.getNumeroPersone())))
-            self.table.setItem(i, 3, QTableWidgetItem(str(prenotazione.getRiferimentoTavolo())))
-            self.table.setItem(i, 4, QTableWidgetItem(prenotazione.cliente.getRecapitoTelefonico()))
-            self.table.setItem(i, 5, QTableWidgetItem(prenotazione.getStatoPrenotazione()))
-            i += 1
-            self.table.insertRow(self.table.rowCount())
-            if i == (len(self.PRENOTAZIONI)):
-                i = 0
-                break
+        self.setLayout(hLayout)
+        self.resize(600, 300)
+        self.setWindowTitle("Prenotazioni")
 
 
 
+    def aggiornaUi(self):
+       # self.pren = []
+       # self.loadPrenotazioni()
+        listViewModel = QStandardItemModel(self.listView)
+
+        for prenotazione in self.PRENOTAZIONI: #per ogni prenotazione crea una riga
+            item = QStandardItem()
+            titolo = f"{prenotazione.cliente.getNomeCliente()},  {prenotazione.getDataPrenotazione()},  Coperti: {prenotazione.getNumeroPersone()},  Tavolo: {prenotazione.getRiferimentoTavolo()}"
+            item.setText(titolo)
+            item.setEditable(False)
+            font = item.font()
+            font.setPointSize(20)
+            item.setFont(font)
+            listViewModel.appendRow(item)
+
+        self.listView.setModel(listViewModel)
 
 
-        self.row = QGridLayout()
-        self.title = QLabel(f"Prenotazioni odierne")
-        self.title.setStyleSheet("QLabel {font-size: 20px;}")
-        self.row.addWidget(self.title, 0, 0)
-        self.row.addWidget(self.table, 1, 0)
-        #self.row.addWidget(self.getGenericButton('Elimina Prenotazione', self.EliminaPrenotazione()), 2, 0, 1,2)
 
-        self.setLayout(self.row)
 
 
 
