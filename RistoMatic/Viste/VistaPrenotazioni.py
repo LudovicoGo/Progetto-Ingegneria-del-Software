@@ -1,16 +1,22 @@
+from collections import defaultdict
+
 from PySide6 import QtWidgets
+from PySide6.QtCore import QTimer
 from PySide6.QtGui import QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QAbstractItemView, QGridLayout, QPushButton, QSizePolicy, QHBoxLayout, QListView
-from PySide6.QtWidgets import QLabel, QVBoxLayout, QTableWidget, QTableWidgetItem
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView
+from PySide6.QtWidgets import QVBoxLayout
 
 from RistoMatic.GestioneAttivita.Cliente import Cliente
 from RistoMatic.GestioneAttivita.Prenotazione import Prenotazione
+from RistoMatic.Viste.VistaAggiungiPrenotazione import VistaAggiungiPrenotazione
 
 
 class VistaPrenotazioni(QtWidgets.QWidget):
 
     def __init__(self):
         super().__init__()
+
+
         self.cliente = Cliente('Albertino', '3333333333')
         self.cliente2 = Cliente('Michelino', '3333333333')
         self.cliente3 = Cliente('Faustino', '3333333333')
@@ -22,7 +28,8 @@ class VistaPrenotazioni(QtWidgets.QWidget):
                              Prenotazione('Oggi', 14, 'Confermata', self.cliente3, 44),
                              Prenotazione('Oggi', 6, 'Confermata', self.cliente2, 47),
                              Prenotazione('Oggi', 8, 'Confermata', self.cliente2, 47),
-                             Prenotazione(dataPrenotazione='Oggi', numeroPersone=21, statoPrenotazione='Confermata', cliente=self.cliente2, riferimentoTavolo=7)]
+                             Prenotazione(dataPrenotazione='Oggi', numeroPersone=21, statoPrenotazione='Confermata',
+                                          cliente=self.cliente2, riferimentoTavolo=7)]
 
         self.PRENOTAZIONI.sort(key=lambda x: x.cliente.getNomeCliente())       #mette in ordine alfabetico le prenotazioni riferendosi al nome dei clienti che le hanno effettuate
 
@@ -56,9 +63,12 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
 
 
+    def loadPrenotazioni(self):
+        pass
+
+
+
     def aggiornaUi(self):
-       # self.pren = []
-       # self.loadPrenotazioni()
         listViewModel = QStandardItemModel(self.listView)
 
         for prenotazione in self.PRENOTAZIONI: #per ogni prenotazione crea una riga
@@ -76,10 +86,6 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
 
 
-
-
-
-
     def getGenericButton(self, titolo, onClick):
         button = QPushButton(titolo)
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -91,9 +97,12 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         print("modificaPrenotazione")
 
     def aggiungiPrenotazione(self):
-        print("aggiungiPrenotazione")
+        #print("aggiungiPrenotazione")
+        self.inserisciPrenotazione = VistaAggiungiPrenotazione(callback=self.aggiornaUi)
+        self.inserisciPrenotazione.show()
 
     def eliminaPrenotazione(self):
-        print("eliminaPrenotazione")
-
+        self.listView.selectedIndexes()
+        for i in self.PRENOTAZIONI:
+            print(i.getInfoPrenotazione())
 
