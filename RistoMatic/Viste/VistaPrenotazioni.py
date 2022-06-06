@@ -31,6 +31,25 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         self.aggiornaUi()
         hLayout.addWidget(self.listView)
 
+        buttonsLayout = QVBoxLayout()
+        modifyButton = QPushButton("Modifica Prenotazione")
+        modifyButton.clicked.connect(self.modificaPrenotazione)
+
+        newButton = QPushButton("Aggiungi Prenotazione")
+        newButton.clicked.connect(self.aggiungiPrenotazione)
+
+        delButton = QPushButton("Elimina Prenotazione")
+        delButton.clicked.connect(self.eliminaPrenotazione)
+
+        buttonsLayout.addWidget(newButton)
+        buttonsLayout.addWidget(modifyButton)
+        buttonsLayout.addWidget(delButton)
+
+        buttonsLayout.addStretch()
+        hLayout.addLayout(buttonsLayout)
+
+
+
         self.setLayout(hLayout)
         self.resize(600, 300)
         self.setWindowTitle("Prenotazioni")
@@ -67,11 +86,14 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         button.clicked.connect(onClick)
         return
 
-    def AggiungiPrenotazione(self):
-        pass
 
+    def modificaPrenotazione(self):
+        print("modificaPrenotazione")
 
-    def EliminaPrenotazione(self):
-        pass
+    def aggiungiPrenotazione(self):
+        print("aggiungiPrenotazione")
+
+    def eliminaPrenotazione(self):
+        print("eliminaPrenotazione")
 
 
