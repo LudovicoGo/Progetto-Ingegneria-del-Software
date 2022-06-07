@@ -59,9 +59,12 @@ class VistaAggiungiPrenotazione(QWidget):
             prenotazione.setNumeroPersone(numeroPersone)
             prenotazione.cliente.setNomeCliente(nome)
             prenotazione.cliente.setRecapitoTelefonico(recapitoTelefonico)
+
+
         except:
             QMessageBox.critical(self, 'ERRORE! Controllare i dati inseriti', QMessageBox.Ok, QMessageBox.Ok)
             return
 
         self.callback()
         self.close()
+

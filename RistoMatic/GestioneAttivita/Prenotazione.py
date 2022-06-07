@@ -18,10 +18,14 @@ class Prenotazione():
 
     def getInfoPrenotazione(self):
         return {
+            "nomeCliente": self.cliente.getNomeCliente(),
+            "idCliente": self.cliente.getIdCliente(),
+            "recapitoTelefonico": self.cliente.getRecapitoTelefonico(),
             "idPrenotazione": self.idPrenotazione,
             "dataPrenotazione": self.dataPrenotazione,
             "numeroPersone": self.numeroPersone,
-            "statoPrenotazione": self.statoPrenotazione
+            "statoPrenotazione": self.statoPrenotazione,
+            "riferimentoTavolo": self.riferimentoTavolo
         }
 
     def getDataPrenotazione(self):
