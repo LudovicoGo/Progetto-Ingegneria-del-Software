@@ -2,12 +2,15 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButt
 
 from RistoMatic.GestioneAttivita.Cliente import Cliente
 from RistoMatic.GestioneAttivita.Prenotazione import Prenotazione
+from RistoMatic.Viste.ClasseTestLudovico import ClasseTestLudovico
 
 
 class VistaAggiungiPrenotazione(QWidget):
 
     def __init__(self, callback):
         super(VistaAggiungiPrenotazione, self).__init__()
+        #self.lista = ClasseTestLudovico()
+
         self.callback = callback
         self.vLayout = QVBoxLayout()
         self.qlines = {}
@@ -61,10 +64,12 @@ class VistaAggiungiPrenotazione(QWidget):
             prenotazione.cliente.setRecapitoTelefonico(recapitoTelefonico)
 
 
+
+
         except:
             QMessageBox.critical(self, 'ERRORE! Controllare i dati inseriti', QMessageBox.Ok, QMessageBox.Ok)
             return
 
         self.callback()
         self.close()
-
+        return prenotazione

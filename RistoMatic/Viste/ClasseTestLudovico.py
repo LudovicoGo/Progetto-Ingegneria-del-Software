@@ -9,24 +9,24 @@ class ClasseTestLudovico():
         self.cliente2 = Cliente('Michelino', '123456789')
         self.cliente3 = Cliente('Faustino', '123789456')
 
-        self.PRENOTAZIONI = [Prenotazione('dd/mm/yyyy', 5, 'Confermata', self.cliente, 4),
-                             Prenotazione('dd/mm/yyyy', 1, 'Da Confermare', self.cliente3, 10),
-                             Prenotazione('dd/mm/yyyy', 3, 'Da Confermare', self.cliente2, 6),
-                             Prenotazione('dd/mm/yyyy', 17, 'Confermata', self.cliente, 2),
-                             Prenotazione('dd/mm/yyyy', 14, 'Confermata', self.cliente3, 44),
-                             Prenotazione('dd/mm/yyyy', 6, 'Confermata', self.cliente2, 47),
-                             Prenotazione('dd/mm/yyyy', 8, 'Confermata', self.cliente2, 887),
+        self.PRENOTAZIONI = [Prenotazione('dd/mm/yyyy1', 5, 'Confermata', self.cliente, 4),
+                             Prenotazione('dd/mm/yyyy2', 1, 'Da Confermare', self.cliente3, 10),
+                             Prenotazione('dd/mm/yyyy3', 3, 'Da Confermare', self.cliente2, 6),
+                             Prenotazione('dd/mm/yyyy4', 17, 'Confermata', self.cliente, 2),
+                             Prenotazione('dd/mm/yyyy5', 14, 'Confermata', self.cliente3, 44),
+                             Prenotazione('dd/mm/yyyy6', 6, 'Confermata', self.cliente2, 47),
+                             Prenotazione('dd/mm/yyyy7', 8, 'Confermata', self.cliente2, 887),
                              Prenotazione(dataPrenotazione='dd/mm/yyyy', numeroPersone=21, statoPrenotazione='Confermata',
                                           cliente=self.cliente2, riferimentoTavolo=7)]
 
 
 
     def ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo):
-        for i in range(0, len(self.PRENOTAZIONI)):
-            if self.PRENOTAZIONI[i].cliente.nomeCliente == nomeCliente and self.PRENOTAZIONI[i].dataPrenotazione == dataPrenotazione and self.PRENOTAZIONI[i].riferimentoTavolo == riferimentoTavolo:
-                return i
-            i = i+1
-        return -1
+        for i in self.PRENOTAZIONI:
+            if i.cliente.nomeCliente == nomeCliente and i.riferimentoTavolo == int(riferimentoTavolo):
+                prenotazione = i
+        return self.PRENOTAZIONI.index(prenotazione)
+
 
     def ricercaNomeRecapitoTavolo(self, nomeCliente, recapitoTelefonico, riferimentoTavolo):
        for i in self.PRENOTAZIONI:
@@ -36,5 +36,7 @@ class ClasseTestLudovico():
 
 
     def stampaLista(self):
+        count = 1
         for i in self.PRENOTAZIONI:
-            print(i.getInfoPrenotazione())
+            print(count, i.getInfoPrenotazione())
+            count += 1

@@ -1,12 +1,13 @@
 from PySide6 import QtWidgets
 from PySide6.QtGui import QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView, QMessageBox, QLineEdit, QLabel
 from PySide6.QtWidgets import QVBoxLayout
 
+from RistoMatic.GestioneAttivita.Cliente import Cliente
+from RistoMatic.GestioneAttivita.Prenotazione import Prenotazione
 from RistoMatic.Viste.ClasseTestLudovico import ClasseTestLudovico
 from RistoMatic.Viste.VistaAggiungiPrenotazione import VistaAggiungiPrenotazione
 from RistoMatic.Viste.VistaPrenotazione import VistaPrenotazione
-
 
 
 class VistaPrenotazioni(QtWidgets.QWidget):
@@ -15,8 +16,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
         self.lista = ClasseTestLudovico()
 
-
-        #self.PRENOTAZIONI.sort(key=lambda x: x.cliente.getNomeCliente())  # mette in ordine alfabetico le prenotazioni riferendosi al nome dei clienti che le hanno effettuate
+        # self.PRENOTAZIONI.sort(key=lambda x: x.cliente.getNomeCliente())  # mette in ordine alfabetico le prenotazioni riferendosi al nome dei clienti che le hanno effettuate
 
         hLayout = QHBoxLayout()
         self.listView = QListView()
@@ -36,7 +36,6 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         buttonsLayout.addWidget(newButton)
         buttonsLayout.addWidget(infoButton)
         buttonsLayout.addWidget(delButton)
-
 
         ##############################################
         testButton = QPushButton("TEST (stampa lista)")
@@ -84,10 +83,9 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         print(nomeCliente)
         print(recapitoTelefonico)
         prenotazione = self.lista.ricercaNomeRecapitoTavolo(nomeCliente, recapitoTelefonico, riferimentoTavolo)
-        #prenotazione =
+        # prenotazione =
         self.vistaPrenotazione = VistaPrenotazione(prenotazione, eliminaCallback=self.aggiornaUi())
         self.vistaPrenotazione.show()
-
 
     def eliminaPrenotazione(self):
         print("eliminaPrenotazione")
@@ -95,17 +93,20 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         nomeCliente = selected.split(', ')[0].strip()
         riferimentoTavolo = selected.split(', ')[3].strip().split()[1]
         dataPrenotazione = selected.split(', ')[1].strip()
+
+        recapitoTelefonico = selected.split(', ')[4].strip().split()[2]
+        print(recapitoTelefonico)
+
+
+        print(nomeCliente)
+        print(riferimentoTavolo)
+        print(dataPrenotazione)
+
+
         index = self.lista.ricercaNomeDataTavolo(nomeCliente, dataPrenotazione, riferimentoTavolo)
+        print(index)
         del self.lista.PRENOTAZIONI[index]
         self.aggiornaUi()
 
-
-
-
     def aggiungiPrenotazione(self):
         print("aggiungiPrenotazione")
-        self.inserisciPrenotazione = VistaAggiungiPrenotazione(callback=self.aggiornaUi)
-        self.inserisciPrenotazione.show()
-
-
-
