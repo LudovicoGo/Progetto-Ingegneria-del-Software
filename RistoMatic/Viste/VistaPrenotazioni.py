@@ -22,7 +22,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         hLayout = QHBoxLayout()
 
         self.aggiorna = QTimer()
-        self.aggiorna.setInterval(8000)
+        self.aggiorna.setInterval(7000)
         self.aggiorna.timeout.connect(self.aggiornaUi)
         self.aggiorna.start()
 
