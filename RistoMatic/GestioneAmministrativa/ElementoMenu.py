@@ -28,7 +28,10 @@ class ElementoMenu():
         self.areaPreparazione = area
 
     def setPrezzoElemento(self, prezzo):
-        self.prezzoElemento = prezzo
+        try:
+            self.prezzoElemento = float(prezzo)
+        except:
+            raise Exception("Not a number")
 
     def setNomeElemento(self, nome):
         self.nomeElemento = nome

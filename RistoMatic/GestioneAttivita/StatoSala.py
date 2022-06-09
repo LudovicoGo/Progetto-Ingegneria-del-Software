@@ -1,12 +1,15 @@
 import datetime
 
+import RistoMatic.GestioneAttivita.Tavolo
+
+
 class StatoSala():
     OrdiniAsporto =[]
     Tavoli = []
     Prenotazioni = []
     Comande = []
-    Menu = ""
     ListaMenu = []
+    Menu = ""
 
     def __init__(self):
         pass
@@ -18,6 +21,8 @@ class StatoSala():
     @staticmethod
     def aggiungiComanda(comanda):
         StatoSala.Comande.append(comanda)
+        if isinstance(comanda.rif, RistoMatic.GestioneAttivita.Tavolo.Tavolo):
+            comanda.rif.setIsLibero(False)
 
     @staticmethod
     def aggiungiMenu(menu):
@@ -50,6 +55,9 @@ class StatoSala():
     @staticmethod
     def rimuoviComanda(comanda):
         StatoSala.Comande.remove(comanda)
+        if isinstance(comanda.rif, RistoMatic.GestioneAttivita.Tavolo.Tavolo):
+            comanda.rif.setIsLibero(True)
+            comanda.rif.setNumeroCoperti(0)
 
     @staticmethod
     def rimuoviMenu(menu):

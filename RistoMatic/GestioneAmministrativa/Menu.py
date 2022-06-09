@@ -9,6 +9,7 @@ class Menu:
         self.dataCreazione = datetime.datetime.now()
         self.nomeMenu=nome_menu
         self.listaElementi = dict()
+
         StatoSala.aggiungiMenu(self)
 
         #dati esempio
@@ -17,10 +18,10 @@ class Menu:
         self.aggiungiElementoMenu(ElementoMenu("pasta", Zone.CUCINA, 6))
 
     def aggiungiElementoMenu(self, elemento: ElementoMenu):
-        self.listaElementi[elemento.nomeElemento] = elemento
-
-    def aggiornaElementoMenu(self, elemento_nuovo: ElementoMenu):
-        self.listaElementi[elemento_nuovo.nomeElemento] = elemento_nuovo
+        if (isinstance(elemento,ElementoMenu)):
+            self.listaElementi[elemento.nomeElemento] = elemento
+        else:
+            raise Exception("Not ElementoMenu")
 
     def eliminaElementoMenu(self, nome: str):
         del(self.listaElementi[nome])
@@ -48,11 +49,13 @@ class Menu:
         self.costoCoperto=costo
 
     def setDataCreazione(self, data):
-        self.dataCreazione = datetime.datetime.strptime(data, "%d/%m/%Y")
+        try:
+            self.dataCreazione = datetime.datetime.strptime(data, "%d/%m/%Y")
+        except:
+            raise Exception("Not a date")
 
     def setNomeMenu(self, nome: str):
-        if isinstance(nome, str):
-            self.nomeMenu = nome
+        self.nomeMenu = nome
 
     def setActive(self):
         StatoSala.setMenuAttivo(self)
