@@ -14,10 +14,10 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
 
         self.tavolo=tavolo
 
-        self.add=QPushButton("Crea comanda")
+        self.add=QPushButton("Apri tavolo")
         self.add.clicked.connect(self.aggiungi_comanda)
 
-        self.remove = QPushButton("Elimina comanda")
+        self.remove = QPushButton("Chiudi tavolo")
         self.remove.clicked.connect(self.rimuovi_comanda)
 
         self.coperti = QLineEdit()
