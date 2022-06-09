@@ -1,10 +1,9 @@
 from PySide6 import QtWidgets
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QPushButton, QLabel, QGridLayout, QLineEdit
-
 from RistoMatic.Viste.Blocks.BlockComandaSala import BlockComandaSala
 from RistoMatic.GestioneAttivita.Comanda import Comanda
-
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 
 class BlockDettaglioTavolo(QtWidgets.QWidget):
 
@@ -32,10 +31,16 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
         self.lbl_prenotazione = QLabel("Prenotazione: ")
         self.lbl_prenotazione.setAlignment(Qt.AlignRight)
 
-        self.prenotazione = QLabel(str(tavolo.getNomeTavolo()))
+        self.prenotazione = QLabel("nessuna")
+        prenotazioni = StatoSala.getListaPrenotazioni()
+        if not prenotazioni == None:
+            for prenotazione in prenotazioni:
+                if prenotazione.riferimentoTavolo == self.tavolo.getRiferimentoTavolo():
+                    self.prenotazione.setText(str(prenotazione.cliente.nomeCliente))
+
         self.prenotazione.setAlignment(Qt.AlignLeft)
 
-        self.comanda=Comanda.ricercaComanda(self.tavolo.riferimentoTavolo)
+        self.comanda=StatoSala.ricercaComanda(self.tavolo.riferimentoTavolo)
 
         self.wcomanda=None
 
@@ -60,7 +65,7 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
 
     def rimuovi_comanda(self):
         self.wcomanda.deleteLater()
-        self.comanda.rimuoviComanda()
+        StatoSala.rimuoviComanda(self.comanda)
         self.comanda = None
 
 

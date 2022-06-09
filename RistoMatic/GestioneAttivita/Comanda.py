@@ -92,15 +92,3 @@ class Comanda:
 
         tot = tot+ self.getCostoCoperto()
         return tot
-
-    @staticmethod
-    def ricercaComanda(riferimentoTavolo : int):
-        for comanda in StatoSala.getComande():
-            if isinstance(comanda.rif,Tavolo) and comanda.rif.riferimentoTavolo==riferimentoTavolo:
-                return comanda
-        return None
-
-    def rimuoviComanda(self):
-        if (not self.getStato() == StatoComanda.COMPLETATA):
-            StatoSala.rimuoviComanda(self)
-        del self
