@@ -1,10 +1,13 @@
+import threading
+import time
+
 from PySide6 import QtWidgets
+from PySide6.QtCore import QBasicTimer, QTimer
 from PySide6.QtGui import QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView, QMessageBox, QLineEdit, QLabel
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView
 from PySide6.QtWidgets import QVBoxLayout
 
 from RistoMatic.GestioneAttivita.Cliente import Cliente
-from RistoMatic.GestioneAttivita.Prenotazione import Prenotazione
 from RistoMatic.Viste.ClasseTestLudovico import ClasseTestLudovico
 from RistoMatic.Viste.VistaAggiungiPrenotazione import VistaAggiungiPrenotazione
 from RistoMatic.Viste.VistaPrenotazione import VistaPrenotazione
@@ -15,10 +18,14 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         super().__init__()
 
         self.lista = ClasseTestLudovico()
-
-        # self.PRENOTAZIONI.sort(key=lambda x: x.cliente.getNomeCliente())  # mette in ordine alfabetico le prenotazioni riferendosi al nome dei clienti che le hanno effettuate
-
+        #self.qlines = {}
         hLayout = QHBoxLayout()
+
+        self.aggiorna = QTimer()
+        self.aggiorna.setInterval(8000)
+        self.aggiorna.timeout.connect(self.aggiornaUi)
+        self.aggiorna.start()
+
         self.listView = QListView()
         self.aggiornaUi()
         hLayout.addWidget(self.listView)
@@ -39,7 +46,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
         ##############################################
         testButton = QPushButton("TEST (stampa lista)")
-        testButton.clicked.connect(self.lista.stampaLista)
+        testButton.clicked.connect(self.testButtonFunction)
         buttonsLayout.addWidget(testButton)
         ##############################################
 
@@ -55,6 +62,8 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
     def aggiornaUi(self):
         listViewModel = QStandardItemModel(self.listView)
+
+        self.lista.PRENOTAZIONI.sort(key=lambda x: x.cliente.getNomeCliente())  # mette in ordine alfabetico le prenotazioni riferendosi al nome dei clienti che le hanno effettuate
 
         for prenotazione in self.lista.PRENOTAZIONI:  # per ogni prenotazione crea una riga
             item = QStandardItem()
@@ -110,3 +119,18 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
     def aggiungiPrenotazione(self):
         print("aggiungiPrenotazione")
+        cliente = Cliente('AAAAAA', 'DDDDDDDD')
+        #self.lista.PRENOTAZIONI.append(Prenotazione('dd/mm/yyyy3', 32222, 'Da Confermare', cliente, 111111))
+
+        self.inserisciPrenotazione = VistaAggiungiPrenotazione(callback=self.aggiornaUi(), lista=self.lista.PRENOTAZIONI)
+        prenotazione = self.inserisciPrenotazione.show()
+
+
+    def testButtonFunction(self):
+        self.aggiungiPrenotazione()
+        self.aggiornaUi()
+        self.lista.stampaLista
+
+
+
+
