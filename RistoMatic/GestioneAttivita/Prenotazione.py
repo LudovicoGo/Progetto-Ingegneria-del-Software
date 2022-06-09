@@ -44,7 +44,7 @@ class Prenotazione():
         self.dataPrenotazione = dataPrenotazione
 
     def setNumeroPersone(self, NumeroPersone):
-        self.NumeroPersone = NumeroPersone
+        self.numeroPersone = NumeroPersone
 
     def setStatoPrenotazione(self, statoPrenotazione):
         self.StatoPrenotazione = statoPrenotazione
