@@ -25,7 +25,7 @@ class Tavolo():
         }
 
     def getIsLibero(self) -> bool:
-        return self.isLibero
+        return (not self.isLibero and not self.getIsPrenotato())
 
     def getIsPrenotato(self) -> bool:
         prenotazioni=StatoSala.Prenotazioni

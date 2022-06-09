@@ -6,9 +6,10 @@ class Zone(Enum):
     FORNO = 3
 
 class StatoComanda(Enum):
-    NON_AVVIATA = 0
-    AVVIATA = 1
+    CREATA = 0
+    IN_PREPARAZIONE = 1
     COMPLETATA = 2
+    ANNULLATA = 3
 
 class StatoTavolo(Enum):
     UTILIZZABILE = "Libero"

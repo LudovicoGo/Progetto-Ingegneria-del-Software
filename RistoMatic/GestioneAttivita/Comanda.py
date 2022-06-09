@@ -13,23 +13,18 @@ class Comanda:
         self.dataCreazione = datetime.datetime.now()
         self.elementiComanda= []
         self.rif=rif
-        self.sincronizzata=False
+        self.comandaSincronizzata=False
         self.numeroComanda = Comanda.counter_n_comanda
-        Comanda.counter_n_comanda = Comanda.counter_n_comanda +1
 
-        if isinstance(self.rif, Tavolo):
-            self.rif.setIsLibero(False)
+        Comanda.counter_n_comanda += 1
 
         StatoSala.aggiungiComanda(self)
-
-    def aggiornaElementoComanda(self, daAggiornare):
-        pass
 
     def aggiungiElementoComanda(self, elementoDaAggiungere : ElementoComanda):
         self.elementiComanda.append(elementoDaAggiungere)
 
     def getComandaSincronizzata(self):
-        return self.sincronizzata
+        return self.comandaSincronizzata
 
     def getInfoComanda(self) -> dict:
         rif=""
@@ -41,7 +36,7 @@ class Comanda:
             "rif": rif,
             "dataCreazione": self.dataCreazione,
             "numeroComanda": self.numeroComanda,
-            "sincronizzata": self.sincronizzata
+            "sincronizzata": self.comandaSincronizzata
         }
 
     def getNumeroComanda(self) -> int:
@@ -56,9 +51,9 @@ class Comanda:
         if count==len(self.elementiComanda):
             return StatoComanda.COMPLETATA
         elif count > 0:
-            return StatoComanda.AVVIATA
+            return StatoComanda.IN_PREPARAZIONE
         else:
-            return StatoComanda.NON_AVVIATA
+            return StatoComanda.CREATA
 
     def inviaNotificaBar(self):
         pass
@@ -67,14 +62,18 @@ class Comanda:
         self.elementiComanda.remove(daEliminare)
 
     def setComandaSincronizzata(self, comandaSincronizzata : bool):
-        self.sincronizzata=comandaSincronizzata
+        self.comandaSincronizzata=comandaSincronizzata
 
+    #forzo lo stato della comanda e quindi dei suoi elementi su uno stato
     def setStatoPreparazione(self, stato : StatoComanda):
         for elemento in self.elementiComanda:
             if stato==StatoComanda.COMPLETATA:
                 elemento.setIsPronta(True)
-            elif stato==StatoComanda.NON_AVVIATA:
+            elif stato==StatoComanda.CREATA:
                 elemento.setIsPronta(False)
+            elif stato==StatoComanda.ANNULLATA:
+                elemento.setIsPronta(False)
+                elemento.setVisibilita(False)
 
     def stampaPreconto(self):
         pass
@@ -88,9 +87,8 @@ class Comanda:
     def getTotale(self):
         tot=0
         for elemento in self.elementiComanda:
-            qnt = elemento.getQuantita()
             info = elemento.getInfoElementoComanda()
-            tot = tot+ (qnt*info["Prezzo"])
+            tot = tot+ (info['Quantita']*info["Prezzo"])
 
         tot = tot+ self.getCostoCoperto()
         return tot
@@ -103,8 +101,6 @@ class Comanda:
         return None
 
     def rimuoviComanda(self):
-        if isinstance(self.rif, Tavolo):
-            self.rif.setIsLibero(True)
-            self.rif.setNumeroCoperti(0)
-        StatoSala.rimuoviComanda(self)
+        if (not self.getStato() == StatoComanda.COMPLETATA):
+            StatoSala.rimuoviComanda(self)
         del self
