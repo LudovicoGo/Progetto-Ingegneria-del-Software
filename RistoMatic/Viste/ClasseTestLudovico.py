@@ -1,4 +1,5 @@
 from RistoMatic.GestioneAttivita.Cliente import Cliente
+from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
 from RistoMatic.GestioneAttivita.Prenotazione import Prenotazione
 
 
@@ -20,6 +21,8 @@ class ClasseTestLudovico():
                                           statoPrenotazione='Confermata',
                                           cliente=self.cliente2, riferimentoTavolo=7)]
 
+
+        self.ASPORTO = [OrdineAsporto('21:00', '19:30', self.cliente), OrdineAsporto('21:00', '19:30', self.cliente), OrdineAsporto('19:00', '16:30', self.cliente2), OrdineAsporto('20:00', '15:30', self.cliente2), OrdineAsporto('22:00', '19:30', self.cliente3)]
 
     def ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo):
         for i in self.PRENOTAZIONI:

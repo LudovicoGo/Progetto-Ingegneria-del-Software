@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QScrollArea
 
+from RistoMatic.Viste.VistaAsporto import VistaAsporto
 from RistoMatic.Viste.VistaComande import VistaComande
 from RistoMatic.Viste.VistaPrenotazioni import VistaPrenotazioni
 from RistoMatic.Viste.VistaTavoli import VistaTavoli
@@ -19,7 +20,7 @@ class VistaSala(QtWidgets.QWidget):
         self.areaComande = QScrollArea(widgetResizable=True)
         self.areaComande.setWidget(self.tabComande)
 
-        self.tabAsporto = QtWidgets.QWidget()
+        self.tabAsporto = VistaAsporto()
         self.tabAmministrazione = QtWidgets.QWidget()
 
         self.tabs = QTabWidget()
