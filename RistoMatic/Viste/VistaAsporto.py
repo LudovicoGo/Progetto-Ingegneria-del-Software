@@ -1,4 +1,6 @@
-from PySide6.QtWidgets import QWidget, QGridLayout, QHBoxLayout, QPushButton, QLabel, QVBoxLayout
+from PySide6.QtGui import QStandardItem
+from PySide6.QtWidgets import QWidget, QGridLayout, QHBoxLayout, QPushButton, QLabel, QVBoxLayout, QListView
+from PySide6.examples.widgets.layouts.flowlayout.flowlayout import FlowLayout
 
 from RistoMatic.Viste.ClasseTestLudovico import ClasseTestLudovico
 
@@ -30,24 +32,35 @@ class VistaAsporto(QWidget):
         pass
 
     def loadOrdini(self):
+        #self.vlayout = QVBoxLayout()
         column = 1
         row = 1
         for ordine in self.lista.ASPORTO:
-            self.hLayout = QVBoxLayout(self)
+            self.vLayout = QVBoxLayout(self)
+            self.setGeometry(100, 100, 100, 100)
             self.nome = QLabel("Nome: " + str(ordine.cliente.getNomeCliente()))
             self.recapito = QLabel('Telefono: ' + str(ordine.cliente.getRecapitoTelefonico()))
             self.oraConsegna = QLabel('Ora consegna: ' + str(ordine.getOraConsegna()))
             self.oraOrdine = QLabel('Ora ordine: ' + str(ordine.getoraOrdine()))
-            self.hLayout.addWidget(self.nome)
-            self.hLayout.addWidget(self.recapito)
-            self.hLayout.addWidget(self.oraConsegna)
-            self.hLayout.addWidget(self.oraOrdine)
-            self.gridLayout.addLayout(self.hLayout, row, column, row, column)
+            self.vLayout.addWidget(self.nome)
+            self.vLayout.addWidget(self.recapito)
+            self.vLayout.addWidget(self.oraConsegna)
+            self.vLayout.addWidget(self.oraOrdine)
+            self.gridLayout.addLayout(self.vLayout, row, column, row, column)
             column += 1
             if column == 11:
                 column = 1
                 row += 1
-
-
+            self.listaElementi = QListView()
+            for ordine in self.lista.ASPORTO:
+                item = QStandardItem()
+                for elemento in ordine.comanda.elementiComanda:
+                    titolo = f"{elemento.ElementoMenu.getNomeElemento(), elemento.getQuantita}"
+                    item.setText(titolo)
+                    item.setEditable(False)
+                    font = item.font()
+                    font.setPointSize(12)
+                    item.setFont(font)
+                    self.listaElementi.appendRow(item)
 
 

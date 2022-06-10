@@ -1,4 +1,4 @@
-from GestioneAttivita.Cliente import Cliente
+from RistoMatic.GestioneAttivita.Comanda import Comanda
 
 
 class OrdineAsporto():
@@ -9,8 +9,8 @@ class OrdineAsporto():
         self.id += 1
         self.oraConsegna = oraConsegna
         self.oraOrdine = oraOrdine
-
         self.cliente = cliente
+        self.comanda = Comanda(id)
 
     def getInfoOrdineAsporto(self):
         return {
@@ -37,4 +37,10 @@ class OrdineAsporto():
 
     def setoraOrdine(self, oraOrdine):
         self.oraOrdine = oraOrdine
-        
+
+    def aggiungiElementoAporto(self, elementoComanda):
+        self.comanda.elementiComanda.append(elementoComanda)
+
+    def rimuoviElementoAporto(self, index):
+        self.comanda.elementiComanda.remove(index)
+

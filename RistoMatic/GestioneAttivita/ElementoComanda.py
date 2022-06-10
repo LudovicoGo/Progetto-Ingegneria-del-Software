@@ -1,8 +1,6 @@
 from RistoMatic.GestioneAmministrativa.ElementoMenu import ElementoMenu
-from RistoMatic.GestioneAttivita.Enum import Zone
 
-
-class ElementoComanda():
+class aElementoComanda():
     def __init__(self, elementoMenu : ElementoMenu, note: str, quantita: int):
         self.elemento = elementoMenu
         self.note = note

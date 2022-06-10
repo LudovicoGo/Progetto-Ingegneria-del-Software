@@ -1,4 +1,4 @@
-from RistoMatic.GestioneAttivita.ElementoComanda import ElementoComanda
+from RistoMatic.GestioneAttivita import ElementoComanda
 from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
 from RistoMatic.GestioneAttivita.Enum import StatoComanda
