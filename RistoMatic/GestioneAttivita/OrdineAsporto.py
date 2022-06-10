@@ -1,5 +1,4 @@
-from RistoMatic.GestioneAttivita.Comanda import Comanda
-
+import RistoMatic.GestioneAttivita.Comanda
 
 class OrdineAsporto():
     id = 0
@@ -10,7 +9,8 @@ class OrdineAsporto():
         self.oraConsegna = oraConsegna
         self.oraOrdine = oraOrdine
         self.cliente = cliente
-        self.comanda = Comanda(id)
+
+        self.comanda = RistoMatic.GestioneAttivita.Comanda(id)
 
     def getInfoOrdineAsporto(self):
         return {
