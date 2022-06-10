@@ -8,7 +8,7 @@ class ElementoComanda():
         self.note = note
         self.quantita=quantita
         self.isPronta = False
-        #self.visibilita = False
+        self.visibilita = True #se false l'elemento è annullato
 
     def getInfoElementoComanda(self) -> dict:
         return {"Nome":self.elemento.nomeElemento,
@@ -25,8 +25,8 @@ class ElementoComanda():
     def getQuantita(self) -> int:
         return self.quantita
 
-    #def getVisibilita(self) -> Zone:
-    #    return self.visibilita
+    def getVisibilita(self):
+        return self.visibilita
 
     def setIsPronta(self,isPronta : bool):
         self.isPronta=isPronta
@@ -37,5 +37,5 @@ class ElementoComanda():
     def setQuantita(self,quantita : int):
         self.quantita=quantita
 
-    #def setVisibilita(self,visibilita : Zone) :
-    #    self.visibilita=visibilita
+    def setVisibilita(self,visibilita) :
+        self.visibilita=visibilita

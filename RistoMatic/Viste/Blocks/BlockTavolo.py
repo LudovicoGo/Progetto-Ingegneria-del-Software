@@ -33,7 +33,7 @@ class BlockTavolo(QtWidgets.QPushButton):
     def filldata(self):
         self.status = self.tavolo.getStato()
         self.setText(
-            f"Tavolo {str(self.tavolo.riferimentoTavolo)} Posti: {str(self.tavolo.posti)} \n Coperti: {str(self.tavolo.coperti)} \n Stato: {str(self.status.value)}")
+            f"Tavolo {str(self.tavolo.riferimentoTavolo)} Posti: {str(self.tavolo.getNumeroPosti())} \n Coperti: {str(self.tavolo.getNumeroCoperti())} \n Stato: {str(self.status.value)}")
 
         if (self.status == StatoTavolo.UTILIZZABILE):
             self.setStyleSheet('QPushButton {background-color: green; font-size: 16px; height: 90; width:150;}')
