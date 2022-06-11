@@ -17,8 +17,6 @@ class VistaPreparazione(QtWidgets.QWidget):
         # generazione dati di esempio
         for i in range(0, 10):
             tavolo = Tavolo(randint(1, 10))
-        menu = Menu(2, "summer")
-        menu.setActive()
 
         self.layout = FlowLayout(self)
         self.timer = QTimer()

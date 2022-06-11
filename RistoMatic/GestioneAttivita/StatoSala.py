@@ -12,8 +12,7 @@ class StatoSala():
     Tavoli = []
     Prenotazioni = []
     Comande = []
-    ListaMenu = []
-    Menu = ""
+    Menu = None
 
     def __init__(self):
         pass
@@ -84,7 +83,7 @@ class StatoSala():
 
 
     @staticmethod
-    def getListaMenu():
+    def getDictMenu():
         if os.path.isfile('Dati/Menu.pickle'):
             with open('Dati/Menu.pickle', 'rb') as f:
                 menus = pickle.load(f)
@@ -92,16 +91,18 @@ class StatoSala():
 
     @staticmethod
     def aggiungiMenu(menu):
-        menus = []
+        menus = dict()
         if os.path.isfile('Dati/Menu.pickle'):
             with open('Dati/Menu.pickle', 'rb') as f:
                 menus = pickle.load(f)
-        menus.append(menu)
+        menus[menu.getNomeMenu()]=(menu)
         with open('Dati/Menu.pickle', 'wb') as handle:
             pickle.dump(menus, handle, pickle.HIGHEST_PROTOCOL)
 
     @staticmethod
     def getMenuAttivo():
+        if StatoSala.Menu == None:
+            StatoSala.setMenuAttivo(StatoSala.getDictMenu()["Default"])
         return StatoSala.Menu
 
     @staticmethod
@@ -125,7 +126,7 @@ class StatoSala():
     @staticmethod
     def getListaCodaPrenotazione():
         prenotazioni = []
-        for prenotazione in StatoSala.getPrenotazione():
+        for prenotazione in StatoSala.getListaPrenotazioni():
             if prenotazione.getStatoPrenotazione() == StatoPrenotazione.NON_CONFERMATA:
                 prenotazioni.append(prenotazione)
 

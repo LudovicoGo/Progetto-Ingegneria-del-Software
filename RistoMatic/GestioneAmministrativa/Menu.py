@@ -10,20 +10,14 @@ class Menu:
         self.nomeMenu=nome_menu
         self.listaElementi = dict()
 
-        StatoSala.aggiungiMenu(self)
 
-        #dati esempio
-        self.aggiungiElementoMenu(ElementoMenu("pizza", Zone.CUCINA, 10))
-        self.aggiungiElementoMenu(ElementoMenu("birra", Zone.BAR, 3))
-        self.aggiungiElementoMenu(ElementoMenu("pasta", Zone.CUCINA, 6))
-
-    def aggiungiElementoMenu(self, elemento: ElementoMenu):
+    def aggiungiElementoMenu(self, elemento):
         if (isinstance(elemento,ElementoMenu)):
             self.listaElementi[elemento.nomeElemento] = elemento
         else:
             raise Exception("Not ElementoMenu")
 
-    def eliminaElementoMenu(self, nome: str):
+    def eliminaElementoMenu(self, nome):
         del(self.listaElementi[nome])
 
     def getCostoCoperto(self):
