@@ -8,19 +8,19 @@ class ElementoComanda():
         self.isPronta = False
         self.visibilita = True #se false l'elemento è annullato
 
-    def getInfoElementoComanda(self) -> dict:
+    def getInfoElementoComanda(self):
         return {"Nome":self.elemento.nomeElemento,
                 "Note":self.note,
                 "Quantita":self.quantita,
                 "Prezzo": self.elemento.prezzoElemento}
 
-    def getIsPronta(self) -> bool:
+    def getIsPronta(self):
         return self.isPronta
 
-    def getNote(self) -> str:
+    def getNote(self):
         return self.note
 
-    def getQuantita(self) -> int:
+    def getQuantita(self):
         return self.quantita
 
     def getVisibilita(self):

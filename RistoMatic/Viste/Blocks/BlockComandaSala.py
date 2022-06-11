@@ -18,7 +18,7 @@ class BlockComandaSala(QtWidgets.QGroupBox):
         else:
             self.setTitle(
                 f"Comanda {comanda.numeroComanda} - Asporto  - {comanda.dataCreazione.strftime('%H:%M')}")
-            self.setStyleSheet("QGroupBox {background-color: blue;}")
+            self.setStyleSheet("QGroupBox {background-color: yellow;}")
 
         self.setMinimumWidth(300)
 

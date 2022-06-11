@@ -32,14 +32,14 @@ class VistaAsporto(QWidget):
         self.addButton = QPushButton("Aggiungi nuovo ordine")
         self.addButton.clicked.connect(self.aggiungiNuovoOrdine)
         self.layout.addWidget(self.addButton)
-        for ordine in StatoSala.getListaAsporto(self):
+        for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine))
 
     def aggiorna(self):
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
 
-        for ordine in StatoSala.getListaAsporto(self):
+        for ordine in StatoSala.getListaAsporto():
 #            self.bb = QPushButton('bottone')
 #            self.addButton.clicked.connect(self.pas)
 #            self.layout.addWidget(self.bb)

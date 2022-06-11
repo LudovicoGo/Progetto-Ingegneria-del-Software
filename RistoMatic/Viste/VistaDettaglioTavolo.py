@@ -1,6 +1,6 @@
 from PySide6 import QtWidgets
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QPushButton, QLabel, QGridLayout, QLineEdit
+from PySide6.QtWidgets import QPushButton, QLabel, QGridLayout, QLineEdit, QMessageBox
 from RistoMatic.Viste.Blocks.BlockComandaSala import BlockComandaSala
 from RistoMatic.GestioneAttivita.Comanda import Comanda
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
@@ -64,10 +64,13 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
             self.grid.addWidget(self.wcomanda, 2, 0, 1, 4)
 
     def rimuovi_comanda(self):
-        self.wcomanda.deleteLater()
-        StatoSala.rimuoviComanda(self.comanda)
-        self.comanda = None
-
+        if StatoSala.rimuoviComanda(self.comanda):
+            self.comanda = None
+            self.wcomanda.deleteLater()
+        else:
+            msgBox = QMessageBox()
+            msgBox.setText("Impossibile rimuovere comanda")
+            msgBox.exec()
 
     def modifica_coperti(self):
         try:
