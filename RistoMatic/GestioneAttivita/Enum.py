@@ -15,3 +15,7 @@ class StatoTavolo(Enum):
     UTILIZZABILE = "Libero"
     OCCUPATO = "Occupato"
     PRENOTATO = "Prenotato"
+
+class StatoPrenotazione(Enum):
+    CONFERMATA = "Confermata"
+    NON_CONFERMATA = "Non Confermata"
