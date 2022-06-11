@@ -50,6 +50,3 @@ class Menu:
 
     def setNomeMenu(self, nome: str):
         self.nomeMenu = nome
-
-    def setActive(self):
-        StatoSala.setMenuAttivo(self)
