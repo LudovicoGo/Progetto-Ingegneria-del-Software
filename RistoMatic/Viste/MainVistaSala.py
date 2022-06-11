@@ -20,7 +20,7 @@ class VistaSala(QtWidgets.QWidget):
         self.areaComande = QScrollArea(widgetResizable=True)
         self.areaComande.setWidget(self.tabComande)
 
-        self.tabAsporto = VistaAsporto()
+        self.tabAsporto = VistaAsporto()  #QtWidgets.QWidget()
         self.tabAmministrazione = QtWidgets.QWidget()
 
         self.tabs = QTabWidget()

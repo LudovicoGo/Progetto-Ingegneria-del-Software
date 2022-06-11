@@ -1,6 +1,6 @@
 from RistoMatic.GestioneAttivita import ElementoComanda
-from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
+from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.GestioneAttivita.Enum import StatoComanda
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 import datetime
@@ -30,7 +30,7 @@ class Comanda:
         rif=""
         if isinstance(self.rif, Tavolo):
             rif = "Tavolo "+ str(self.rif.getRiferimentoTavolo())
-        elif isinstance(self.rif,OrdineAsporto):
+        elif isinstance(self.rif, OrdineAsporto):
             rif = "Asporto " + str(self.rif.getNumeroOrdine())
         return {
             "rif": rif,

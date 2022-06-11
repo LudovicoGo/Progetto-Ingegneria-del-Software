@@ -111,8 +111,8 @@ class StatoSala():
     def createPrenotazione(self, daCreare):
         pass
 
-    def getListaAsporto(self) -> dict:
-        pass
+    def getListaAsporto(self):
+        return StatoSala.OrdiniAsporto
 
     def getListaCodaPrenotazione(self) -> dict:
         pass
