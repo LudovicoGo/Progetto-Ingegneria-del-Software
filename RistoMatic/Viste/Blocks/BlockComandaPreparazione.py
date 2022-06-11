@@ -12,7 +12,7 @@ class BlockComandaPreparazione(QtWidgets.QGroupBox):
             super().__init__(f"Comanda {comanda.numeroComanda} - Tavolo {comanda.rif.riferimentoTavolo} - {comanda.dataCreazione.strftime('%H:%M')}")
         else:
             super().__init__(f"Comanda {comanda.numeroComanda} - Asporto {comanda.rif.riferimentoTavolo} - {comanda.dataCreazione.strftime('%H:%M')}")
-            self.setStyleSheet("QGroupBox {background-color: blue;}")
+            self.setStyleSheet("QGroupBox {background-color: yellow;}")
         self.vbox = QVBoxLayout()
         self.vbox.addStretch(1)
 

@@ -4,7 +4,7 @@ import pickle
 
 import RistoMatic.GestioneAttivita.Tavolo
 import RistoMatic.GestioneAttivita.OrdineAsporto
-from RistoMatic.GestioneAttivita.Enum import StatoComanda
+from RistoMatic.GestioneAttivita.Enum import StatoComanda, StatoPrenotazione
 
 
 class StatoSala():
@@ -78,15 +78,27 @@ class StatoSala():
             if isinstance(comanda.rif, RistoMatic.GestioneAttivita.Tavolo.Tavolo):
                 comanda.rif.setIsLibero(True)
                 comanda.rif.setNumeroCoperti(0)
+            return True
+        else:
+            return False
 
 
     @staticmethod
     def getListaMenu():
-        return StatoSala.ListaMenu
+        if os.path.isfile('Dati/Menu.pickle'):
+            with open('Dati/Menu.pickle', 'rb') as f:
+                menus = pickle.load(f)
+                return menus
 
     @staticmethod
     def aggiungiMenu(menu):
-        StatoSala.ListaMenu.append(menu)
+        menus = []
+        if os.path.isfile('Dati/Menu.pickle'):
+            with open('Dati/Menu.pickle', 'rb') as f:
+                menus = pickle.load(f)
+        menus.append(menu)
+        with open('Dati/Menu.pickle', 'wb') as handle:
+            pickle.dump(menus, handle, pickle.HIGHEST_PROTOCOL)
 
     @staticmethod
     def getMenuAttivo():
@@ -98,47 +110,92 @@ class StatoSala():
 
     @staticmethod
     def rimuoviMenu(menu):
-        StatoSala.ListaMenu.remove(menu)
+        if os.path.isfile('Dati/Menu.pickle'):
+            with open('Dati/Menu.pickle', 'rb') as f:
+                menus = pickle.load(f)
+                menus.remove(menu)
+                with open('Dati/Menu.pickle', 'wb') as handle:
+                    pickle.dump(menus, handle, pickle.HIGHEST_PROTOCOL)
 
 
+    @staticmethod
+    def getListaPrenotazioni():
+        return StatoSala.Prenotazioni
 
-    def aggiungiOrdineAsporto(self,oraConsegna : datetime):
-        pass
+    @staticmethod
+    def getListaCodaPrenotazione():
+        prenotazioni = []
+        for prenotazione in StatoSala.getPrenotazione():
+            if prenotazione.getStatoPrenotazione() == StatoPrenotazione.NON_CONFERMATA:
+                prenotazioni.append(prenotazione)
 
-    def confermaPrenotazione(self, daConfermare):
-        pass
+        return prenotazioni
 
-    def createPrenotazione(self, daCreare):
-        pass
+    @staticmethod
+    def ricercaPrenotazione(nomeCliente: str, dataPrenotazione: datetime):
+        prenotazioni = []
+        for prenotazione in StatoSala.getListaPrenotazioni():
+            info = prenotazione.getInfoPrenotazione()
+            if info["NomeCliente"] == nomeCliente and dataPrenotazione==prenotazione.getDataPrenotazione():
+                prenotazioni.append(prenotazione)
 
-    def getListaAsporto(self):
-        return StatoSala.OrdiniAsporto
+        return prenotazioni
 
-    def getListaCodaPrenotazione(self) -> dict:
+    @staticmethod
+    def rimuoviPrenotazione(prenotazione):
+        dati = []
+        if os.path.isfile('Dati/Prenotazioni.pickle'):
+            with open('Dati/Prenotazioni.pickle', 'rb') as f:
+                dati = pickle.load(f)
+        dati.append(prenotazione)
+        with open('Dati/Prenotazioni.pickle', 'wb') as handle:
+            pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
+
+        StatoSala.Prenotazioni.remove(prenotazione)
+
+
+    @staticmethod
+    def confermaPrenotazione(daConfermare):
+        daConfermare.setStatoPrenotazione(StatoPrenotazione.CONFERMATA)
+
+    @staticmethod
+    def inviaRisposta():
         pass
 
     @staticmethod
-    def getListaPrenotazioni() -> dict:
+    def notificaDisponibilita(numeroCellulareCliente : str, nomeCliente : str):
         pass
 
-    def getPrenotazione(self,nomeCliente : str, data : datetime):
-        pass
+    @staticmethod
+    def rimuoviPrenotazioniNonConfermate():
+        nc= StatoSala.getListaCodaPrenotazione()
+        for prenotazione in nc:
+            StatoSala.rimuoviPrenotazione(prenotazione)
 
-    def inviaRisposta(self):
-        pass
 
-    def modificaOrdineAsporto(self,nomeCliente : str):
-        pass
+    @staticmethod
+    def aggiungiOrdineAsporto(ordineasporto):
+        StatoSala.OrdiniAsporto.append(ordineasporto)
 
-    def notificaDisponibilita(self,numeroCellulareCliente : str, nomeCliente : str):
-        pass
+    @staticmethod
+    def getListaAsporto():
+        return StatoSala.OrdiniAsporto
 
-    def ricercaPrenotazione(self, nomeCliente : str, dataPrenotazione : datetime):
-        pass
+    @staticmethod
+    def ricercaOrdineAsporto(nomeCliente : str):
+        for asporto in StatoSala.getListaAsporto():
+            if asporto.cliente.nomeCliente == nomeCliente:
+                return asporto
+        return None
 
-    def rimuoviOrdineAsporto(self,nomeCliente : str):
-        pass
+    @staticmethod
+    def rimuoviOrdineAsporto(ordine):
+        dati = []
+        if os.path.isfile('Dati/Asporto.pickle'):
+            with open('Dati/Asporto.pickle', 'rb') as f:
+                dati = pickle.load(f)
+        dati.append(ordine)
+        with open('Dati/Asporto.pickle', 'wb') as handle:
+            pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
 
-    def rimuoviPrenotazioniNonConfermate(self):
-        pass
-
+        StatoSala.OrdiniAsporto.remove(ordine)
