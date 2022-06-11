@@ -156,10 +156,6 @@ class StatoSala():
 
 
     @staticmethod
-    def confermaPrenotazione(daConfermare):
-        daConfermare.setStatoPrenotazione(StatoPrenotazione.CONFERMATA)
-
-    @staticmethod
     def inviaRisposta():
         pass
 
