@@ -23,43 +23,37 @@ class VistaAsporto(QWidget):
     def __init__(self):
         super().__init__()
 
+     #   self.tasti = QVBoxLayout()
+     #   self.comande = QHBoxLayout()
+     #   self.hbox = QVBoxLayout()
+
+
+
         self.layout = FlowLayout(self)
         self.timer = QTimer()
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
-        self.addButton = QPushButton("Aggiungi nuovo ordine")
-        self.addButton.clicked.connect(self.aggiungiTest())
-        self.layout.addWidget(self.addButton)
 
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine))
 
+        self.addButton = QPushButton("Aggiungi nuovo ordine")
+        self.addButton.clicked.connect(self.aggiungiTest())
+        self.layout.addWidget(self.addButton)
+
+
+
+
+
+
     def aggiorna(self):
+
+        self.layout.addWidget(self.addButton)
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
 
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine))
-
-
-
-    def passe(self):
-        #super().__init__()
-
-        self.layout = FlowLayout(self)
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.aggiorna)
-        self.timer.start(5000)
-        self.lista = ClasseTestLudovico()
-        #for comanda in StatoSala.getListaAsporto():
-        self.addButton = QPushButton("Aggiungi nuovo ordine")
-        self.addButton.clicked.connect(self.aggiungiNuovoOrdine)
-        self.layout.addWidget(self.addButton)
-        for ordine in StatoSala.getListaAsporto():
-            self.layout.addWidget(BlockComandaAsporto(ordine))
-
-
-
 
 
     def aggiungiTest(self):
