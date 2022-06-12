@@ -85,8 +85,8 @@ class BlockElementoComandaAsporto(QtWidgets.QVBoxLayout):
             self.aggiorna_comanda.emit()
 
     def rimuovi(self):
-        self.elimina_elemento.emit(self.elemento,self)
-        self.aggiorna_comanda.emit()
+        self.eliminaElemento.emit(self.elemento,self)
+        self.aggiornaComanda.emit()
         for i in reversed(range(self.col1.count())):
             self.col1.itemAt(i).widget().setParent(None)
         for i in reversed(range(self.col2.count())):

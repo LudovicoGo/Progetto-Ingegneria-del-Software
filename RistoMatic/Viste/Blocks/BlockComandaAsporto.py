@@ -1,97 +1,79 @@
 from PySide6 import QtWidgets
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QStandardItem, QStandardItemModel
-from PySide6.QtWidgets import QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QListView
+from PySide6.QtWidgets import QPushButton, QVBoxLayout, QHBoxLayout, QLabel
 from RistoMatic.GestioneAttivita.Comanda import Comanda
+from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.Viste.Blocks.BlockElementoComandaSala import BlockElementoComandaSala
 from RistoMatic.Viste.VistaAggiungiElemento import VistaAggiungiElemento
 
-from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
-from RistoMatic.Viste.Blocks.BlockElementoComandaAsporto import BlockElementoComandaAsporto
-from RistoMatic.Viste.VistaAggiungiElemento import VistaAggiungiElemento
-from RistoMatic.Viste.VistaAggiungiElementoAsporto import VistaAggiungiElementoAsporto
-
-
 class BlockComandaAsporto(QtWidgets.QGroupBox):
 
-    def __init__(self, ordine : OrdineAsporto):
+    def __init__(self, ordine: OrdineAsporto):
         super().__init__()
         self.ordine = ordine
-        self.setTitle("Ordine Asporto: "+ ordine.cliente.nomeCliente + "   Ora Consegna " + ordine.oraConsegna)
-       # if (isinstance(comanda.rif, Tavolo)):
-       #     self.setTitle(
-       #         f"Comanda {comanda.numeroComanda} - Tavolo {comanda.rif.riferimentoTavolo} - {comanda.dataCreazione.strftime('%H:%M')}")
-       # else:
-             #self.setTitlef("Comanda {ordine.numeroOrdine} - Asporto  - {ordine.oraConsegna}")
-             #self.setStyleSheet("QGroupBox {background-color: blue;}")
+        self.comanda = ordine.comanda
 
         self.setMinimumWidth(300)
-        self.setMinimumHeight(300)
+
         self.vbox = QVBoxLayout()
-
-        self.addButton = QPushButton("Aggiungi elemento")
-        self.addButton.clicked.connect(self.aggiungiElemento)
-        self.vbox.addWidget(self.addButton)
-
+        self.addbtn = QPushButton("Aggiungi elemento")
+        self.addbtn.clicked.connect(self.aggiungi_elemento)
+        self.vbox.addWidget(self.addbtn)
         #self.vbox.addStretch(1)
-        self.list = QVBoxLayout()
-        self.listview = QListView()
-        self.lista = QStandardItemModel(self.listview)
-        for ordinato in ordine.comanda.elementiComanda:
-            item = QStandardItem()
-            title = f"{ordinato.elemento.nomeElemento}, Q.tà: {ordinato.quantita}, Prezzo: {ordinato.elemento.prezzoElemento}x{ordinato.quantita}"
-            item.setText(title)
-            item.setEditable(False)
-            font = item.font()
-            font.setPointSize(12)
-            item.setFont(font)
-            self.lista.appendRow(item)
+        self.list=QVBoxLayout()
 
+        for elemento in self.comanda.elementiComanda:
+            block = BlockElementoComandaSala(elemento)
+            block.aggiorna_comanda.connect(self.aggiorna_totale)
+            block.elimina_elemento.connect(self.elimina_elemento)
+            self.list.addLayout(block)
 
-        self.listview.setModel(self.lista)
-
-        self.vbox.addWidget(self.listview)
-
+        self.vbox.addLayout(self.list)
         self.totline = QHBoxLayout()
 
-
-
-        self.tot = QLabel("Totale: "+ str(self.ordine.comanda.getTotale()) +" €")
+        self.tot = QLabel("Totale: "+ str(self.ordine.getTotale()) +" €")
         self.tot.setStyleSheet("QLabel {font-size:16px; font-weight: bold}")
+
+
         self.totline.addWidget(self.tot)
         self.totline.setAlignment(Qt.AlignRight)
         self.vbox.addLayout(self.totline)
 
-        self.delButton = QPushButton("Rimuovi elemento")
-        self.delButton.clicked.connect(self.rimuoviElemento)
-        self.vbox.addWidget(self.delButton)
-
         self.stampa = QPushButton("Stampa Conto")
-        self.stampa.clicked.connect(self.stampaConto)
+        self.stampa.clicked.connect(self.stampa_preconto)
         self.vbox.addWidget(self.stampa)
+
+        self.delbutton = QPushButton("Elimina Ordine")
+        self.delbutton.clicked.connect(self.elimina_ordine)
+        self.vbox.addWidget(self.delbutton)
         self.setLayout(self.vbox)
 
         self.waggiungi=None
 
-    def aggiornaTotale(self):
-        self.tot.setText("Totale: "+ str(self.ordine.comanda.getTotale()) +" €")
-        pass
+    def aggiorna_totale(self):
+        self.tot.setText("Totale: "+ str(self.ordine.getTotale()) +" €")
 
-    def aggiungiElemento(self):
-        self.waggiungi=VistaAggiungiElementoAsporto(self.ordine)
-        self.waggiungi.update_ui.connect(self.aggiungiBlock)
+    def aggiungi_elemento(self):
+        self.waggiungi=VistaAggiungiElemento(self.comanda)
+        self.waggiungi.update_ui.connect(self.aggiungi_block)
         self.waggiungi.show()
 
-    def aggiungiBlock(self):
-        block = BlockElementoComandaAsporto(self.ordine.comanda.elementiComanda[-1])
-        block.aggiornaComanda.connect(self.aggiornaTotale)
-        block.eliminaElemento.connect(self.eliminaElemento)
+    def aggiungi_block(self):
+        block = BlockElementoComandaSala(self.comanda.elementiComanda[-1])
+        block.aggiorna_comanda.connect(self.aggiorna_totale)
+        block.elimina_elemento.connect(self.elimina_elemento)
         self.list.addLayout(block)
-        self.aggiornaTotale()
+        self.aggiorna_totale()
 
-    def rimuoviElemento(self,elemento):
-        self.ordine.comanda.rimuoviElementoComanda(elemento)
 
-    def stampaConto(self):
-        print('Stampa conto')
+    def elimina_elemento(self,elemento):
+        self.comanda.rimuoviElementoComanda(elemento)
+
+    def elimina_ordine(self):
+        StatoSala.OrdiniAsporto.remove(self.ordine)
+
+    def stampa_preconto(self):
+        pass #manda i dati alla stampante
+

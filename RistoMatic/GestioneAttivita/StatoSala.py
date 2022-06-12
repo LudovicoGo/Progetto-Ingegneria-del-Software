@@ -4,6 +4,7 @@ import pickle
 
 import RistoMatic.GestioneAttivita.Tavolo
 import RistoMatic.GestioneAttivita.OrdineAsporto
+from RistoMatic.GestioneAttivita import OrdineAsporto
 from RistoMatic.GestioneAttivita.Enum import StatoComanda, StatoPrenotazione
 
 

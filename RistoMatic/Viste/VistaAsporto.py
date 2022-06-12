@@ -27,11 +27,10 @@ class VistaAsporto(QWidget):
         self.timer = QTimer()
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
-        self.lista = ClasseTestLudovico()
-        #for comanda in StatoSala.getListaAsporto():
         self.addButton = QPushButton("Aggiungi nuovo ordine")
-        self.addButton.clicked.connect(self.aggiungiNuovoOrdine)
+        self.addButton.clicked.connect(self.aggiungiTest())
         self.layout.addWidget(self.addButton)
+
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine))
 
@@ -40,12 +39,30 @@ class VistaAsporto(QWidget):
             self.layout.itemAt(i).widget().setParent(None)
 
         for ordine in StatoSala.getListaAsporto():
-#            self.bb = QPushButton('bottone')
-#            self.addButton.clicked.connect(self.pas)
-#            self.layout.addWidget(self.bb)
             self.layout.addWidget(BlockComandaAsporto(ordine))
 
-    def aggiungiNuovoOrdine(self):
+
+
+    def passe(self):
+        #super().__init__()
+
+        self.layout = FlowLayout(self)
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.aggiorna)
+        self.timer.start(5000)
+        self.lista = ClasseTestLudovico()
+        #for comanda in StatoSala.getListaAsporto():
+        self.addButton = QPushButton("Aggiungi nuovo ordine")
+        self.addButton.clicked.connect(self.aggiungiNuovoOrdine)
+        self.layout.addWidget(self.addButton)
+        for ordine in StatoSala.getListaAsporto():
+            self.layout.addWidget(BlockComandaAsporto(ordine))
+
+
+
+
+
+    def aggiungiTest(self):
         print('Aggiungi Ordine')
         self.cliente = Cliente('Albertino', '987654321')
         ooordine = OrdineAsporto('21:00', '19:30', self.cliente)
@@ -59,7 +76,3 @@ class VistaAsporto(QWidget):
         b = ElementoComanda(f, "nessuna", 3)
         oooordine.comanda.elementiComanda.append(b)
         StatoSala.OrdiniAsporto.append(oooordine)
-
-
-def pas(self):
-        pass

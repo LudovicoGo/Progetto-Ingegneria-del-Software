@@ -23,6 +23,13 @@ class OrdineAsporto():
             "idCliente": self.cliente.getIdCliente()
         }
 
+    def getTotale(self):
+        tot = 0
+        for elemento in self.comanda.elementiComanda:
+            info = elemento.getInfoElementoComanda()
+            tot = tot + (info['Quantita'] * info["Prezzo"])
+        return tot
+
     def getNumeroOrdine(self):
         return self.numeroOrdine
 
