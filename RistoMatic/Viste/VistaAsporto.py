@@ -49,10 +49,17 @@ class VistaAsporto(QWidget):
         print('Aggiungi Ordine')
         self.cliente = Cliente('Albertino', '987654321')
         ooordine = OrdineAsporto('21:00', '19:30', self.cliente)
-        e = ElementoMenu("pizza", "bar", 12)
-        a = ElementoComanda(e, "nessuna", 12)
+        e = ElementoMenu("pizza", "Pizza", 1)
+        a = ElementoComanda(e, "blablabla", 3)
         ooordine.comanda.elementiComanda.append(a)
         StatoSala.OrdiniAsporto.append(ooordine)
 
-    def pas(self):
+        oooordine = OrdineAsporto('22:00', '20:30', self.cliente)
+        f = ElementoMenu("pizza", "bar", 12)
+        b = ElementoComanda(f, "nessuna", 3)
+        oooordine.comanda.elementiComanda.append(b)
+        StatoSala.OrdiniAsporto.append(oooordine)
+
+
+def pas(self):
         pass

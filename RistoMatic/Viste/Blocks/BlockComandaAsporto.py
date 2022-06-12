@@ -10,6 +10,7 @@ from RistoMatic.Viste.VistaAggiungiElemento import VistaAggiungiElemento
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
 from RistoMatic.Viste.Blocks.BlockElementoComandaAsporto import BlockElementoComandaAsporto
 from RistoMatic.Viste.VistaAggiungiElemento import VistaAggiungiElemento
+from RistoMatic.Viste.VistaAggiungiElementoAsporto import VistaAggiungiElementoAsporto
 
 
 class BlockComandaAsporto(QtWidgets.QGroupBox):
@@ -39,7 +40,7 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.lista = QStandardItemModel(self.listview)
         for ordinato in ordine.comanda.elementiComanda:
             item = QStandardItem()
-            title = f"{ordinato.elemento.nomeElemento} + Q.tà: {ordinato.quantita}"
+            title = f"{ordinato.elemento.nomeElemento}, Q.tà: {ordinato.quantita}, Prezzo: {ordinato.elemento.prezzoElemento}x{ordinato.quantita}"
             item.setText(title)
             item.setEditable(False)
             font = item.font()
@@ -55,10 +56,17 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.totline = QHBoxLayout()
 
 
-#        self.tot.setStyleSheet("QLabel {font-size:16px; font-weight: bold}")
-#        self.totline.addWidget(self.tot)
-#        self.totline.setAlignment(Qt.AlignRight)
+
+        self.tot = QLabel("Totale: "+ str(self.ordine.comanda.getTotale()) +" €")
+        self.tot.setStyleSheet("QLabel {font-size:16px; font-weight: bold}")
+        self.totline.addWidget(self.tot)
+        self.totline.setAlignment(Qt.AlignRight)
         self.vbox.addLayout(self.totline)
+
+        self.delButton = QPushButton("Rimuovi elemento")
+        self.delButton.clicked.connect(self.rimuoviElemento)
+        self.vbox.addWidget(self.delButton)
+
         self.stampa = QPushButton("Stampa Conto")
         self.stampa.clicked.connect(self.stampaConto)
         self.vbox.addWidget(self.stampa)
@@ -67,11 +75,11 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.waggiungi=None
 
     def aggiornaTotale(self):
-#        self.tot.setText("Totale: "+ str(self.ordine.comanda.getTotale()) +" €")
+        self.tot.setText("Totale: "+ str(self.ordine.comanda.getTotale()) +" €")
         pass
 
     def aggiungiElemento(self):
-        self.waggiungi=VistaAggiungiElemento(self.ordine)
+        self.waggiungi=VistaAggiungiElementoAsporto(self.ordine)
         self.waggiungi.update_ui.connect(self.aggiungiBlock)
         self.waggiungi.show()
 
@@ -82,7 +90,7 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.list.addLayout(block)
         self.aggiornaTotale()
 
-    def eliminaElemento(self,elemento):
+    def rimuoviElemento(self,elemento):
         self.ordine.comanda.rimuoviElementoComanda(elemento)
 
     def stampaConto(self):
