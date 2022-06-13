@@ -12,12 +12,14 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
 
     def __init__(self, ordine: OrdineAsporto):
         super().__init__()
+
         self.ordine = ordine
         self.comanda = ordine.comanda
 
         self.setMinimumWidth(300)
 
         self.vbox = QVBoxLayout()
+
         self.addbtn = QPushButton("Aggiungi elemento")
         self.addbtn.clicked.connect(self.aggiungi_elemento)
         self.vbox.addWidget(self.addbtn)
@@ -46,6 +48,8 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.vbox.addWidget(self.stampa)
 
         self.delbutton = QPushButton("Elimina Ordine")
+
+        self.delbutton.setStyleSheet("QPushButton {background-color: #f76f6f;}")
         self.delbutton.clicked.connect(self.elimina_ordine)
         self.vbox.addWidget(self.delbutton)
         self.setLayout(self.vbox)

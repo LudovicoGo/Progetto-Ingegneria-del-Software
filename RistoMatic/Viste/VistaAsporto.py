@@ -24,6 +24,9 @@ class VistaAsporto(QWidget):
     def __init__(self):
         super().__init__()
 
+
+        self.layout = FlowLayout(self)
+        self.aggiorna()
         self.timer = QTimer()
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
@@ -34,7 +37,6 @@ class VistaAsporto(QWidget):
         self.tasti = QVBoxLayout()
         self.vBox = QVBoxLayout()
 
-        self.layout = FlowLayout(self)
 
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine))
@@ -56,9 +58,8 @@ class VistaAsporto(QWidget):
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine))
 
-        self.layout.addWidget(BlockNuovoOrdineAsporto())
 
-        #self.layout.addWidget(self.addButton)
+        self.layout.addWidget(BlockNuovoOrdineAsporto())
 
 
     def aggiungiTest(self):
