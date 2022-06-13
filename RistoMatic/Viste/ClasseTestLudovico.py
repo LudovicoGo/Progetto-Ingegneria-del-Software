@@ -23,23 +23,3 @@ class ClasseTestLudovico():
 
 
         self.ASPORTO = [OrdineAsporto('21:00', '19:30', self.cliente), OrdineAsporto('21:00', '19:30', self.cliente), OrdineAsporto('19:00', '16:30', self.cliente2), OrdineAsporto('20:00', '15:30', self.cliente2), OrdineAsporto('22:00', '19:30', self.cliente3)]
-
-    def ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo):
-        for i in self.PRENOTAZIONI:
-            if i.cliente.nomeCliente == nomeCliente and i.riferimentoTavolo == int(riferimentoTavolo):
-                prenotazione = i
-        return self.PRENOTAZIONI.index(prenotazione)
-
-
-    def ricercaNomeRecapitoTavolo(self, nomeCliente, recapitoTelefonico, riferimentoTavolo):
-       for i in self.PRENOTAZIONI:
-            if i.cliente.nomeCliente == nomeCliente and i.riferimentoTavolo == int(riferimentoTavolo):
-                prenotazione = i
-       return prenotazione
-
-
-    def stampaLista(self):
-        count = 1
-        for i in self.PRENOTAZIONI:
-            print(count, i.getInfoPrenotazione())
-            count += 1

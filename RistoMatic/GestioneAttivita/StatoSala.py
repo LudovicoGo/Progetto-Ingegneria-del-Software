@@ -197,3 +197,20 @@ class StatoSala():
             pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
 
         StatoSala.OrdiniAsporto.remove(ordine)
+
+
+    @staticmethod
+    def ricercaNomeRecapitoTavolo(self, nomeCliente, recapitoTelefonico, riferimentoTavolo):
+       for i in self.PRENOTAZIONI:
+            if i.cliente.nomeCliente == nomeCliente and i.riferimentoTavolo == int(riferimentoTavolo):
+                prenotazione = i
+       return prenotazione
+
+
+    @staticmethod
+    def ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo):
+        for i in self.PRENOTAZIONI:
+            if i.cliente.nomeCliente == nomeCliente and i.riferimentoTavolo == int(riferimentoTavolo):
+                prenotazione = i
+        return self.PRENOTAZIONI.index(prenotazione)
+
