@@ -28,37 +28,24 @@ class VistaAsporto(QWidget):
         self.layout = FlowLayout(self)
         self.aggiorna()
 
-        self.refresh = QTimer()
-        self.refresh.setInterval(5000)
-        self.refresh.timeout.connect(self.aggiorna)
+       # self.refresh = QTimer()
+       # self.refresh.setInterval(5000)
+       # self.refresh.timeout.connect(self.aggiorna)
        # self.refresh.start()
-
-
 
         self.hBox = QHBoxLayout()
         self.tasti = QVBoxLayout()
         self.vBox = QVBoxLayout()
 
-
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine, self.aggiorna()))
-
         self.aggiorna()
 
 
-
-
-
-
-
     def aggiorna(self):
-
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
-
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine, self.aggiorna))
-
-
         self.layout.addWidget(BlockNuovoOrdineAsporto(self.aggiorna))
 

@@ -1,5 +1,6 @@
 from PySide6 import QtWidgets
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QPushButton, QVBoxLayout, QHBoxLayout, QLabel
 from RistoMatic.GestioneAttivita.Comanda import Comanda
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
@@ -17,7 +18,7 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.comanda = ordine.comanda
 
         self.setMinimumWidth(300)
-
+        self.setTitle(f"Nome ordine: {ordine.cliente.nomeCliente}, Ora consegna: {ordine.oraConsegna}, cell: {ordine.cliente.recapitoTelefonico}, ID: {ordine.id}")
         self.vbox = QVBoxLayout()
 
         self.addbtn = QPushButton("Aggiungi elemento")
