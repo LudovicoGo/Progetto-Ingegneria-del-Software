@@ -3,12 +3,14 @@ from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QVBoxLayout, QPushButton
 
 from RistoMatic.GestioneAttivita import OrdineAsporto
+from RistoMatic.Viste.VistaAggiungiOrdineAsporto import VistaAggiungiOrdineAsporto
 
 
 class BlockNuovoOrdineAsporto(QtWidgets.QGroupBox):
 
-    def __init__(self):
+    def __init__(self, callback):
         super().__init__()
+        self.callback = callback
         self.setMinimumSize(300, 227)
         self.vbox = QVBoxLayout()
 
@@ -26,4 +28,9 @@ class BlockNuovoOrdineAsporto(QtWidgets.QGroupBox):
         self.setLayout(self.vbox)
 
     def aggiungiNuovoOrdine(self):
-        pass
+        print("aggiungiNuovoOrdine")
+
+
+        self.nuovoOrdine = VistaAggiungiOrdineAsporto(callback=self.callback)
+        ordine = self.nuovoOrdine.show()
+    #    self.callback()

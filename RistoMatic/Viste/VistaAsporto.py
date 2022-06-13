@@ -27,9 +27,11 @@ class VistaAsporto(QWidget):
 
         self.layout = FlowLayout(self)
         self.aggiorna()
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.aggiorna)
-        self.timer.start(5000)
+
+        self.refresh = QTimer()
+        self.refresh.setInterval(5000)
+        self.refresh.timeout.connect(self.aggiorna)
+       # self.refresh.start()
 
 
 
@@ -39,10 +41,9 @@ class VistaAsporto(QWidget):
 
 
         for ordine in StatoSala.getListaAsporto():
-            self.layout.addWidget(BlockComandaAsporto(ordine))
+            self.layout.addWidget(BlockComandaAsporto(ordine, self.aggiorna()))
 
-        self.addButton = QPushButton("Aggiungi nuovo ordine")
-        self.addButton.clicked.connect(self.aggiungiTest())
+        self.aggiorna()
 
 
 
@@ -56,23 +57,8 @@ class VistaAsporto(QWidget):
             self.layout.itemAt(i).widget().setParent(None)
 
         for ordine in StatoSala.getListaAsporto():
-            self.layout.addWidget(BlockComandaAsporto(ordine))
+            self.layout.addWidget(BlockComandaAsporto(ordine, self.aggiorna))
 
 
-        self.layout.addWidget(BlockNuovoOrdineAsporto())
+        self.layout.addWidget(BlockNuovoOrdineAsporto(self.aggiorna))
 
-
-    def aggiungiTest(self):
-        print('Aggiungi Ordine')
-        self.cliente = Cliente('Albertino', '987654321')
-        ooordine = OrdineAsporto('21:00', '19:30', self.cliente)
-        e = ElementoMenu("pizza", "Pizza", 1)
-        a = ElementoComanda(e, "blablabla", 3)
-        ooordine.comanda.elementiComanda.append(a)
-        StatoSala.OrdiniAsporto.append(ooordine)
-
-        oooordine = OrdineAsporto('22:00', '20:30', self.cliente)
-        f = ElementoMenu("pizza", "bar", 12)
-        b = ElementoComanda(f, "nessuna", 3)
-        oooordine.comanda.elementiComanda.append(b)
-        StatoSala.OrdiniAsporto.append(oooordine)

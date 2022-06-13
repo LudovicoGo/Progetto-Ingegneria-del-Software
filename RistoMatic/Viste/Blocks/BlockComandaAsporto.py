@@ -10,9 +10,9 @@ from RistoMatic.Viste.VistaAggiungiElemento import VistaAggiungiElemento
 
 class BlockComandaAsporto(QtWidgets.QGroupBox):
 
-    def __init__(self, ordine: OrdineAsporto):
+    def __init__(self, ordine: OrdineAsporto, callback):
         super().__init__()
-
+        self.callback = callback
         self.ordine = ordine
         self.comanda = ordine.comanda
 
@@ -75,8 +75,10 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
     def elimina_elemento(self,elemento):
         self.comanda.rimuoviElementoComanda(elemento)
 
+
     def elimina_ordine(self):
         StatoSala.OrdiniAsporto.remove(self.ordine)
+        self.callback()
 
     def stampa_preconto(self):
         pass #manda i dati alla stampante
