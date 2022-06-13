@@ -45,9 +45,9 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         buttonsLayout.addWidget(delButton)
 
         ##############################################
-        testButton = QPushButton("TEST (stampa lista)")
-        testButton.clicked.connect(self.testButtonFunction)
-        buttonsLayout.addWidget(testButton)
+        #testButton = QPushButton("TEST (stampa lista)")
+        #testButton.clicked.connect(self.testButtonFunction)
+        #buttonsLayout.addWidget(testButton)
         ##############################################
 
         buttonsLayout.addStretch()

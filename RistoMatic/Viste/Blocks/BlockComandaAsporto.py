@@ -21,8 +21,8 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.addbtn = QPushButton("Aggiungi elemento")
         self.addbtn.clicked.connect(self.aggiungi_elemento)
         self.vbox.addWidget(self.addbtn)
-        #self.vbox.addStretch(1)
-        self.list=QVBoxLayout()
+
+        self.list = QVBoxLayout()
 
         for elemento in self.comanda.elementiComanda:
             block = BlockElementoComandaSala(elemento)

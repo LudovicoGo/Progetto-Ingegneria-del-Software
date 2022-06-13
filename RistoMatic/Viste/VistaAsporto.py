@@ -8,6 +8,7 @@ from RistoMatic.GestioneAttivita.Cliente import Cliente
 from RistoMatic.GestioneAttivita.ElementoComanda import ElementoComanda
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
+from RistoMatic.Viste.Blocks.BlockNuovoOrdineAsporto import BlockNuovoOrdineAsporto
 from RistoMatic.Viste.ClasseTestLudovico import ClasseTestLudovico
 from RistoMatic.Viste.Blocks.BlockComandaAsporto import BlockComandaAsporto
 from PySide6 import QtWidgets
@@ -23,23 +24,24 @@ class VistaAsporto(QWidget):
     def __init__(self):
         super().__init__()
 
-     #   self.tasti = QVBoxLayout()
-     #   self.comande = QHBoxLayout()
-     #   self.hbox = QVBoxLayout()
-
-
-
-        self.layout = FlowLayout(self)
         self.timer = QTimer()
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
+
+
+
+        self.hBox = QHBoxLayout()
+        self.tasti = QVBoxLayout()
+        self.vBox = QVBoxLayout()
+
+        self.layout = FlowLayout(self)
 
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine))
 
         self.addButton = QPushButton("Aggiungi nuovo ordine")
         self.addButton.clicked.connect(self.aggiungiTest())
-        self.layout.addWidget(self.addButton)
+
 
 
 
@@ -48,12 +50,15 @@ class VistaAsporto(QWidget):
 
     def aggiorna(self):
 
-        self.layout.addWidget(self.addButton)
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
 
         for ordine in StatoSala.getListaAsporto():
             self.layout.addWidget(BlockComandaAsporto(ordine))
+
+        self.layout.addWidget(BlockNuovoOrdineAsporto())
+
+        #self.layout.addWidget(self.addButton)
 
 
     def aggiungiTest(self):
