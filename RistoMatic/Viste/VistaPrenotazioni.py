@@ -67,7 +67,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
         for prenotazione in StatoSala.Prenotazioni:  # per ogni prenotazione crea una riga
             item = QStandardItem()
-            titolo = f"{prenotazione.cliente.getNomeCliente()},  {prenotazione.getDataPrenotazione()},  Coperti: {prenotazione.getNumeroPersone()}, Tavolo: {prenotazione.getRiferimentoTavolo()}, Numero telefono: {prenotazione.cliente.getRecapitoTelefonico()}"
+            titolo = f"{prenotazione.cliente.getNomeCliente()},  {prenotazione.dataPrenotazione.toString('dd/MM/yyyy')},  Coperti: {prenotazione.getNumeroPersone()}, Tavolo: {prenotazione.getRiferimentoTavolo()}, Numero telefono: {prenotazione.cliente.getRecapitoTelefonico()}"
             item.setText(titolo)
             item.setEditable(False)
             font = item.font()
@@ -91,7 +91,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
         print(nomeCliente)
         print(recapitoTelefonico)
-        prenotazione = StatoSala.ricercaNomeRecapitoTavolo(nomeCliente, recapitoTelefonico, riferimentoTavolo)
+        prenotazione = StatoSala.ricercaNomeRecapitoTavolo(self, nomeCliente=nomeCliente, recapitoTelefonico=recapitoTelefonico, riferimentoTavolo=riferimentoTavolo)
 
         self.vistaPrenotazione = VistaPrenotazione(prenotazione, eliminaCallback=self.aggiornaUi())
         self.vistaPrenotazione.show()
@@ -112,7 +112,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         print(dataPrenotazione)
 
 
-        index = StatoSala.ricercaNomeDataTavolo(nomeCliente, dataPrenotazione, riferimentoTavolo)
+        index = StatoSala.ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo)
 
         print(index)
         del StatoSala.Prenotazioni[index]

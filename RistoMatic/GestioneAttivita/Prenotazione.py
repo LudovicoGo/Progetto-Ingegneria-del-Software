@@ -16,6 +16,9 @@ class Prenotazione():
         self.riferimentoTavolo = riferimentoTavolo
 
 
+    def getTavoloPrenotato(self):
+        return self.riferimentoTavolo
+
     def getInfoPrenotazione(self):
         return {
             "nomeCliente": self.cliente.getNomeCliente(),

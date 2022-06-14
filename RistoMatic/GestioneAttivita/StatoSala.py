@@ -201,7 +201,7 @@ class StatoSala():
 
     @staticmethod
     def ricercaNomeRecapitoTavolo(self, nomeCliente, recapitoTelefonico, riferimentoTavolo):
-       for i in self.PRENOTAZIONI:
+       for i in StatoSala.Prenotazioni:
             if i.cliente.nomeCliente == nomeCliente and i.riferimentoTavolo == int(riferimentoTavolo):
                 prenotazione = i
        return prenotazione
@@ -209,8 +209,8 @@ class StatoSala():
 
     @staticmethod
     def ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo):
-        for i in self.PRENOTAZIONI:
+        for i in StatoSala.Prenotazioni:
             if i.cliente.nomeCliente == nomeCliente and i.riferimentoTavolo == int(riferimentoTavolo):
                 prenotazione = i
-        return self.PRENOTAZIONI.index(prenotazione)
+        return StatoSala.Prenotazioni.index(prenotazione)
 

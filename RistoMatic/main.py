@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     widgetPreparazione = VistaPreparazione()
     widgetPreparazione.resize(1280, 720)
-    widgetPreparazione.show()
+    #widgetPreparazione.show()
 
     widgetSala = VistaSala()
     widgetSala.resize(1280, 720)
