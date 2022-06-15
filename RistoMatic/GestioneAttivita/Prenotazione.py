@@ -3,11 +3,11 @@ from RistoMatic.GestioneAttivita.Cliente import Cliente
 
 class Prenotazione():
 
-    id = 0
+    id = 1000
 
     def __init__(self, dataPrenotazione, numeroPersone, statoPrenotazione, cliente: Cliente, riferimentoTavolo):
         self.idPrenotazione = self.id
-        self.id += 1
+        Prenotazione.id += 1
         self.dataPrenotazione = dataPrenotazione
         self.numeroPersone = numeroPersone
         self.statoPrenotazione = "Confermata"
