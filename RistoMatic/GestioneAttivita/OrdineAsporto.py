@@ -9,7 +9,7 @@ class OrdineAsporto():
         self.numeroOrdine = self.id
         OrdineAsporto.id += 1
         self.oraConsegna = oraConsegna
-        self.oraOrdine = datetime.time.now()
+        self.oraOrdine = datetime.datetime.now()
         self.cliente = cliente
 
         self.comanda = RistoMatic.GestioneAttivita.Comanda.Comanda(id)

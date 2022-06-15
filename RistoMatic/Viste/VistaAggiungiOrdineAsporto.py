@@ -17,7 +17,7 @@ class VistaAggiungiOrdineAsporto(QWidget):
         self.addInfoText("nome", "Nome")
         self.addInfoText("recapitoTelefonico", "Recapito Telefonico")
         self.addInfoText("oraConsegna", "Ora consegna")
-        self.addInfoText("oraOrdine", "oraOrdine")
+   #     self.addInfoText("oraOrdine", "oraOrdine")
 
         okButton = QPushButton("OK")
         ordine = okButton.clicked.connect(self.aggiungiOrdine)
@@ -34,25 +34,16 @@ class VistaAggiungiOrdineAsporto(QWidget):
 
 
     def aggiungiOrdine(self):
-
-
         self.cliente = Cliente("", "")
         self.ordine = OrdineAsporto(None, None, self.cliente)
 
-
         self.nome = self.qlines["nome"].text()
         self.recapitoTelefonico = self.qlines["recapitoTelefonico"].text()
-
-#        self.dataPrenotazione = self.qlines["dataPrenotazione"].text()
-#        self.numeroPersone = int(self.qlines["numeroPersone"].text())
-
         self.oraConsegna = self.qlines["oraConsegna"].text()
-
         self.ordine.setOraConsegna(self.oraConsegna)
         self.ordine.cliente.setNomeCliente(self.nome)
         self.ordine.cliente.setRecapitoTelefonico(self.recapitoTelefonico)
 
-        #StatoSala.OrdiniAsporto.append(self.ordine)
         StatoSala.StatoSala.aggiungiOrdineAsporto(self.ordine)
         self.callback()
         self.close()
