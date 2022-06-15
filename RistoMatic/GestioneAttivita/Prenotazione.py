@@ -10,7 +10,7 @@ class Prenotazione():
         self.id += 1
         self.dataPrenotazione = dataPrenotazione
         self.numeroPersone = numeroPersone
-        self.statoPrenotazione = statoPrenotazione
+        self.statoPrenotazione = "Confermata"
 
         self.cliente = cliente
         self.riferimentoTavolo = riferimentoTavolo
@@ -50,7 +50,7 @@ class Prenotazione():
         self.numeroPersone = NumeroPersone
 
     def setStatoPrenotazione(self, statoPrenotazione):
-        self.StatoPrenotazione = statoPrenotazione
+        self.statoPrenotazione = statoPrenotazione
 
     def getRiferimentoTavolo(self):
         return self.riferimentoTavolo

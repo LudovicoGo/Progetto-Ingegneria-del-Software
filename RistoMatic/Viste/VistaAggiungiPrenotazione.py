@@ -1,3 +1,6 @@
+import datetime
+from DateTime import DateTime
+
 from PySide6 import QtCore
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QCheckBox, \
     QCalendarWidget, QComboBox
@@ -26,13 +29,16 @@ class VistaAggiungiPrenotazione(QWidget):
 
         self.menuOra = QComboBox()
         orari = ['11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30']
+   #     self.menuOra.clicked.connect(self.selezionaOra)
         self.menuOra.addItems(orari)
    #    self.menuOra.clicked.connect(self)
 
         self.dataString = QLabel("Giorno prenotazione:")
         self.oraString = QLabel("Orario prenotazione:")
         self.box = QCheckBox("Prenotazione da confermare?", self)
-        self.box.stateChanged.connect(self.clickBox)
+  #      self.box.stateChanged.connect(self.clickBox)
+
+
         self.vLayout.addWidget(self.dataString)
         self.vLayout.addWidget(self.data)
         self.vLayout.addWidget(self.oraString)
@@ -53,6 +59,20 @@ class VistaAggiungiPrenotazione(QWidget):
     def selezionaData(self):
         self.dataSelezionata = self.data.selectedDate()
 
+        self.year = self.dataSelezionata.year()
+        self.day = self.dataSelezionata.day()
+        self.month = self.dataSelezionata.month()
+
+        #self.pyDate = datetime.date(int(self.year), int(self.month), int(self.day))
+#        self.pyDate.day(self.dataSelezionata.day())
+#        self.pyDate.month(self.dataSelezionata.month())
+#        self.pyDate.year(self.dataSelezionata.year())
+        #print(self.pyDate)
+
+
+    def selezionaOra(self):
+        self.oraSelezionata = self.menuOra.currentText()
+        print(self.oraSelezionata)
     def addInfoText(self, nome, label):
         self.vLayout.addWidget(QLabel(label))
         testo = QLineEdit(self)
@@ -66,36 +86,39 @@ class VistaAggiungiPrenotazione(QWidget):
 
 
         cliente = Cliente("", "")
-        prenotazione = Prenotazione('', -1, '', cliente, -1)
+        self.prenotazione = Prenotazione('', -1, '', cliente, -1)
 
 
         nome = self.qlines["nome"].text()
         recapitoTelefonico = self.qlines["recapitoTelefonico"].text()
 
-        dataPrenotazione = self.dataSelezionata
 
-        #dataPrenotazione = self.qlines["dataPrenotazione"].text()
+
+
+        selected = self.menuOra.currentText()
+        ora = int(selected.split(':')[0].strip())
+        minuti = int(selected.split(':')[1].strip())
+#        print(ora)
+#        print(minuti)
+
         numeroPersone = int(self.qlines["numeroPersone"].text())
-        statoPrenotazione = self.statoPrenotazione
+        check = self.box.checkState()
+
+        if check == 2:      #se c'è la spunta imposta da confermare
+            print('2')
+            self.prenotazione.setStatoPrenotazione('Da Confermare')
+
+        self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day), ora, minuti, 0)
+        self.prenotazione.setDataPrenotazione(self.pyDate)
+        self.prenotazione.setRiferimentoTavolo(riferimentoTavolo)
+        self.prenotazione.setNumeroPersone(numeroPersone)
+        #self.prenotazione.setStatoPrenotazione(statoPrenotazione)
+        self.prenotazione.cliente.setNomeCliente(nome)
+        self.prenotazione.cliente.setRecapitoTelefonico(recapitoTelefonico)
 
 
-
-        prenotazione.setDataPrenotazione(dataPrenotazione)
-        prenotazione.setRiferimentoTavolo(riferimentoTavolo)
-        prenotazione.setNumeroPersone(numeroPersone)
-        prenotazione.setStatoPrenotazione(statoPrenotazione)
-        prenotazione.cliente.setNomeCliente(nome)
-        prenotazione.cliente.setRecapitoTelefonico(recapitoTelefonico)
-
-        StatoSala.Prenotazioni.append(prenotazione)
+        StatoSala.Prenotazioni.append(self.prenotazione)
         self.close()
 
-    def clickBox(self, state):
-
-        if state == QtCore.Qt.Checked:
-            print('Da confermare')
-            self.statoPrenotazione = "Non Confermata"
-
-        else:
-            print('Da confermare')
-            self.statoPrenotazione = "Confermata"
+    def clickBox(self):
+        pass

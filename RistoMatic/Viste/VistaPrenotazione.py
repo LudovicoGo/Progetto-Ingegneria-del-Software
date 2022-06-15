@@ -27,7 +27,7 @@ class VistaPrenotazione(QWidget):
         vLayout.addWidget(QLabel(f"Recapito telefonico: {info.get('recapitoTelefonico')}"))
         vLayout.addWidget(QLabel(f"Numero persone: {info.get('numeroPersone')}"))
         vLayout.addWidget(QLabel(f"Numero tavolo: {info.get('riferimentoTavolo')}"))
-        vLayout.addWidget(QLabel(f"Data: {info.get('dataPrenotazione')}"))
+        vLayout.addWidget(QLabel(f"Data e ora: {info.get('dataPrenotazione')}"))
         vLayout.addWidget(QLabel(f"Stato: {info.get('statoPrenotazione')}"))
         vLayout.addWidget(QLabel(f"Id: {info.get('idPrenotazione')}"))
 

@@ -9,7 +9,6 @@ from PySide6.QtWidgets import QVBoxLayout
 
 from RistoMatic.GestioneAttivita.Cliente import Cliente
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
-from RistoMatic.Viste.ClasseTestLudovico import ClasseTestLudovico
 from RistoMatic.Viste.VistaAggiungiPrenotazione import VistaAggiungiPrenotazione
 from RistoMatic.Viste.VistaPrenotazione import VistaPrenotazione
 
@@ -18,7 +17,6 @@ class VistaPrenotazioni(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.lista = ClasseTestLudovico()
         hLayout = QHBoxLayout()
 
         self.aggiorna = QTimer()
@@ -67,7 +65,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
         for prenotazione in StatoSala.Prenotazioni:  # per ogni prenotazione crea una riga
             item = QStandardItem()
-            titolo = f"{prenotazione.cliente.getNomeCliente()},  {prenotazione.dataPrenotazione.toString('dd/MM/yyyy')},  Coperti: {prenotazione.getNumeroPersone()}, Tavolo: {prenotazione.getRiferimentoTavolo()}, Numero telefono: {prenotazione.cliente.getRecapitoTelefonico()}"
+            titolo = f"{prenotazione.cliente.getNomeCliente()},  {prenotazione.dataPrenotazione},  Coperti: {prenotazione.getNumeroPersone()}, Tavolo: {prenotazione.getRiferimentoTavolo()}, Numero telefono: {prenotazione.cliente.getRecapitoTelefonico()}"
             item.setText(titolo)
             item.setEditable(False)
             font = item.font()

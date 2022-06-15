@@ -9,7 +9,6 @@ from RistoMatic.GestioneAttivita.ElementoComanda import ElementoComanda
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 from RistoMatic.Viste.Blocks.BlockNuovoOrdineAsporto import BlockNuovoOrdineAsporto
-from RistoMatic.Viste.ClasseTestLudovico import ClasseTestLudovico
 from RistoMatic.Viste.Blocks.BlockComandaAsporto import BlockComandaAsporto
 from PySide6 import QtWidgets
 from PySide6.QtCore import QTimer
