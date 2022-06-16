@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
-from RistoMatic.GestioneAttivita import StatoSala
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 from RistoMatic.GestioneAttivita.Cliente import Cliente
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
 from RistoMatic.GestioneAttivita.Prenotazione import Prenotazione
@@ -40,10 +40,25 @@ class VistaAggiungiOrdineAsporto(QWidget):
         self.nome = self.qlines["nome"].text()
         self.recapitoTelefonico = self.qlines["recapitoTelefonico"].text()
         self.oraConsegna = self.qlines["oraConsegna"].text()
+
+        nOrdini = 0
+        for i in StatoSala.OrdiniAsporto:
+            if i.oraConsegna == self.oraConsegna:
+                nOrdini += 1
+
+            if nOrdini >= 4:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("ERRORE!")
+                msg.setInformativeText("Ci sono già troppi ordini per quell'ora")
+                msg.exec_()
+                return
+
+
         self.ordine.setOraConsegna(self.oraConsegna)
         self.ordine.cliente.setNomeCliente(self.nome)
         self.ordine.cliente.setRecapitoTelefonico(self.recapitoTelefonico)
 
-        StatoSala.StatoSala.aggiungiOrdineAsporto(self.ordine)
+        StatoSala.aggiungiOrdineAsporto(self.ordine)
         self.callback()
         self.close()
