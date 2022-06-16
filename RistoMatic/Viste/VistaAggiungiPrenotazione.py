@@ -70,9 +70,6 @@ class VistaAggiungiPrenotazione(QWidget):
         #print(self.pyDate)
 
 
-    def selezionaOra(self):
-        self.oraSelezionata = self.menuOra.currentText()
-        print(self.oraSelezionata)
     def addInfoText(self, nome, label):
         self.vLayout.addWidget(QLabel(label))
         testo = QLineEdit(self)

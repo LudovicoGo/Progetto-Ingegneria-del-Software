@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QComboBox
 
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 from RistoMatic.GestioneAttivita.Cliente import Cliente
@@ -9,16 +9,22 @@ class VistaAggiungiOrdineAsporto(QWidget):
 
     def __init__(self, callback):
         super(VistaAggiungiOrdineAsporto, self).__init__()
-
+        self.setWindowTitle('Nuova Prenotazione')
         self.callback = callback
 
         self.vLayout = QVBoxLayout()
         self.qlines = {}
         self.addInfoText("nome", "Nome")
         self.addInfoText("recapitoTelefonico", "Recapito Telefonico")
-        self.addInfoText("oraConsegna", "Ora consegna")
+    #    self.addInfoText("oraConsegna", "Ora consegna")
+
+        self.menuOra = QComboBox()
+        orari = ['18:30', '18:45', '19:00','19:15', '19:30','19:45', '20:00','20:15', '20:30','20:45',
+                 '21:00','21:15', '21:30','21:45', '22:00']
+        self.menuOra.addItems(orari)
    #     self.addInfoText("oraOrdine", "oraOrdine")
 
+        self.vLayout.addWidget(self.menuOra)
         okButton = QPushButton("OK")
         ordine = okButton.clicked.connect(self.aggiungiOrdine)
         self.qlines["okButton"] = okButton
@@ -39,8 +45,10 @@ class VistaAggiungiOrdineAsporto(QWidget):
 
         self.nome = self.qlines["nome"].text()
         self.recapitoTelefonico = self.qlines["recapitoTelefonico"].text()
-        self.oraConsegna = self.qlines["oraConsegna"].text()
 
+
+   #     self.oraConsegna = self.qlines["oraConsegna"].text()
+        self.oraConsegna = self.menuOra.currentText()
         nOrdini = 0
         for i in StatoSala.OrdiniAsporto:
             if i.oraConsegna == self.oraConsegna:
@@ -48,6 +56,7 @@ class VistaAggiungiOrdineAsporto(QWidget):
 
             if nOrdini >= 4:
                 msg = QMessageBox()
+                msg.setWindowTitle('ATTENZIONE!')
                 msg.setIcon(QMessageBox.Critical)
                 msg.setText("ERRORE!")
                 msg.setInformativeText("Ci sono già troppi ordini per quell'ora")
