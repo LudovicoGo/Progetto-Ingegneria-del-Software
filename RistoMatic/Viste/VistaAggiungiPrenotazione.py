@@ -79,6 +79,17 @@ class VistaAggiungiPrenotazione(QWidget):
         self.qlines[nome] = testo
         self.vLayout.addWidget(testo)
 
+    def giaPrenotato(self, riferimentoTavolo):
+        tavoli = StatoSala.getTavoli()
+        prenotato = False
+        for i in StatoSala.Prenotazioni:
+            if i.riferimentoTavolo == riferimentoTavolo:
+                diff = i.dataPrenotazione - self.pyDate
+                for i in tavoli:
+                    if i.riferimentoTavolo == riferimentoTavolo:
+                        prenotato = i.getIsPrenotato
+        return prenotato
+
 
     def aggiungiPrenotazione(self):
 
@@ -109,6 +120,18 @@ class VistaAggiungiPrenotazione(QWidget):
             self.prenotazione.setStatoPrenotazione('Da Confermare')
 
         self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day), ora, minuti, 0)
+
+
+        for i in StatoSala.Prenotazioni:
+            if self.giaPrenotato(riferimentoTavolo):
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("ERRORE!")
+                msg.setInformativeText("Il tavolo scelto ha già una prenotazione per quell'ora")
+                msg.exec_()
+                return
+
+
         self.prenotazione.setDataPrenotazione(self.pyDate)
         self.prenotazione.setRiferimentoTavolo(riferimentoTavolo)
         self.prenotazione.setNumeroPersone(numeroPersone)
