@@ -28,9 +28,6 @@ class BlockNuovoOrdineAsporto(QtWidgets.QGroupBox):
         self.setLayout(self.vbox)
 
     def aggiungiNuovoOrdine(self):
-        print("aggiungiNuovoOrdine")
-
-
+        #print("aggiungiNuovoOrdine")
         self.nuovoOrdine = VistaAggiungiOrdineAsporto(callback=self.callback)
         ordine = self.nuovoOrdine.show()
-    #    self.callback()

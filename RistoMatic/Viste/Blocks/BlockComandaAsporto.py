@@ -6,6 +6,7 @@ from RistoMatic.GestioneAttivita.Comanda import Comanda
 from RistoMatic.GestioneAttivita.OrdineAsporto import OrdineAsporto
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 from RistoMatic.GestioneAttivita.Tavolo import Tavolo
+from RistoMatic.Viste.Blocks.BlockElementoComandaAsporto import BlockElementoComandaAsporto
 from RistoMatic.Viste.Blocks.BlockElementoComandaSala import BlockElementoComandaSala
 from RistoMatic.Viste.VistaAggiungiElemento import VistaAggiungiElemento
 
@@ -28,7 +29,7 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.list = QVBoxLayout()
 
         for elemento in self.comanda.elementiComanda:
-            block = BlockElementoComandaSala(elemento)
+            block = BlockElementoComandaAsporto(elemento)
             block.aggiorna_comanda.connect(self.aggiorna_totale)
             block.elimina_elemento.connect(self.elimina_elemento)
             self.list.addLayout(block)
@@ -66,9 +67,9 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
         self.waggiungi.show()
 
     def aggiungi_block(self):
-        block = BlockElementoComandaSala(self.comanda.elementiComanda[-1])
-        block.aggiorna_comanda.connect(self.aggiorna_totale)
-        block.elimina_elemento.connect(self.elimina_elemento)
+        block = BlockElementoComandaAsporto(self.comanda.elementiComanda[-1])
+        block.aggiornaComanda.connect(self.aggiorna_totale)
+        block.eliminaElemento.connect(self.elimina_elemento)
         self.list.addLayout(block)
         self.aggiorna_totale()
 
