@@ -39,6 +39,5 @@ class BlockTavolo(QtWidgets.QPushButton):
             self.setStyleSheet('QPushButton {background-color: green; font-size: 16px; height: 90; width:150;}')
         elif (self.status == StatoTavolo.PRENOTATO):
             self.setStyleSheet('QPushButton {background-color: orange; font-size: 16px; height: 90; width:150;}')
-            self.setText(self.text() + "\n Nome Cognome \n 3332323232")
         elif (self.status == StatoTavolo.OCCUPATO):
             self.setStyleSheet('QPushButton {background-color: red; font-size: 16px; height: 90; width:150;}')

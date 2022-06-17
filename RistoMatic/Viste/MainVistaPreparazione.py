@@ -15,7 +15,7 @@ class VistaPreparazione(QtWidgets.QWidget):
         self.setWindowTitle("Vista Cucina")
 
         # generazione dati di esempio
-        for i in range(0, 10):
+        for i in range(0, 2):
             tavolo = Tavolo(randint(1, 10))
 
         self.layout = FlowLayout(self)

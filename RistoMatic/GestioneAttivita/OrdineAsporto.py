@@ -12,7 +12,7 @@ class OrdineAsporto():
         self.oraOrdine = datetime.datetime.now()
         self.cliente = cliente
 
-        self.comanda = RistoMatic.GestioneAttivita.Comanda.Comanda(id)
+        self.comanda = RistoMatic.GestioneAttivita.Comanda.Comanda(self)
 
     def getInfoOrdineAsporto(self):
         return {

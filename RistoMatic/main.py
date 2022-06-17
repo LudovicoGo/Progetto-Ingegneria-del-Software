@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
         widgetMobile = VistaMobile()
         widgetMobile.resize(540, 640)
-        #widgetMobile.show()
+        widgetMobile.show()
 
 
         sys.exit(app.exec())

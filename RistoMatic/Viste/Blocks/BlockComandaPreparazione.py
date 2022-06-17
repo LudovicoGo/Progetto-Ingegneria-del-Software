@@ -11,7 +11,7 @@ class BlockComandaPreparazione(QtWidgets.QGroupBox):
         if(isinstance(comanda.rif,Tavolo)):
             super().__init__(f"Comanda {comanda.numeroComanda} - Tavolo {comanda.rif.riferimentoTavolo} - {comanda.dataCreazione.strftime('%H:%M')}")
         else:
-            super().__init__(f"Comanda {comanda.numeroComanda} - Asporto {comanda.rif.riferimentoTavolo} - {comanda.dataCreazione.strftime('%H:%M')}")
+            super().__init__(f"Comanda {comanda.numeroComanda} - Asporto {comanda.rif.getNumeroOrdine()} - {comanda.rif.getOraConsegna()}")
             self.setStyleSheet("QGroupBox {background-color: yellow;}")
         self.vbox = QVBoxLayout()
         self.vbox.addStretch(1)
