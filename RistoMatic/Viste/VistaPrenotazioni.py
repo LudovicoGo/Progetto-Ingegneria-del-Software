@@ -8,7 +8,7 @@ from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView
 from PySide6.QtWidgets import QVBoxLayout
 
 from RistoMatic.GestioneAttivita.Cliente import Cliente
-from RistoMatic.Viste.ClasseTestLudovico import ClasseTestLudovico
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 from RistoMatic.Viste.VistaAggiungiPrenotazione import VistaAggiungiPrenotazione
 from RistoMatic.Viste.VistaPrenotazione import VistaPrenotazione
 
@@ -17,12 +17,10 @@ class VistaPrenotazioni(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.lista = ClasseTestLudovico()
-        #self.qlines = {}
         hLayout = QHBoxLayout()
 
         self.aggiorna = QTimer()
-        self.aggiorna.setInterval(7000)
+        self.aggiorna.setInterval(5000)
         self.aggiorna.timeout.connect(self.aggiornaUi)
         self.aggiorna.start()
 
@@ -63,11 +61,11 @@ class VistaPrenotazioni(QtWidgets.QWidget):
     def aggiornaUi(self):
         listViewModel = QStandardItemModel(self.listView)
 
-        self.lista.PRENOTAZIONI.sort(key=lambda x: x.cliente.getNomeCliente())  # mette in ordine alfabetico le prenotazioni riferendosi al nome dei clienti che le hanno effettuate
+        StatoSala.Prenotazioni.sort(key=lambda x: x.cliente.getNomeCliente())  # mette in ordine alfabetico le prenotazioni riferendosi al nome dei clienti che le hanno effettuate
 
-        for prenotazione in self.lista.PRENOTAZIONI:  # per ogni prenotazione crea una riga
+        for prenotazione in StatoSala.Prenotazioni:  # per ogni prenotazione crea una riga
             item = QStandardItem()
-            titolo = f"{prenotazione.cliente.getNomeCliente()},  {prenotazione.getDataPrenotazione()},  Coperti: {prenotazione.getNumeroPersone()}, Tavolo: {prenotazione.getRiferimentoTavolo()}, Numero telefono: {prenotazione.cliente.getRecapitoTelefonico()}"
+            titolo = f"{prenotazione.cliente.getNomeCliente()},  {prenotazione.dataPrenotazione},  Coperti: {prenotazione.getNumeroPersone()}, Tavolo: {prenotazione.getRiferimentoTavolo()}, Numero telefono: {prenotazione.cliente.getRecapitoTelefonico()}"
             item.setText(titolo)
             item.setEditable(False)
             font = item.font()
@@ -91,8 +89,8 @@ class VistaPrenotazioni(QtWidgets.QWidget):
 
         print(nomeCliente)
         print(recapitoTelefonico)
-        prenotazione = self.lista.ricercaNomeRecapitoTavolo(nomeCliente, recapitoTelefonico, riferimentoTavolo)
-        # prenotazione =
+        prenotazione = StatoSala.ricercaNomeRecapitoTavolo(self, nomeCliente=nomeCliente, recapitoTelefonico=recapitoTelefonico, riferimentoTavolo=riferimentoTavolo)
+
         self.vistaPrenotazione = VistaPrenotazione(prenotazione, eliminaCallback=self.aggiornaUi())
         self.vistaPrenotazione.show()
 
@@ -112,24 +110,27 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         print(dataPrenotazione)
 
 
-        index = self.lista.ricercaNomeDataTavolo(nomeCliente, dataPrenotazione, riferimentoTavolo)
+        index = StatoSala.ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo)
+
         print(index)
-        del self.lista.PRENOTAZIONI[index]
+        del StatoSala.Prenotazioni[index]
         self.aggiornaUi()
 
     def aggiungiPrenotazione(self):
         print("aggiungiPrenotazione")
         cliente = Cliente('AAAAAA', 'DDDDDDDD')
-        #self.lista.PRENOTAZIONI.append(Prenotazione('dd/mm/yyyy3', 32222, 'Da Confermare', cliente, 111111))
 
-        self.inserisciPrenotazione = VistaAggiungiPrenotazione(callback=self.aggiornaUi(), lista=self.lista.PRENOTAZIONI)
+        self.inserisciPrenotazione = VistaAggiungiPrenotazione(callback=self.aggiornaUi())
         prenotazione = self.inserisciPrenotazione.show()
 
 
     def testButtonFunction(self):
         self.aggiungiPrenotazione()
+        count = 1
+        for i in StatoSala.Prenotazioni:
+            print(count, i.getInfoPrenotazione())
+            count += 1
         self.aggiornaUi()
-        self.lista.stampaLista
 
 
 

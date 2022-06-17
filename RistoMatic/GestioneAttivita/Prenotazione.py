@@ -3,18 +3,21 @@ from RistoMatic.GestioneAttivita.Cliente import Cliente
 
 class Prenotazione():
 
-    id = 0
+    id = 1000
 
     def __init__(self, dataPrenotazione, numeroPersone, statoPrenotazione, cliente: Cliente, riferimentoTavolo):
         self.idPrenotazione = self.id
-        self.id += 1
+        Prenotazione.id += 1
         self.dataPrenotazione = dataPrenotazione
         self.numeroPersone = numeroPersone
-        self.statoPrenotazione = statoPrenotazione
+        self.statoPrenotazione = "Confermata"
 
         self.cliente = cliente
         self.riferimentoTavolo = riferimentoTavolo
 
+
+    def getTavoloPrenotato(self):
+        return self.riferimentoTavolo
 
     def getInfoPrenotazione(self):
         return {
@@ -47,7 +50,7 @@ class Prenotazione():
         self.numeroPersone = NumeroPersone
 
     def setStatoPrenotazione(self, statoPrenotazione):
-        self.StatoPrenotazione = statoPrenotazione
+        self.statoPrenotazione = statoPrenotazione
 
     def getRiferimentoTavolo(self):
         return self.riferimentoTavolo

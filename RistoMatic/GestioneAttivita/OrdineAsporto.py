@@ -1,13 +1,15 @@
+import datetime
+
 import RistoMatic.GestioneAttivita.Comanda
 
 class OrdineAsporto():
-    id = 0
+    id = 1000
 
     def __init__(self, oraConsegna, oraOrdine, cliente):
         self.numeroOrdine = self.id
-        self.id += 1
+        OrdineAsporto.id += 1
         self.oraConsegna = oraConsegna
-        self.oraOrdine = oraOrdine
+        self.oraOrdine = datetime.datetime.now()
         self.cliente = cliente
 
         self.comanda = RistoMatic.GestioneAttivita.Comanda.Comanda(id)
