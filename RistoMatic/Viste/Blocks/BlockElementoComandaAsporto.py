@@ -73,7 +73,7 @@ class BlockElementoComandaAsporto(QtWidgets.QVBoxLayout):
         self.qty.setText(str(self.elemento.getQuantita()))
         info = self.elemento.getInfoElementoComanda()
         self.prezzo.setText(str(info["Prezzo"]*info["Quantita"]) + " €")
-        self.aggiorna_comanda.emit()
+        self.aggiornaComanda.emit()
 
     def riduci(self):
         val = (self.elemento.getQuantita() -1)
@@ -82,7 +82,7 @@ class BlockElementoComandaAsporto(QtWidgets.QVBoxLayout):
             self.qty.setText(str(self.elemento.getQuantita()))
             info = self.elemento.getInfoElementoComanda()
             self.prezzo.setText(str(info["Prezzo"] * info["Quantita"]) + " €")
-            self.aggiorna_comanda.emit()
+            self.aggiornaComanda.emit()
 
     def rimuovi(self):
         self.eliminaElemento.emit(self.elemento,self)
