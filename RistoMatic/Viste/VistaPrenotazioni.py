@@ -10,7 +10,7 @@ from PySide6.QtWidgets import QVBoxLayout
 from RistoMatic.GestioneAttivita.Cliente import Cliente
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 from RistoMatic.Viste.VistaAggiungiPrenotazione import VistaAggiungiPrenotazione
-from RistoMatic.Viste.VistaPrenotazione import VistaPrenotazione
+from RistoMatic.Viste.VistaInfoPrenotazione import VistaInfoPrenotazione
 
 
 class VistaPrenotazioni(QtWidgets.QWidget):
@@ -55,9 +55,6 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         self.resize(600, 300)
         self.setWindowTitle("Prenotazioni")
 
-    def loadPrenotazioni(self):
-        pass
-
     def aggiornaUi(self):
         listViewModel = QStandardItemModel(self.listView)
 
@@ -91,7 +88,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         print(recapitoTelefonico)
         prenotazione = StatoSala.ricercaNomeRecapitoTavolo(self, nomeCliente=nomeCliente, recapitoTelefonico=recapitoTelefonico, riferimentoTavolo=riferimentoTavolo)
 
-        self.vistaPrenotazione = VistaPrenotazione(prenotazione, eliminaCallback=self.aggiornaUi())
+        self.vistaPrenotazione = VistaInfoPrenotazione(prenotazione, eliminaCallback=self.aggiornaUi())
         self.vistaPrenotazione.show()
 
     def eliminaPrenotazione(self):
@@ -117,20 +114,19 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         self.aggiornaUi()
 
     def aggiungiPrenotazione(self):
-        print("aggiungiPrenotazione")
-        cliente = Cliente('AAAAAA', 'DDDDDDDD')
+#        print("aggiungiPrenotazione")
 
         self.inserisciPrenotazione = VistaAggiungiPrenotazione(callback=self.aggiornaUi())
         prenotazione = self.inserisciPrenotazione.show()
 
 
-    def testButtonFunction(self):
-        self.aggiungiPrenotazione()
-        count = 1
-        for i in StatoSala.Prenotazioni:
-            print(count, i.getInfoPrenotazione())
-            count += 1
-        self.aggiornaUi()
+#    def testButtonFunction(self):
+#        self.aggiungiPrenotazione()
+#        count = 1
+#        for i in StatoSala.Prenotazioni:
+#            print(count, i.getInfoPrenotazione())
+#            count += 1
+#        self.aggiornaUi()
 
 
 

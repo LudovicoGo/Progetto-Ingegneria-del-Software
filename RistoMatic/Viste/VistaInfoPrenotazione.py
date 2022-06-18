@@ -3,9 +3,9 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
 from RistoMatic.GestioneAttivita.Prenotazione import Prenotazione
 
 
-class VistaPrenotazione(QWidget):
+class VistaInfoPrenotazione(QWidget):
     def __init__(self, prenotazione, eliminaCallback):
-        super(VistaPrenotazione, self).__init__()
+        super(VistaInfoPrenotazione, self).__init__()
         self.eliminaCallback = eliminaCallback
 
         vLayout = QVBoxLayout()

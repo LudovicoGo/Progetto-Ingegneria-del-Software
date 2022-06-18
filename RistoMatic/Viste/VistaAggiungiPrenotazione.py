@@ -11,7 +11,6 @@ class VistaAggiungiPrenotazione(QWidget):
 
     def __init__(self, callback):
         super(VistaAggiungiPrenotazione, self).__init__()
-
         self.callback = callback
         self.vLayout = QVBoxLayout()
         self.qlines = {}
@@ -30,21 +29,16 @@ class VistaAggiungiPrenotazione(QWidget):
    #     self.menuOra.clicked.connect(self.selezionaOra)
         self.menuOra.addItems(orari)
    #    self.menuOra.clicked.connect(self)
-
         self.dataString = QLabel("Giorno prenotazione:")
         self.oraString = QLabel("Orario prenotazione:")
         self.box = QCheckBox("Prenotazione da confermare?", self)
   #      self.box.stateChanged.connect(self.clickBox)
-
-
         self.vLayout.addWidget(self.dataString)
         self.vLayout.addWidget(self.data)
         self.vLayout.addWidget(self.oraString)
         self.vLayout.addWidget(self.menuOra)
 
         self.vLayout.addWidget(self.box)
-
-
 
         self.statoPrenotazione = "Confermata"
 
@@ -90,23 +84,17 @@ class VistaAggiungiPrenotazione(QWidget):
 
         riferimentoTavolo = int(self.qlines["riferimentoTavolo"].text())
 
-
         cliente = Cliente("", "")
         self.prenotazione = Prenotazione('', -1, '', cliente, -1)
 
-
         nome = self.qlines["nome"].text()
         recapitoTelefonico = self.qlines["recapitoTelefonico"].text()
-
-
-
 
         selected = self.menuOra.currentText()
         ora = int(selected.split(':')[0].strip())
         minuti = int(selected.split(':')[1].strip())
 #        print(ora)
 #        print(minuti)
-
         numeroPersone = int(self.qlines["numeroPersone"].text())
         check = self.box.checkState()
 
@@ -115,8 +103,6 @@ class VistaAggiungiPrenotazione(QWidget):
             self.prenotazione.setStatoPrenotazione('Da Confermare')
 
         self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day), ora, minuti, 0)
-
-
         for i in StatoSala.Prenotazioni:
             if self.giaPrenotato(riferimentoTavolo):
                 msg = QMessageBox()
@@ -126,7 +112,6 @@ class VistaAggiungiPrenotazione(QWidget):
                 msg.exec_()
                 return
 
-
         self.prenotazione.setDataPrenotazione(self.pyDate)
         self.prenotazione.setRiferimentoTavolo(riferimentoTavolo)
         self.prenotazione.setNumeroPersone(numeroPersone)
@@ -134,9 +119,5 @@ class VistaAggiungiPrenotazione(QWidget):
         self.prenotazione.cliente.setNomeCliente(nome)
         self.prenotazione.cliente.setRecapitoTelefonico(recapitoTelefonico)
 
-
         StatoSala.Prenotazioni.append(self.prenotazione)
         self.close()
-
-    def clickBox(self):
-        pass
