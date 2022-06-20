@@ -1,5 +1,4 @@
 import unittest
-
 from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 from RistoMatic.GestioneAttivita.Comanda import Comanda
 
