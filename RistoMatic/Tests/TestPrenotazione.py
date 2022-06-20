@@ -1,10 +1,9 @@
-import datetime
 import unittest
-
+import datetime
 from RistoMatic.GestioneAttivita.Cliente import Cliente
 from RistoMatic.GestioneAttivita.Prenotazione import Prenotazione
 
-class TestComanda(unittest.TestCase):
+class TestPrenotazione(unittest.TestCase):
 
     def testCreazionePrenotazione(self):
         data = datetime.datetime(2022, 6, 14, 19, 30, 0)
