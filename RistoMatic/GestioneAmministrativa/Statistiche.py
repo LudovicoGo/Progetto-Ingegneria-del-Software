@@ -1,3 +1,4 @@
+from abc import abstractmethod
 
 
 class Statistiche():
@@ -20,13 +21,15 @@ class Statistiche():
     def setDataFine(self , setFine) :
         self.dataFine = setFine
 
-
+    @abstractmethod
     def calcolaStatistiche(self):
         pass
 
+    @abstractmethod
     def generaStatistiche(self):
         pass
 
+    @abstractmethod
     def esportaStatistiche(self):
         pass
 
