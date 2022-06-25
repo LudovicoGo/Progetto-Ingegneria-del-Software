@@ -22,8 +22,8 @@ class Statistiche():
         self.dataFine = setFine
 
     @abstractmethod
-    def calcolaStatistiche(self):
-        pass
+    def calcolaStatistiche(self)-> dict:
+
 
     @abstractmethod
     def generaStatistiche(self):
