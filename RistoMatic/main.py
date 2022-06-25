@@ -1,7 +1,7 @@
 import sys
 from PySide6 import QtWidgets
 
-from RistoMatic.GestioneAttivita.Enum import Zone
+from GestioneAttivita.Enum import Zone
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
