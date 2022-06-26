@@ -1,8 +1,10 @@
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView
 
+from RistoMatic.Utility.Calendario import Calenderio
 from RistoMatic.Viste.FlowLayout import FlowLayout
 from RistoMatic.Viste.VistaFiltroStatistiche import VistaFiltroStatistiche
+import pandas as pd
 
 
 class VistaAmministratore(QtWidgets.QWidget):
@@ -10,7 +12,6 @@ class VistaAmministratore(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         hLayout = QHBoxLayout()
-
 
         self.listView = QListView()
         hLayout.addWidget(self.listView)
@@ -26,8 +27,6 @@ class VistaAmministratore(QtWidgets.QWidget):
         newButton1 = QPushButton("Esporta e salva statistiche")
         newButton.clicked.connect(self.statisticheGestionali)
 
-
-
         buttonsLayout.addWidget(newButton1)
         buttonsLayout.addWidget(newButton)
         buttonsLayout.addWidget(infoButton)
@@ -40,18 +39,34 @@ class VistaAmministratore(QtWidgets.QWidget):
 
 
 
-        buttonsLayout.addWidget(newButton)
-        buttonsLayout.addWidget(infoButton)
 
-        buttonsLayout.addStretch()
-        hLayout.addLayout(buttonsLayout)
+        ###      AGGIUNTA CALENDARIO CON SCELTA MULTIPLA   ###
 
-#        self.layout().addWidget()
+        self.layout = QVBoxLayout()
+        self.setLayout(self.layout)
 
+        btn = QPushButton('Retrieve Date Range', clicked=self.print_days_selected)
+        self.layout.addWidget(btn)
 
+        self.calendar = Calenderio()
+        self.layout.addWidget(self.calendar)
+        hLayout.addLayout(self.layout)
+
+    def print_days_selected(self):
+        if self.calendar.from_date and self.calendar.to_date:
+            start_date = min(self.calendar.from_date.toPyDate(), self.calendar.to_date.toPyDate())
+            end_date = max(self.calendar.from_date.toPyDate(), self.calendar.to_date.toPyDate())
+            # print('Number of days: {0}'.format((end_date - start_date).days))
+            date_list = pd.date_range(start=start_date, end=end_date)
+            print(date_list)
+
+        else:
+            print('No date range is selected')
+
+    ###     FINE CALENDARIO SCELTA MULTIPLA    ###
 
     def statisticheEconomiche(self):
-        self.inserisciPrenotazione = VistaFiltroStatistiche()
-        prenotazione = self.inserisciPrenotazione.show()
+        pass
+
     def statisticheGestionali(self):
         pass
