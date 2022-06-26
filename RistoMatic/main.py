@@ -1,20 +1,15 @@
 import sys
-from PySide6 import QtWidgets
+import unittest
 
-from GestioneAttivita.Enum import Zone
+from PySide6 import QtWidgets
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
-from GestioneAmministrativa.Menu import Menu
-from GestioneAttivita.StatoSala import StatoSala
-from GestioneAmministrativa.ElementoMenu import ElementoMenu
-import unittest
 
 testmode=False
 # main
 if __name__ == "__main__":
     if (testmode):
-        from Tests.TestComanda import TestComanda
         unittest.main()
     else:
         app = QtWidgets.QApplication([])
