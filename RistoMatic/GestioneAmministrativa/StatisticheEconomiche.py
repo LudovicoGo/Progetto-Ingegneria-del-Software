@@ -52,13 +52,25 @@ class StatisticheEconomiche(Statistiche):
 
 
 
-    def generaStatistiche(self):
+    def generaStatistiche(self)->dict:
 
         datiGrezzi = self.calcolaStatistiche()
 
-        # Prezzo maggiore , prezzo minore , media:
+        giornoMaxIncasso  = max(datiGrezzi, key=datiGrezzi.get)
+        giornoMinIncasso = min(datiGrezzi , key=datiGrezzi.get)
 
-        # Finire di generare statistiches
+        mediaIncasso = 0
+        for singoloIncasso in datiGrezzi.__len__():
+            mediaIncasso += singoloIncasso
+
+        datiRaffinati = {}
+        datiRaffinati.pop(giornoMaxIncasso,datiGrezzi.get(giornoMaxIncasso))
+        datiRaffinati.pop(giornoMinIncasso,datiGrezzi.get(giornoMinIncasso))
+        datiRaffinati.pop("media incassi: ",datiGrezzi.get(mediaIncasso))
+
+        return datiRaffinati
+
+
 
 
 

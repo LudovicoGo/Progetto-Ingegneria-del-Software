@@ -26,11 +26,12 @@ class Statistiche():
 
 
     @abstractmethod
-    def generaStatistiche(self):
-        pass
+    def generaStatistiche(self)->dict:
+
 
     @abstractmethod
     def esportaStatistiche(self):
+        # Magari si puo decidere di farle esportare in formato pdf o altri formati
         pass
 
 
