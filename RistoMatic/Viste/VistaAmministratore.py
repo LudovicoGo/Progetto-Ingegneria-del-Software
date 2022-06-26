@@ -2,6 +2,7 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView
 
 from RistoMatic.Viste.FlowLayout import FlowLayout
+from RistoMatic.Viste.VistaFiltroStatistiche import VistaFiltroStatistiche
 
 
 class VistaAmministratore(QtWidgets.QWidget):
@@ -31,13 +32,6 @@ class VistaAmministratore(QtWidgets.QWidget):
         buttonsLayout.addWidget(newButton)
         buttonsLayout.addWidget(infoButton)
 
-        ##############################################
-        #testButton = QPushButton("TEST (stampa lista)")
-        #testButton.clicked.connect(self.testButtonFunction)
-        #buttonsLayout.addWidget(testButton)
-        ##############################################
-
-       # buttonsLayout.addStretch()
         hLayout.addLayout(buttonsLayout)
 
         self.setLayout(hLayout)
@@ -57,7 +51,7 @@ class VistaAmministratore(QtWidgets.QWidget):
 
 
     def statisticheEconomiche(self):
-        pass
-
+        self.inserisciPrenotazione = VistaFiltroStatistiche()
+        prenotazione = self.inserisciPrenotazione.show()
     def statisticheGestionali(self):
         pass
