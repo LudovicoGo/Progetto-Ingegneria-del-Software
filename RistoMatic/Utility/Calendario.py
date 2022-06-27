@@ -1,4 +1,7 @@
 import sys
+from calendar import calendar
+
+import self
 from PySide6.QtWidgets import QApplication, QWidget, QCalendarWidget, QPushButton, \
     QHBoxLayout, QVBoxLayout
 from PySide6.QtCore import Qt
@@ -44,6 +47,20 @@ class Calendario(QCalendarWidget):
             self.from_date = date_value
             self.to_date = None
         # print(self.from_date, self.to_date, 'x')
+
+    def print_days_selected(self):
+        # PROBLEMA NON ENTRA QUI DENTRO
+        print('tipo variabile self.calendar.from_date : ' + type(self.calendar.from_date))
+        if self.calendar.from_date and self.calendar.to_date:
+            # print(self.calendar.to_date.toPyDate.strftime("%Y-%m-%d"))
+            start_date = min(self.calendar.to_date.toPyDate, self.calendar.from_date.toPyDate)
+            end_date = max(self.calendar.from_date.toPyDate, self.calendar.to_date.toPyDate)
+            # print('Number of days: {0}'.format((end_date - start_date).days))
+            date_list = pd.date_range(start=start_date, end=end_date)
+            print(date_list)
+
+        else:
+            print('Filtro non valido')
 
 ## FINE APP
 
