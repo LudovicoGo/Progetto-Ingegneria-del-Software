@@ -17,9 +17,6 @@ if __name__ == "__main__":
         app = QtWidgets.QApplication([])
         app.setStyle('Fusion')
 
-        calendar = Calendario()
-        calendar.show()
-
         widgetPreparazione = VistaPreparazione()
         widgetPreparazione.resize(1280, 720)
         widgetPreparazione.show()
