@@ -1,14 +1,15 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QCalendarWidget, QPushButton, \
+from PySide6.QtWidgets import QApplication, QWidget, QCalendarWidget, QPushButton, \
     QHBoxLayout, QVBoxLayout
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPalette, QTextCharFormat, QIcon
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QPalette, QTextCharFormat, QIcon
 import pandas as pd
 
 
 class Calendario(QCalendarWidget):
     def __init__(self):
         super().__init__()
+
         self.from_date = None
         self.to_date = None
 

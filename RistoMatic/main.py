@@ -2,6 +2,8 @@ import sys
 import unittest
 
 from PySide6 import QtWidgets
+
+from RistoMatic.Utility.Calendario import Calendario
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
@@ -14,6 +16,9 @@ if __name__ == "__main__":
     else:
         app = QtWidgets.QApplication([])
         app.setStyle('Fusion')
+
+        calendar = Calendario()
+        calendar.show()
 
         widgetPreparazione = VistaPreparazione()
         widgetPreparazione.resize(1280, 720)

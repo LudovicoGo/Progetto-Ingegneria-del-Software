@@ -46,6 +46,7 @@ class VistaAmministratore(QtWidgets.QWidget):
         self.setLayout(self.layout)
         btn = QPushButton('Retrieve Date Range', clicked=self.print_days_selected)
         self.layout.addWidget(btn)
+
         self.calendar = Calendario()  # IL PROBLEMA STA IN QUESTA RIGA DI CODICE
 
         self.layout.addWidget(self.calendar)
