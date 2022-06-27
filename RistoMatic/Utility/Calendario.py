@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QTextCharFormat, QIcon
 import pandas as pd
 
-class Calenderio(QCalendarWidget):
+class Calendario(QCalendarWidget):
 	def __init__(self):
 		super().__init__()
 		self.from_date = None

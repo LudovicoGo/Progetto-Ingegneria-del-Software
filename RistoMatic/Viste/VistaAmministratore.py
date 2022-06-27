@@ -1,7 +1,7 @@
 from PySide6 import QtWidgets
-from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView
+from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView,  QCalendarWidget
 
-from RistoMatic.Utility.Calendario import Calenderio
+from RistoMatic.Utility.Calendario import Calendario
 from RistoMatic.Viste.FlowLayout import FlowLayout
 from RistoMatic.Viste.VistaFiltroStatistiche import VistaFiltroStatistiche
 import pandas as pd
@@ -39,21 +39,21 @@ class VistaAmministratore(QtWidgets.QWidget):
 
 
 
-
+        print("ECCOMI")
         ###      AGGIUNTA CALENDARIO CON SCELTA MULTIPLA   ###
 
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
-
         btn = QPushButton('Retrieve Date Range', clicked=self.print_days_selected)
         self.layout.addWidget(btn)
+        self.calendar = Calendario()  # IL PROBLEMA STA IN QUESTA RIGA DI CODICE
 
-        self.calendar = Calenderio()
         self.layout.addWidget(self.calendar)
         hLayout.addLayout(self.layout)
 
-    def print_days_selected(self):
-        if self.calendar.from_date and self.calendar.to_date:
+    def print_days_selected(self, calendar):
+        #PROBLEMA NON ENTRA QUI DENTRO
+        if  calendar.from_date and calendar.to_date:
             start_date = min(self.calendar.from_date.toPyDate(), self.calendar.to_date.toPyDate())
             end_date = max(self.calendar.from_date.toPyDate(), self.calendar.to_date.toPyDate())
             # print('Number of days: {0}'.format((end_date - start_date).days))
@@ -62,6 +62,7 @@ class VistaAmministratore(QtWidgets.QWidget):
 
         else:
             print('No date range is selected')
+
 
     ###     FINE CALENDARIO SCELTA MULTIPLA    ###
 
