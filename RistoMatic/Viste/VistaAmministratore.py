@@ -1,9 +1,7 @@
-import calendar
-
-import pandas as pd
-from PyQt5.uic.uiparser import QtCore
 from PySide6 import QtWidgets
-from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView
+from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox
+
+
 
 from RistoMatic.Utility.Calendario import Calendario
 
@@ -59,11 +57,12 @@ class VistaAmministratore(QtWidgets.QWidget):
 
 
 
-
     ###     FINE CALENDARIO SCELTA MULTIPLA    ###
 
     def statisticheEconomiche(self):
-        pass
+
+
+
 
     def statisticheGestionali(self):
         pass
