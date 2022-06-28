@@ -48,18 +48,11 @@ class Calendario(QCalendarWidget):
             self.to_date = None
         # print(self.from_date, self.to_date, 'x')
 
-    def print_days_selected(self)->datetime:
-
-        if(self.from_date== None or self.to_date == None ):
-                msg = QMessageBox()
-                msg.setWindowTitle('ATTENZIONE!')
-                msg.setIcon(QMessageBox.Critical)
-                msg.setText("ERRORE!")
-                msg.setInformativeText("Sicuro di aver selezionato bene la data?")
-                msg.exec_()
+    def print_days_selected(self):
 
 
-        elif self.from_date and self.to_date:
+
+        if self.from_date and self.to_date:
         # Devo lavorare con i datetime , quindi estrapolo manualmente anni , mesi e giorni e creo un nuovo oggetto datetime
             toAnno = self.to_date.year()
             toMese = self.to_date.month()
@@ -80,17 +73,16 @@ class Calendario(QCalendarWidget):
             print(date_list)
 
 
-        return start_date , end_date
+        try:
+            return start_date , end_date
+        except:
+                msg = QMessageBox()
+                msg.setWindowTitle('ATTENZIONE!')
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("Errore range data")
+                msg.setInformativeText("Sicuro di aver selezionato un range di date?")
+                msg.exec_()
+
 
 
 ## FINE APP
-
-
-# if __name__ == '__main__':
-# don't auto scale when drag app to a different monitor.
-# QApplication.setAttribute(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
-
-# app = QApplication(sys.argv)
-
-# myApp = MyApp()
-# myApp.show()

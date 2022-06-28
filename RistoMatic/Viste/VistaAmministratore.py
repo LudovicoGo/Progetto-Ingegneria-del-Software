@@ -1,3 +1,5 @@
+import datetime
+
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox
 
@@ -50,16 +52,29 @@ class VistaAmministratore(QtWidgets.QWidget):
         self.layout.addWidget(self.calendar)
         hLayout.addLayout(self.layout)
 
-
         btn = QPushButton('Conferma filtro')
+
         btn.clicked.connect(self.calendar.print_days_selected)
         self.layout.addWidget(btn)
 
+       #todo  luca Fare handling per gestire in caso di scelta sbagliata del range di data
+        try:
+            inizioCampionamento , fineCampionamento= self.calendar.print_days_selected()
+        except:
+              msg = QMessageBox()
+              msg.setWindowTitle('ATTENZIONE!')
+              msg.setIcon(QMessageBox.Critical)
+              msg.setText("Errore range data")
+              msg.setInformativeText("Sicuro di aver selezionato un range di date?")
+              msg.exec_()
+              return
 
 
-    ###     FINE CALENDARIO SCELTA MULTIPLA    ###
 
-    def statisticheEconomiche(self):
+    def statisticheEconomiche(self,inizioCampionamento,fineCampionamento):
+        if(self.calendar.print_days_selected==None or fineCampionamento>datetime.datetime.now):
+            print('erroreeeeee')
+            return
 
 
 
