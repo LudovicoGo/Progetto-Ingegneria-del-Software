@@ -1,14 +1,15 @@
-import sys
-from calendar import calendar
+import datetime
 
 from PySide6.QtWidgets import QApplication, QWidget, QCalendarWidget, QPushButton, \
-    QHBoxLayout, QVBoxLayout
+    QHBoxLayout, QVBoxLayout, QDateTimeEdit
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPalette, QTextCharFormat, QIcon
+
 import pandas as pd
 
+
 # Aggiunto Qwidget
-class Calendario(QCalendarWidget, QWidget):
+class Calendario(QCalendarWidget):
     def __init__(self):
         super().__init__()
 
@@ -48,12 +49,23 @@ class Calendario(QCalendarWidget, QWidget):
         # print(self.from_date, self.to_date, 'x')
 
     def print_days_selected(self):
-        # PROBLEMA NON ENTRA QUI DENTRO
-        print(type(self))
-        if self.calendar.from_date and self.calendar.to_date:
+
+# Devo lavorare con i datetime , quindi estrapolo manualmente anni , mesi e giorni e creo un nuovo oggetto datetime
+        toAnno = self.to_date.year()
+        toMese = self.to_date.month()
+        toGiorno = self.to_date.day()
+        toData = datetime.datetime(toAnno,toMese,toGiorno)
+
+        fromAnno = self.from_date.year()
+        fromMese = self.from_date.month()
+        fromGiorno = self.from_date.day()
+        fromData = datetime.datetime(fromAnno,fromMese,fromGiorno)
+
+
+        if self.from_date and self.to_date:
             # print(self.calendar.to_date.toPyDate.strftime("%Y-%m-%d"))
-            start_date = min(self.calendar.to_date.toPyDate, self.calendar.from_date.toPyDate)
-            end_date = max(self.calendar.from_date.toPyDate, self.calendar.to_date.toPyDate)
+            start_date = min(toData, fromData)
+            end_date = max(toData, fromData)
             # print('Number of days: {0}'.format((end_date - start_date).days))
             date_list = pd.date_range(start=start_date, end=end_date)
             print(date_list)
