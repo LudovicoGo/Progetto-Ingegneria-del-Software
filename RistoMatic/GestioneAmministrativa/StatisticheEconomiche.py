@@ -10,7 +10,9 @@ from GestioneAttivita import StatoSala
 
 class StatisticheEconomiche(Statistiche):
 
-
+    # Rivedere realizzazione costruttore
+    def __init__(self):
+        super.__init__()
 
 
     def __init__(self, dataInizio , dataFine):

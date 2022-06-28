@@ -31,8 +31,10 @@ class Statistiche():
 
     @abstractmethod
     def esportaStatistiche(self):
-        # Magari si puo decidere di farle esportare in formato pdf o altri formati
-        pass
+#   Magari si puo decidere di farle esportare in formato pdf o altri formati
+    pass
+
+
 
 
 
