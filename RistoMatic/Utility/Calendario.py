@@ -50,19 +50,18 @@ class Calendario(QCalendarWidget):
 
     def print_days_selected(self):
 
-# Devo lavorare con i datetime , quindi estrapolo manualmente anni , mesi e giorni e creo un nuovo oggetto datetime
-        toAnno = self.to_date.year()
-        toMese = self.to_date.month()
-        toGiorno = self.to_date.day()
-        toData = datetime.datetime(toAnno,toMese,toGiorno)
-
-        fromAnno = self.from_date.year()
-        fromMese = self.from_date.month()
-        fromGiorno = self.from_date.day()
-        fromData = datetime.datetime(fromAnno,fromMese,fromGiorno)
-
 
         if self.from_date and self.to_date:
+        # Devo lavorare con i datetime , quindi estrapolo manualmente anni , mesi e giorni e creo un nuovo oggetto datetime
+            toAnno = self.to_date.year()
+            toMese = self.to_date.month()
+            toGiorno = self.to_date.day()
+            toData = datetime.datetime(toAnno,toMese,toGiorno)
+
+            fromAnno = self.from_date.year()
+            fromMese = self.from_date.month()
+            fromGiorno = self.from_date.day()
+            fromData = datetime.datetime(fromAnno,fromMese,fromGiorno)
             # print(self.calendar.to_date.toPyDate.strftime("%Y-%m-%d"))
             start_date = min(toData, fromData)
             end_date = max(toData, fromData)
@@ -70,8 +69,6 @@ class Calendario(QCalendarWidget):
             date_list = pd.date_range(start=start_date, end=end_date)
             print(date_list)
 
-        else:
-            print('Filtro non valido')
 
 ## FINE APP
 
