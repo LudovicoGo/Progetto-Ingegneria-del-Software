@@ -92,3 +92,18 @@ class Comanda:
 
         tot = tot+ self.getCostoCoperto()
         return tot
+
+
+    # Aggiunti due nuovi metodi ausiliari , integrare con il progetto
+
+    def isAsporto(self)->bool:
+        if isinstance(self.rif,OrdineAsporto):
+            return True
+        else:
+            return False
+
+    def isTavolo(self)->bool:
+        if isinstance(self.rif,Tavolo):
+            return True
+        else:
+            return False
