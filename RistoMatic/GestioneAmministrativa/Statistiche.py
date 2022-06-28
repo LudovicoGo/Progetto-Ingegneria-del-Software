@@ -1,5 +1,6 @@
 from abc import abstractmethod
-
+from RistoMatic.GestioneAmministrativa import StatisticheEconomiche
+import datetime
 
 class Statistiche():
 
@@ -23,16 +24,25 @@ class Statistiche():
 
     @abstractmethod
     def calcolaStatistiche(self)-> dict:
+        return
 
 
     @abstractmethod
     def generaStatistiche(self)->dict:
+        return
 
 
-    @abstractmethod
+     # TODO LUCA : rifinire meglio l'esportazione
     def esportaStatistiche(self):
-#   Magari si puo decidere di farle esportare in formato pdf o altri formati
-    pass
+        file_object = open("Dati/Statistiche.txt", 'a')
+        file_object.write('Data : ' + datetime.datetime.now() + '\n' + '\n' + '\n')
+        if isinstance(self,StatisticheEconomiche):
+            file_object.write("Statistiche economiche:")
+            file_object.write(self.generaStatistiche())
+        elif isinstance(self,StatisticheEconomiche):
+            file_object.write('Statistiche gestionali: ')
+            file_object.write(self.generaStatistiche())
+
 
 
 

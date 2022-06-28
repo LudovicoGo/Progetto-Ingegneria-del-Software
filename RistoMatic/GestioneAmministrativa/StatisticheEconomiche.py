@@ -5,8 +5,8 @@
 import datetime
 import pickle
 
-from GestioneAmministrativa.Statistiche import Statistiche
-from GestioneAttivita import StatoSala
+from RistoMatic.GestioneAmministrativa.Statistiche import Statistiche
+from RistoMatic.GestioneAttivita import StatoSala
 
 class StatisticheEconomiche(Statistiche):
 
