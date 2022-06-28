@@ -1,15 +1,14 @@
 import sys
 from calendar import calendar
 
-import self
 from PySide6.QtWidgets import QApplication, QWidget, QCalendarWidget, QPushButton, \
     QHBoxLayout, QVBoxLayout
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPalette, QTextCharFormat, QIcon
 import pandas as pd
 
-
-class Calendario(QCalendarWidget):
+# Aggiunto Qwidget
+class Calendario(QCalendarWidget, QWidget):
     def __init__(self):
         super().__init__()
 
@@ -50,7 +49,7 @@ class Calendario(QCalendarWidget):
 
     def print_days_selected(self):
         # PROBLEMA NON ENTRA QUI DENTRO
-        print('tipo variabile self.calendar.from_date : ' + type(self.calendar.from_date))
+        print(type(self))
         if self.calendar.from_date and self.calendar.to_date:
             # print(self.calendar.to_date.toPyDate.strftime("%Y-%m-%d"))
             start_date = min(self.calendar.to_date.toPyDate, self.calendar.from_date.toPyDate)

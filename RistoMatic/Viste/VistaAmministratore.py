@@ -54,7 +54,7 @@ class VistaAmministratore(QtWidgets.QWidget):
 
 
         btn = QPushButton('Conferma filtro')
-        btn.clicked.connect(Calendario.print_days_selected)
+        btn.clicked.connect(self.calendar.print_days_selected)
         self.layout.addWidget(btn)
 
 
