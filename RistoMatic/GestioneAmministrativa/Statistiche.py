@@ -23,7 +23,7 @@ class Statistiche():
         self.dataFine = setFine
 
     @abstractmethod
-    def calcolaStatistiche(self)-> dict:
+    def calcolaStatistiche(self):
         return
 
 

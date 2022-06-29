@@ -26,7 +26,7 @@ class VistaAmministratore(QtWidgets.QWidget):
         newButton = QPushButton("Genera Statistiche Gestionali")
         newButton.clicked.connect(self.statisticheGestionali)
 
-        newButton1 = QPushButton("Esporta e salva statistiche")
+        newButton1 = QPushButton("Salva statistiche")
         newButton.clicked.connect(self.statisticheGestionali)
 
         buttonsLayout.addWidget(newButton1)
@@ -53,20 +53,28 @@ class VistaAmministratore(QtWidgets.QWidget):
         self.layout.addWidget(self.calendar)
         hLayout.addLayout(self.layout)
 
-        btn = QPushButton('Conferma filtro')
+        #btn = QPushButton('Conferma filtro')
 
-        btn.clicked.connect(self.calendar.print_days_selected)
-        self.layout.addWidget(btn)
+       # btn.clicked.connect(self.calendar.print_days_selected)
+        #self.layout.addWidget(btn)
 
 
 
     def statisticheEconomiche(self):
 
-        if self.calendar.print_days_selected() is None:
+        if self.calendar.print_days_selected() is None :
           # Non ho inserito , nulla, avro i campi del costruttore di genera statistiche economiche vuoto
-          print('campi vuoti')
+          msg = QMessageBox()
+          msg.setIcon(QMessageBox.Critical)
+          msg.setText("Attenzione!")
+          msg.setInformativeText("Non hai inserito nessun range di date, per convenzione verranno prese le ultime 24 ore !")
+          msg.exec_()
+          statistiche = StatisticheEconomiche(None,None)
+          print(statistiche.generaStatistiche())
+          # TODO Plottare interfaccia grafica
         else:
             start,end=self.calendar.print_days_selected()
+
             if(datetime.date(end.year,end.month,end.day)>datetime.date.today() or datetime.date(start.year,start.month,start.day)==datetime.date(end.year,end.month,end.day)):
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Critical)
@@ -76,6 +84,7 @@ class VistaAmministratore(QtWidgets.QWidget):
                 return
             # Range di dati validi:
             else:
+                # TODO chiamare interfaccia grafica per plottare
                 statistiche = StatisticheEconomiche(start,end)
                 print(statistiche.generaStatistiche())
 
