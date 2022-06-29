@@ -10,13 +10,11 @@ from RistoMatic.GestioneAttivita import StatoSala
 
 class StatisticheEconomiche(Statistiche):
 
-    # Rivedere realizzazione costruttore
-    def __init__(self):
-        super.__init__()
 
 
-    def __init__(self, dataInizio , dataFine):
-        super.__init__(dataInizio , dataFine)
+
+    def __init__(dataInizio , dataFine):
+        super.__init__(dataInizio,dataFine)
 
 
     # Dati "rozzi" , da lavorare

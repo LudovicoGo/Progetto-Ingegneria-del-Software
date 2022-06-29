@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from RistoMatic.GestioneAmministrativa import StatisticheEconomiche
+#from RistoMatic.GestioneAmministrativa import StatisticheEconomiche
 import datetime
 
 class Statistiche():

@@ -3,8 +3,8 @@ import time
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox
 
-
-
+from RistoMatic.GestioneAmministrativa.Statistiche import Statistiche
+from RistoMatic.GestioneAmministrativa.StatisticheEconomiche import StatisticheEconomiche
 from RistoMatic.Utility.Calendario import Calendario
 
 
@@ -74,8 +74,10 @@ class VistaAmministratore(QtWidgets.QWidget):
                 msg.setInformativeText("Attenzione al range di date selezionate !")
                 msg.exec_()
                 return
+            # Range di dati validi:
             else:
-                pass
+                statistiche = StatisticheEconomiche(start,end)
+                print(statistiche.generaStatistiche())
 
 
 
