@@ -52,6 +52,7 @@ class Calendario(QCalendarWidget):
 
 
 
+        global start_date, end_date
         if self.from_date and self.to_date:
         # Devo lavorare con i datetime , quindi estrapolo manualmente anni , mesi e giorni e creo un nuovo oggetto datetime
             toAnno = self.to_date.year()
@@ -70,18 +71,13 @@ class Calendario(QCalendarWidget):
 
             # print('Number of days: {0}'.format((end_date - start_date).days))
             date_list = pd.date_range(start=start_date, end=end_date)
-            print(date_list)
+           # print(date_list)
 
 
         try:
             return start_date , end_date
         except:
-                msg = QMessageBox()
-                msg.setWindowTitle('ATTENZIONE!')
-                msg.setIcon(QMessageBox.Critical)
-                msg.setText("Errore range data")
-                msg.setInformativeText("Sicuro di aver selezionato un range di date?")
-                msg.exec_()
+              return None
 
 
 

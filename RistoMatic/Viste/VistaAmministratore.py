@@ -1,5 +1,5 @@
 import datetime
-
+import time
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox
 
@@ -9,6 +9,7 @@ from RistoMatic.Utility.Calendario import Calendario
 
 
 class VistaAmministratore(QtWidgets.QWidget):
+
 
     def __init__(self):
         super().__init__()
@@ -57,24 +58,24 @@ class VistaAmministratore(QtWidgets.QWidget):
         btn.clicked.connect(self.calendar.print_days_selected)
         self.layout.addWidget(btn)
 
-       #todo  luca Fare handling per gestire in caso di scelta sbagliata del range di data
-        try:
-            inizioCampionamento , fineCampionamento= self.calendar.print_days_selected()
-        except:
-              msg = QMessageBox()
-              msg.setWindowTitle('ATTENZIONE!')
-              msg.setIcon(QMessageBox.Critical)
-              msg.setText("Errore range data")
-              msg.setInformativeText("Sicuro di aver selezionato un range di date?")
-              msg.exec_()
-              return
 
 
+    def statisticheEconomiche(self):
 
-    def statisticheEconomiche(self,inizioCampionamento,fineCampionamento):
-        if(self.calendar.print_days_selected==None or fineCampionamento>datetime.datetime.now):
-            print('erroreeeeee')
-            return
+        if self.calendar.print_days_selected() is None:
+          # Non ho inserito , nulla, avro i campi del costruttore di genera statistiche economiche vuoto
+          print('campi vuoti')
+        else:
+            start,end=self.calendar.print_days_selected()
+            if(datetime.date(end.year,end.month,end.day)>datetime.date.today() or datetime.date(start.year,start.month,start.day)==datetime.date(end.year,end.month,end.day)):
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("ERRORE!")
+                msg.setInformativeText("Attenzione al range di date selezionate !")
+                msg.exec_()
+                return
+            else:
+                pass
 
 
 
