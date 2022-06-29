@@ -4,7 +4,7 @@ from PySide6 import QtWidgets
 from RistoMatic.GestioneAmministrativa import StatisticheEconomiche
 import datetime
 
-class vistaGrafico(QtWidgets.QWidget):
+class vistaGrafico():
 
     def graficoStatisticheEconomiche(self,datiRaffinati):
 
@@ -16,11 +16,11 @@ class vistaGrafico(QtWidgets.QWidget):
 
 
 
-
-        plt.bar(x_pos, popolazione, align='center')
-        plt.xticks(x_pos, citta)
-        plt.ylabel('Popolazione')
-        plt.xlabel('Citta')
-        plt.title('Popolazione per citta')
+        x_pos = np.arange(len(datiRaffinati.giorni))
+        plt.bar(x_pos, datiRaffinati.values(), align='center')
+        plt.xticks(x_pos, datiRaffinati.giorni)
+        plt.ylabel('Incasso')
+        plt.xlabel('Giorno')
+        plt.title('Guadagno totale per giorno')
         plt.show()
 

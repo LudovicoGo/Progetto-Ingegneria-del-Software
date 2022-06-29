@@ -1,12 +1,11 @@
 import datetime
-import time
+
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox
 
-from RistoMatic.GestioneAmministrativa.Statistiche import Statistiche
 from RistoMatic.GestioneAmministrativa.StatisticheEconomiche import StatisticheEconomiche
 from RistoMatic.Utility.Calendario import Calendario
-
+from RistoMatic.Viste.VistaGrafico import VistaGrafico
 
 class VistaAmministratore(QtWidgets.QWidget):
 
@@ -62,6 +61,8 @@ class VistaAmministratore(QtWidgets.QWidget):
 
     def statisticheEconomiche(self):
 
+        vistaGrafico = VistaGrafico()
+
         if self.calendar.print_days_selected() is None :
           # Non ho inserito , nulla, avro i campi del costruttore di genera statistiche economiche vuoto
           msg = QMessageBox()
@@ -86,6 +87,9 @@ class VistaAmministratore(QtWidgets.QWidget):
             else:
                 # TODO chiamare interfaccia grafica per plottare
                 statistiche = StatisticheEconomiche(start,end)
+                #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))
+                print('Tipo oggetto statistiche.calcolaStatistiche()' , type(statistiche.calcolaStatistiche()))
+                vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
                 print(statistiche.generaStatistiche())
 
 
