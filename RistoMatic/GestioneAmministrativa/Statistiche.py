@@ -35,13 +35,10 @@ class Statistiche():
      # TODO LUCA : rifinire meglio l'esportazione
     def esportaStatistiche(self):
         file_object = open("Dati/Statistiche.txt", 'a')
-        file_object.write('Data : ' + datetime.datetime.now() + '\n' + '\n' + '\n')
-        if isinstance(self,StatisticheEconomiche):
-            file_object.write("Statistiche economiche:")
-            file_object.write(self.generaStatistiche())
-        elif isinstance(self,StatisticheEconomiche):
-            file_object.write('Statistiche gestionali: ')
-            file_object.write(self.generaStatistiche())
+        file_object.write('Statistiche del : ' , datetime.datetime.now() , '\n' , '\n' , '\n')
+        file_object.write(self.generaStatistiche())
+        file_object.close()
+
 
 
 
