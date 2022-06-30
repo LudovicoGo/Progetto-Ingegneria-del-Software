@@ -126,7 +126,9 @@ class VistaAmministratore(QtWidgets.QWidget):
             # Range di dati validi:
             else:
                 statistiche = StatisticheGestionali(start,end)
-                a ,b = statistiche.calcolaStatistiche()
+                a,b = statistiche.calcolaStatistiche()
+
+                print(a)
                 #print('ORDINI ASPORTO: ', a)
                 #print('ORDINI TAVOLO: ', b)
                 #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))

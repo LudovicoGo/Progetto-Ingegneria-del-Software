@@ -16,6 +16,7 @@ class StatisticheGestionali(Statistiche):
     # Totale ORDINI ASPORTO , ORDINI TAVOLI
 
     # Restituisce due dizionari con la seguente sintassi: dict = { data : lista_comande , ... }
+    # TODO LUCA VEDERE PER QUALE MOTIVO LA FUNZIONE VIENE RUNNATA DUE VOLTE
     def calcolaStatistiche(self):
 
          if ( self.dataInizio is None) or (self.dataFine is None) :
@@ -49,8 +50,6 @@ class StatisticheGestionali(Statistiche):
                         comandeAsporto.append(comanda)
             OrdiniAsporto[datetime.date(data.year,data.month,data.day)] = comandeAsporto
             OrdiniTavolo[datetime.date(data.year,data.month,data.day)] = comandeTavolo
-         print('Ordini Asporto: ' , OrdiniAsporto)
-         print('Ordini Tavolo: ' , OrdiniTavolo)
 
          return (OrdiniAsporto , OrdiniTavolo)
 
@@ -62,11 +61,20 @@ class StatisticheGestionali(Statistiche):
 
 #   TODO LUCA : Vedere perchè non mi tratta i dizionari come tali(OrdineAsporto , OrdineTavolo)
 #   Posso avere statistiche come segue: giorno con piu ordini , giorno con meno ordini , media ordini nel periodo di tempo
-#   Quante bevande / pietanze si sono presi in quei giorni
-    def generaStatistiche(self)->dict:
-        datiRaffinati = {}
+#   Quante bevande / pietanze si sono presi in quei giorni'
+#   OrdiniAsporto = {'giornoMaxComande':'n_comande' , 'giornoMinComande':'n_comande' , 'MedieComandePeriodoTempo':'n_medioCom', 'Giorno con il maggior numero di elementi':'num_elementi'}
+#   OrdiniComande = ////
+    def generaStatistiche(self):
         OrdiniAsporto , OrdiniTavolo = self.calcolaStatistiche()
-        pass
+
+        giornoMaxComandeAsporto = max(OrdiniAsporto,key=OrdiniAsporto.get())
+        giornoMinComandeAsporto = max(OrdiniAsporto,key=OrdiniAsporto.get())
+
+        giornoMaxComandeTavolo = max(OrdiniTavolo,key=OrdiniTavolo.get())
+        giornoMinComandeTavolo
+
+
+
 
 
 
