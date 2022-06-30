@@ -3,9 +3,12 @@ import datetime
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox
 
+# TODO LUCA : Risolvere problema import VistaGrafico
+
 from RistoMatic.GestioneAmministrativa.StatisticheEconomiche import StatisticheEconomiche
+from RistoMatic.GestioneAmministrativa.StatisticheGestionali import StatisticheGestionali
 from RistoMatic.Utility.Calendario import Calendario
-from RistoMatic.Viste.VistaGrafico import VistaGrafico
+#from RistoMatic.Viste.VistaGrafico import VistaGrafico
 
 class VistaAmministratore(QtWidgets.QWidget):
 
@@ -61,7 +64,7 @@ class VistaAmministratore(QtWidgets.QWidget):
 
     def statisticheEconomiche(self):
 
-        vistaGrafico = VistaGrafico()
+        #vistaGrafico = VistaGrafico()
 
         if self.calendar.print_days_selected() is None :
           # Non ho inserito , nulla, avro i campi del costruttore di genera statistiche economiche vuoto
@@ -71,8 +74,8 @@ class VistaAmministratore(QtWidgets.QWidget):
           msg.setInformativeText("Non hai inserito nessun range di date, per convenzione verranno prese le ultime 24 ore !")
           msg.exec_()
           statistiche = StatisticheEconomiche(None,None)
-          print(statistiche.generaStatistiche())
-          # TODO Plottare interfaccia grafica
+          #print(statistiche.generaStatistiche())
+          #vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
         else:
             start,end=self.calendar.print_days_selected()
 
@@ -85,15 +88,48 @@ class VistaAmministratore(QtWidgets.QWidget):
                 return
             # Range di dati validi:
             else:
-                # TODO chiamare interfaccia grafica per plottare
                 statistiche = StatisticheEconomiche(start,end)
                 #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))
-                print('Tipo oggetto statistiche.calcolaStatistiche()' , type(statistiche.calcolaStatistiche()))
-                vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
-                print(statistiche.generaStatistiche())
+                #print('Tipo oggetto statistiche.calcolaStatistiche()' , type(statistiche.calcolaStatistiche()))
+                #vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
+                #print(statistiche.generaStatistiche())
+
+
 
 
 
 
     def statisticheGestionali(self):
-        pass
+
+        #vistaGrafico = VistaGrafico()
+
+        if self.calendar.print_days_selected() is None :
+          # Non ho inserito , nulla, avro i campi del costruttore di genera statistiche economiche vuoto
+          msg = QMessageBox()
+          msg.setIcon(QMessageBox.Critical)
+          msg.setText("Attenzione!")
+          msg.setInformativeText("Non hai inserito nessun range di date, per convenzione verranno prese le ultime 24 ore !")
+          msg.exec_()
+          statistiche = StatisticheGestionali(None,None)
+          #print(statistiche.generaStatistiche())
+         # vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
+        else:
+            start,end=self.calendar.print_days_selected()
+
+            if(datetime.date(end.year,end.month,end.day)>datetime.date.today() or datetime.date(start.year,start.month,start.day)==datetime.date(end.year,end.month,end.day)):
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("ERRORE!")
+                msg.setInformativeText("Attenzione al range di date selezionate !")
+                msg.exec_()
+                return
+            # Range di dati validi:
+            else:
+                statistiche = StatisticheGestionali(start,end)
+                a ,b = statistiche.calcolaStatistiche()
+                #print('ORDINI ASPORTO: ', a)
+                #print('ORDINI TAVOLO: ', b)
+                #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))
+                #print('Tipo oggetto statistiche.calcolaStatistiche()' , type(statistiche.calcolaStatistiche()))
+                #vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
+                #print(statistiche.generaStatistiche())
