@@ -68,10 +68,30 @@ class StatisticheGestionali(Statistiche):
         OrdiniAsporto , OrdiniTavolo = self.calcolaStatistiche()
 
         giornoMaxComandeAsporto = max(OrdiniAsporto,key=OrdiniAsporto.get())
-        giornoMinComandeAsporto = max(OrdiniAsporto,key=OrdiniAsporto.get())
+        giornoMinComandeAsporto = min(OrdiniAsporto,key=OrdiniAsporto.get())
 
         giornoMaxComandeTavolo = max(OrdiniTavolo,key=OrdiniTavolo.get())
-        giornoMinComandeTavolo
+        giornoMinComandeTavolo = min(OrdiniTavolo,key=OrdiniTavolo.get())
+
+#   OrdineAsporto e OrdineComande hanno la stessa lunghezza(stesso numero di keys), ciò che cambia sono i values al loro interno !
+
+        totAsporto = 0
+        elementiOrdineAsporto = {}
+        for listaComande in OrdiniAsporto.values():
+            totAsporto = totAsporto + len(listaComande)
+            numElementi = 0
+            for comanda in listaComande:
+                  for elemento in comanda.elementiComanda:
+                      numElementi = numElementi + 1
+            elementiOrdineAsporto[OrdiniAsporto.keys()[OrdiniAsporto.values().index(listaComande)]] = numElementi
+
+        giornoMediaComandeAsporto = round(totAsporto/len(OrdiniAsporto),2)
+
+
+
+
+
+
 
 
 
