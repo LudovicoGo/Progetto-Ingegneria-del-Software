@@ -62,7 +62,7 @@ class StatisticheGestionali(Statistiche):
 #   TODO LUCA : Vedere perchè non mi tratta i dizionari come tali(OrdineAsporto , OrdineTavolo)
 #   Posso avere statistiche come segue: giorno con piu ordini , giorno con meno ordini , media ordini nel periodo di tempo
 #   Quante bevande / pietanze si sono presi in quei giorni'
-#   OrdiniAsporto = {'giornoMaxComande':'n_comande' , 'giornoMinComande':'n_comande' , 'MedieComandePeriodoTempo':'n_medioCom', 'Giorno con il maggior numero di elementi':'num_elementi'}
+#   OrdiniAsporto = {'giornoMaxComande':'n_comande' , 'giornoMinComande':'n_comande' , 'MedieComandePeriodoTempo':'n_medioCom', 'Giorno con il maggior numero di elementi':'num_elementi' , 'Giorno con il minor numero di elementi':'num_elementi' , 'mediae elementi':'numMediaElementi'}
 #   OrdiniComande = ////
     def generaStatistiche(self):
         OrdiniAsporto , OrdiniTavolo = self.calcolaStatistiche()
@@ -85,7 +85,60 @@ class StatisticheGestionali(Statistiche):
                       numElementi = numElementi + 1
             elementiOrdineAsporto[OrdiniAsporto.keys()[OrdiniAsporto.values().index(listaComande)]] = numElementi
 
-        giornoMediaComandeAsporto = round(totAsporto/len(OrdiniAsporto),2)
+        mediaComandeAsporto = round(totAsporto/len(OrdiniAsporto),2)
+
+        giornoNumOrdiniAsportoMax = max(elementiOrdineAsporto,key=elementiOrdineAsporto.get())
+        giornoNumOrdiniAsportoMin = min(elementiOrdineAsporto,key=elementiOrdineAsporto.get())
+        mediaOrdiniComandeAsporto = round(sum(elementiOrdineAsporto.values())/len(elementiOrdineAsporto),1)
+
+        AsportoPuliti = {}
+        AsportoPuliti['MAX : ',giornoMaxComandeAsporto]=OrdiniAsporto.get(giornoMaxComandeAsporto)
+        AsportoPuliti['MIN : ',giornoMinComandeAsporto]=OrdiniAsporto.get(giornoMinComandeAsporto)
+        AsportoPuliti['Media comande nel periodo di tempo : ']=mediaComandeAsporto
+        AsportoPuliti['MAX NUM ELEMENTI COMANDE : ',giornoNumOrdiniAsportoMax]=elementiOrdineAsporto.get(giornoNumOrdiniAsportoMax)
+        AsportoPuliti['MIN NUM ELEMENTI COMANDE : ',giornoNumOrdiniAsportoMin]=elementiOrdineAsporto.get(giornoNumOrdiniAsportoMin)
+        AsportoPuliti['MEDIA NUM ELEMENTI COMANDE : ']=mediaOrdiniComandeAsporto
+
+
+
+        ######### TAVOLO ##########
+
+
+        giornoMaxComandeAsporto = max(OrdiniAsporto,key=OrdiniAsporto.get())
+        giornoMinComandeAsporto = min(OrdiniAsporto,key=OrdiniAsporto.get())
+
+        giornoMaxComandeTavolo = max(OrdiniTavolo,key=OrdiniTavolo.get())
+        giornoMinComandeTavolo = min(OrdiniTavolo,key=OrdiniTavolo.get())
+
+#   OrdineAsporto e OrdineComande hanno la stessa lunghezza(stesso numero di keys), ciò che cambia sono i values al loro interno !
+
+        totTavolo = 0
+        elementiOrdineTavolo = {}
+        for listaComande in OrdiniTavolo.values():
+            totTavolo = totTavolo + len(listaComande)
+            numElementi = 0
+            for comanda in listaComande:
+                  for elemento in comanda.elementiComanda:
+                      numElementi = numElementi + 1
+            elementiOrdineTavolo[OrdiniTavolo.keys()[OrdiniTavolo.values().index(listaComande)]] = numElementi
+
+        mediaComandeTavolo = round(totAsporto/len(OrdiniTavolo),2)
+
+        giornoNumOrdiniTavoloMax = max(elementiOrdineTavolo,key=elementiOrdineTavolo.get())
+        giornoNumOrdiniTavoloMin = min(elementiOrdineTavolo,key=elementiOrdineTavolo.get())
+        mediaOrdiniComandeTavolo = round(sum(elementiOrdineTavolo.values())/len(elementiOrdineTavolo),1)
+
+        TavoloPuliti = {}
+        TavoloPuliti['MAX : ',giornoMaxComandeTavolo]=OrdiniTavolo.get(giornoMaxComandeTavolo)
+        TavoloPuliti['MIN : ',giornoMinComandeTavolo]=OrdiniTavolo.get(giornoMinComandeTavolo)
+        TavoloPuliti['Media comande nel periodo di tempo : ']=mediaComandeTavolo
+        TavoloPuliti['MAX NUM ELEMENTI COMANDE : ',giornoNumOrdiniTavoloMax]=elementiOrdineTavolo.get(giornoNumOrdiniTavoloMax)
+        TavoloPuliti['MIN NUM ELEMENTI COMANDE : ',giornoNumOrdiniTavoloMin]=elementiOrdineTavolo.get(giornoNumOrdiniTavoloMin)
+        TavoloPuliti['MEDIA NUM ELEMENTI COMANDE : ']=mediaOrdiniComandeTavolo
+
+
+        return AsportoPuliti , TavoloPuliti
+
 
 
 
