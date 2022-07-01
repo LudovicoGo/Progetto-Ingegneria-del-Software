@@ -10,12 +10,17 @@ from RistoMatic.GestioneAmministrativa.StatisticheGestionali import StatisticheG
 from RistoMatic.GestioneAmministrativa.StatisticheGestionali import Statistiche
 from RistoMatic.Utility.Calendario import Calendario
 #from RistoMatic.Viste.VistaGrafico import VistaGrafico
-
+from RistoMatic.Viste.VistaUnlockAmministratore import VistaUnlockAmministratore
 class VistaAmministratore(QtWidgets.QWidget):
 
 
     def __init__(self):
         super().__init__()
+
+#       Serve per fare il login
+        self.unlock = VistaUnlockAmministratore()
+        if(self.unlock.check_password() is False) : return
+
         hLayout = QHBoxLayout()
 
         self.listView = QListView()

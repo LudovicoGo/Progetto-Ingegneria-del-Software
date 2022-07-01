@@ -1,49 +1,41 @@
-from tkinter import *
-import tkinter.messagebox as box
+import sys
+from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
+from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QScrollArea
 
-#   RIVEDERE QUESTA CLASSE
-class VistaUnclockAmministratore():
+class VistaUnlockAmministratore(QWidget):
+	def __init__(self):
+		super().__init__()
+		self.setWindowTitle('Accesso Amministratore')
+		self.resize(500, 120)
 
-            def   __init__(self):
-                          window = Tk()
-                          window.title('Login amministratore')
+		layout = QGridLayout()
 
-                          frame = Frame(window)
+		label_name = QLabel('<font size="4"> Username </font>')
+		self.lineEdit_username = QLineEdit()
+		self.lineEdit_username.setPlaceholderText('Inserisci il nome-utente')
+		layout.addWidget(label_name, 0, 0)
+		layout.addWidget(self.lineEdit_username, 0, 1)
 
-                          self.Label1 = Label(window,text = 'Nome utente:')
-                          self.Label1.pack(padx=15,pady= 5)
+		label_password = QLabel('<font size="4"> Password </font>')
+		self.lineEdit_password = QLineEdit()
+		self.lineEdit_password.setPlaceholderText('Inserisci la tua password')
+		layout.addWidget(label_password, 1, 0)
+		layout.addWidget(self.lineEdit_password, 1, 1)
 
-                          self.entry1 = Entry(window,bd =5)
-                          self.entry1.pack(padx=15, pady=5)
+		button_login = QPushButton('Accedi')
+		button_login.clicked.connect(self.check_password)
+		layout.addWidget(button_login, 2, 0, 1, 2)
+		layout.setRowMinimumHeight(2, 75)
 
-                          self.username = self.entry1.get()
-
-                          self.Label2 = Label(window,text = 'Password: ')
-                          self.Label2.pack(padx = 15,pady=6)
-
-                          self.entry2 = Entry(window, bd=5)
-                          self.entry2.pack(padx = 15,pady=7)
-
-                          self.password = self.entry2.get()
-                          # BHO QUESTE ULTIME DUE
-                          self.frame.pack(padx=100,pady = 19)
-                          self.window.mainloop()
-
-            def login():
-                    if (self.username == 'RistoMatic' and  self.password == 'amadeus'):
-                              btn = Button(self.frame, text = 'Check Login',command = self.dialog1)
-                              return True
-                    else:
-                          btn = Button(self.frame, text ='Check Login', command = self.dialog2)
-                          return False
-
-                    btn.pack(side = RIGHT , padx =5)
+		self.setLayout(layout)
 
 
+	def check_password(self)->bool:
+		msg = QMessageBox()
+		if self.lineEdit_username.text()=='RistoMatic' and self.lineEdit_password.text()=='amadeus':
+			msg.setText('Accesso effettuato con successo !')
+			msg.exec_()
+			return True
+		else: return False
 
 
-
-            def dialog1():
-                      box.showinfo('info','Accesso concesso!')
-            def dialog2():
-                      box.showinfo('info','Accesso negato!')
