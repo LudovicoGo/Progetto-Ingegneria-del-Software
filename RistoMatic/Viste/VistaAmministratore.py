@@ -1,8 +1,7 @@
 import datetime
-
+import sys
 from PySide6 import QtWidgets
-from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox
-
+from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox,QApplication
 # TODO LUCA : Risolvere problema import VistaGrafico
 
 from RistoMatic.GestioneAmministrativa.StatisticheEconomiche import StatisticheEconomiche
@@ -16,10 +15,13 @@ class VistaAmministratore(QtWidgets.QWidget):
 
     def __init__(self):
         super().__init__()
-
 #       Serve per fare il login
+
         self.unlock = VistaUnlockAmministratore()
-        if(self.unlock.check_password() is False) : return
+        self.unlock.show()
+        if(self.unlock.check_password() is True) : print('OK !!!')
+
+
 
         hLayout = QHBoxLayout()
 

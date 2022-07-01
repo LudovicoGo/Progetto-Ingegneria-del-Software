@@ -16,6 +16,7 @@ class VistaSala(QtWidgets.QWidget):
         self.tabTavoli = VistaTavoli()
         self.tabPrenotazioni = VistaPrenotazioni()
 
+
         self.tabAmministrazione = VistaAmministratore()
 
         self.tabComande = VistaComande()

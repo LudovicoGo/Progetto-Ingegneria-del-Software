@@ -1,6 +1,5 @@
 import sys
-from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLabel, QLineEdit, QGridLayout, QMessageBox)
-from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QScrollArea
+from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QScrollArea , QWidget, QGridLayout, QLabel, QLineEdit,QPushButton, QMessageBox
 
 class VistaUnlockAmministratore(QWidget):
 	def __init__(self):
