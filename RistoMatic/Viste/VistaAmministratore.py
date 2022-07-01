@@ -17,11 +17,6 @@ class VistaAmministratore(QtWidgets.QWidget):
         super().__init__()
 #       Serve per fare il login
 
-        self.unlock = VistaUnlockAmministratore()
-        self.unlock.show()
-        if(self.unlock.check_password() is True) : print('OK !!!')
-
-
 
         hLayout = QHBoxLayout()
 

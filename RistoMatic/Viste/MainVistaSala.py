@@ -4,6 +4,7 @@ from RistoMatic.Viste.VistaAmministratore import VistaAmministratore
 from RistoMatic.Viste.VistaAsporto import VistaAsporto
 from RistoMatic.Viste.VistaComande import VistaComande
 from RistoMatic.Viste.VistaPrenotazioni import VistaPrenotazioni
+from RistoMatic.Viste.VistaUnlockAmministratore import VistaUnlockAmministratore
 from RistoMatic.Viste.VistaTavoli import VistaTavoli
 from PySide6 import QtWidgets
 
@@ -12,6 +13,8 @@ class VistaSala(QtWidgets.QWidget):
         super().__init__()
         self.setWindowTitle("Vista Sala")
         self.layout = QVBoxLayout(self)
+
+        self.unlock = VistaUnlockAmministratore()
 
         self.tabTavoli = VistaTavoli()
         self.tabPrenotazioni = VistaPrenotazioni()
