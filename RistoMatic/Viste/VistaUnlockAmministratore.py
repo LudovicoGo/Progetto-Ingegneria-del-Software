@@ -1,5 +1,7 @@
 import sys
 from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QScrollArea , QWidget, QGridLayout, QLabel, QLineEdit,QPushButton, QMessageBox
+from RistoMatic.Viste.MainVistaSala import VistaSala
+
 
 class VistaUnlockAmministratore(QWidget):
     def __init__(self):
@@ -18,6 +20,7 @@ class VistaUnlockAmministratore(QWidget):
         label_password = QLabel('<font size="4"> Password </font>')
         self.lineEdit_password = QLineEdit()
         self.lineEdit_password.setPlaceholderText('Inserisci la tua password')
+        self.lineEdit_password.setEchoMode(QLineEdit.Password)
         layout.addWidget(label_password, 1, 0)
         layout.addWidget(self.lineEdit_password, 1, 1)
 
@@ -29,14 +32,20 @@ class VistaUnlockAmministratore(QWidget):
         self.setLayout(layout)
 
 
-    def check_password(self)->bool:
+    def check_password(self):
         msg = QMessageBox()
-        if self.lineEdit_username.text()=='RistoMatic' and self.lineEdit_password.text()=='amadeus':
-            msg.setText('Accesso effettuato con successo !')
-            msg.exec_()
-            return True
+        if self.lineEdit_username.text()=='a' and self.lineEdit_password.text()=='a':
+            self.close()
+            msg.setText('Autenticazione effettuata ! Buon lavoro')
+            msg.exec()
+            self.vistaSala = VistaSala()
+            self.vistaSala.resize(1280,720)
+            self.vistaSala.show()
+
+
+            #self.destroy(True)
+
         else:
-             self.accesso = False
              msg.setText('Ops ! Qualcosa è andato storto , riprova !')
              msg.exec()
 
