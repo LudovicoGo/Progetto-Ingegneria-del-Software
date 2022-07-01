@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QScrollArea , QWidget, QGridLayout, QLabel, QLineEdit,QPushButton, QMessageBox
 from RistoMatic.Viste.MainVistaSala import VistaSala
-
+from cryptography.fernet import Fernet
 
 class VistaUnlockAmministratore(QWidget):
     def __init__(self):
@@ -31,10 +31,39 @@ class VistaUnlockAmministratore(QWidget):
 
         self.setLayout(layout)
 
-
+# Nome-utente : a , password: 1234
     def check_password(self):
+        check = None
         msg = QMessageBox()
-        if self.lineEdit_username.text()=='a' and self.lineEdit_password.text()=='a':
+# Idea : creo una password dinamica , che cambia sempre , così non la devo salvare ma è comunque sicura, inutile leggere il nome utente
+        key = Fernet.generate_key()
+        fernet = Fernet(key)
+        psw = fernet.encrypt(self.lineEdit_password.text().encode())
+
+#  Leggo la passowrd in esadecimale , dopodiche la converto e la cripto , contemporaneamente
+        try:
+          with open('Dati/dati.txt') as file:
+               contenuto = file.read().rstrip()
+        except:
+            msg.setWindowTitle('ERRORE')
+            msg.setText('FILE NON PRESENTE O NELLA DIRECTORY SBAGLIATA !(esatta: Dati/dati.txt)')
+            msg.exec()
+            return
+        try:
+            n = int(contenuto,16)
+            check = True
+        except ValueError:
+            check = False
+
+        print('E esadecimale ? ', check)
+        if contenuto == '' or check is False :
+            msg.setWindowTitle('ERRORE')
+            msg.setText('errore nella lettura del file: Dati/dati.tx !')
+            msg.exec()
+            return
+
+        pswDaConfrontare = fernet.encrypt(str(int(str(contenuto), 16)).encode())
+        if self.lineEdit_username.text()=='a' and fernet.decrypt(psw).decode()==fernet.decrypt(pswDaConfrontare).decode():
             self.close()
             msg.setText('Autenticazione effettuata ! Buon lavoro')
             msg.exec()
