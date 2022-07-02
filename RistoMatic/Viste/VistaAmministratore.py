@@ -27,8 +27,9 @@ class VistaAmministratore(QtWidgets.QWidget):
 
         global newButton1
         newButton1 = QPushButton("Salva statistiche")
+        newButton1.clicked.connect(self.salvaStatistiche)
         newButton1.setEnabled(False)
-        #print('newButton1 status iniziale : ' , newButton1.clicked)
+        print('newButton1 status iniziale : ' , newButton1.clicked)
 
 
         infoButton = QPushButton("Genera Statistiche Economiche")
@@ -111,7 +112,7 @@ class VistaAmministratore(QtWidgets.QWidget):
                 statistiche = StatisticheEconomiche(start,end)
                 newButton1.setEnabled(True)
                 print('newButton1 status finale: ' , newButton1.clicked)
-                newButton1.clicked.connect(self.salvaStatistiche(statistiche))
+                #newButton1.clicked.connect(self.salvaStatistiche(statistiche))
                 #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))
                 #print('Tipo oggetto statistiche.calcolaStatistiche()' , type(statistiche.calcolaStatistiche()))
                 #vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())

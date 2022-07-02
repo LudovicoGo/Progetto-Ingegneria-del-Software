@@ -35,8 +35,9 @@ class Statistiche():
      # TODO LUCA : rifinire meglio l'esportazione
     def esportaStatistiche(self):
         file_object = open("Dati/Statistiche.txt", 'a')
-        file_object.write('Statistiche del : ' , datetime.datetime.now() , '\n' , '\n' , '\n')
-        file_object.write(self.generaStatistiche())
+        file_object.write('Statistiche del : ')
+        file_object.write(datetime.date.today().strftime('%d %b %Y '))
+        file_object.write(str(self.generaStatistiche()))
         file_object.close()
 
 

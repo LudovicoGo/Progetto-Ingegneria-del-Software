@@ -60,7 +60,6 @@ class VistaUnlockAmministratore(QWidget):
         except ValueError:
             check = False
 
-        print('E esadecimale ? ', check)
         if contenuto == '' or check is False :
             msg.setWindowTitle('ERRORE')
             msg.setText('errore nella lettura del file: Dati/dati.tx !')
@@ -82,7 +81,7 @@ class VistaUnlockAmministratore(QWidget):
             from RistoMatic.Viste.VistaAmministratore import VistaAmministratore
             self.vistaAmministratore = VistaAmministratore()
             self.layout().addWidget(self.vistaAmministratore)
-            self.close()
+
 
 
             #self.vistaAmministratore.show()
