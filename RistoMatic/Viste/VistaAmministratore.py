@@ -28,7 +28,7 @@ class VistaAmministratore(QtWidgets.QWidget):
         global newButton1
         newButton1 = QPushButton("Salva statistiche")
         newButton1.setEnabled(False)
-        print('newButton1 status iniziale : ' , newButton1.clicked)
+        #print('newButton1 status iniziale : ' , newButton1.clicked)
 
 
         infoButton = QPushButton("Genera Statistiche Economiche")

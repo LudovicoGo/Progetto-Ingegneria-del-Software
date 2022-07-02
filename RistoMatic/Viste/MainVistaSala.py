@@ -17,8 +17,9 @@ class VistaSala(QtWidgets.QWidget):
         self.tabTavoli = VistaTavoli()
         self.tabPrenotazioni = VistaPrenotazioni()
 
-        from RistoMatic.Viste.VistaAmministratore import VistaAmministratore
-        self.tabAmministrazione = VistaAmministratore()
+        from RistoMatic.Viste.VistaUnlockAmministratore import VistaUnlockAmministratore
+        self.tabAmministrazione = VistaUnlockAmministratore()
+
 
         self.tabComande = VistaComande()
 
@@ -40,5 +41,4 @@ class VistaSala(QtWidgets.QWidget):
 
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
-
 
