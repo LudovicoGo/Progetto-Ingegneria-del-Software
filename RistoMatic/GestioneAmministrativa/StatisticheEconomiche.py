@@ -25,6 +25,7 @@ class StatisticheEconomiche(Statistiche):
             self.dataFine = datetime.date.today()
             self.dataInizio = datetime.datetime.today() - datetime.timedelta(days=1)
 
+
       #  print('data inizio: ', self.dataInizio)
       #  print('data fine: ',self.dataFine)
         storicoComande = []

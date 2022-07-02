@@ -3,12 +3,11 @@ import sys
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox,QApplication
 # TODO LUCA : Risolvere problema import VistaGrafico
-
+from RistoMatic.Viste.VistaGrafico import VistaGrafico
 from RistoMatic.GestioneAmministrativa.StatisticheEconomiche import StatisticheEconomiche
 from RistoMatic.GestioneAmministrativa.StatisticheGestionali import StatisticheGestionali
 from RistoMatic.GestioneAmministrativa.StatisticheGestionali import Statistiche
 from RistoMatic.Utility.Calendario import Calendario
-#from RistoMatic.Viste.VistaGrafico import VistaGrafico
 from RistoMatic.Viste.VistaUnlockAmministratore import VistaUnlockAmministratore
 class VistaAmministratore(QtWidgets.QWidget):
 
@@ -26,9 +25,11 @@ class VistaAmministratore(QtWidgets.QWidget):
         buttonsLayout = QVBoxLayout()
 
         global newButton1
+        self.statistiche = None
         newButton1 = QPushButton("Salva statistiche")
-        newButton1.clicked.connect(self.salvaStatistiche)
         newButton1.setEnabled(False)
+        newButton1.clicked.connect(self.salvaStatistiche)
+
         print('newButton1 status iniziale : ' , newButton1.clicked)
 
 
@@ -68,9 +69,9 @@ class VistaAmministratore(QtWidgets.QWidget):
         #self.layout.addWidget(btn)
 
 
-    def salvaStatistiche(self, statistiche : Statistiche):
-        print('Il pulsante è stato cliccato')
-        statistiche.esportaStatistiche()
+    def salvaStatistiche(self):
+        if(self.statistiche is None) : return
+        self.statistiche.esportaStatistiche()
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
         msg.setText("SUCCESSO !")
@@ -83,8 +84,7 @@ class VistaAmministratore(QtWidgets.QWidget):
 
 
     def statisticheEconomiche(self):
-
-        #vistaGrafico = VistaGrafico()
+        vistaGrafico = VistaGrafico()
 
         if self.calendar.print_days_selected() is None :
           # Non ho inserito , nulla, avro i campi del costruttore di genera statistiche economiche vuoto
@@ -93,10 +93,11 @@ class VistaAmministratore(QtWidgets.QWidget):
           msg.setText("Attenzione!")
           msg.setInformativeText("Non hai inserito nessun range di date, per convenzione verranno prese le ultime 24 ore !")
           msg.exec_()
-          statistiche = StatisticheEconomiche(None,None)
+          self.statistiche = StatisticheEconomiche(None,None)
+          newButton1.setEnabled(True)
         #newButton1.clicked.connect(self.salvaStatistiche)
           #print(statistiche.generaStatistiche())
-          #vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
+          vistaGrafico.graficoStatisticheEconomiche(self.statistiche.calcolaStatistiche())
         else:
             start,end=self.calendar.print_days_selected()
 
@@ -109,9 +110,9 @@ class VistaAmministratore(QtWidgets.QWidget):
                 return
             # Range di dati validi:
             else:
-                statistiche = StatisticheEconomiche(start,end)
+                self.statistiche = StatisticheEconomiche(start,end)
                 newButton1.setEnabled(True)
-                print('newButton1 status finale: ' , newButton1.clicked)
+                vistaGrafico.graficoStatisticheEconomiche(self.statistiche.calcolaStatistiche())
                 #newButton1.clicked.connect(self.salvaStatistiche(statistiche))
                 #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))
                 #print('Tipo oggetto statistiche.calcolaStatistiche()' , type(statistiche.calcolaStatistiche()))

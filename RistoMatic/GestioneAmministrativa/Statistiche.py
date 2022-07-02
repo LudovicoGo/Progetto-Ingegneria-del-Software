@@ -38,6 +38,8 @@ class Statistiche():
         file_object.write('Statistiche del : ')
         file_object.write(datetime.date.today().strftime('%d %b %Y '))
         file_object.write(str(self.generaStatistiche()))
+        file_object.write('\n')
+        file_object.write('\n')
         file_object.close()
 
 

@@ -1,1 +1,6 @@
-Statistiche del : Statistiche del : Statistiche del : 02 Jul 2022 Statistiche del : 02 Jul 2022 {Timestamp('2022-06-11 00:00:00', freq='D'): 9.0, Timestamp('2022-06-01 00:00:00', freq='D'): 0.0, 'media incassi: ': 0.52}Statistiche del : 02 Jul 2022 {Timestamp('2022-06-11 00:00:00', freq='D'): 9.0, Timestamp('2022-06-01 00:00:00', freq='D'): 0.0, 'media incassi: ': 0.52}
+
+
+Statistiche del : 02 Jul 2022 {Timestamp('2022-07-01 00:00:00', freq='D'): 0.0, 'media incassi: ': 0.0}
+
+Statistiche del : 02 Jul 2022 {Timestamp('2022-07-01 00:00:00', freq='D'): 0.0, 'media incassi: ': 0.0}
+
