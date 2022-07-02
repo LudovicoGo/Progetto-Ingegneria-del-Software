@@ -18,12 +18,13 @@ class VistaGrafico():
 
 
 #       len(datiRaffinati.giorni)
+
         x_pos = np.arange(len(giorni))
         plt.bar(x_pos, datiRaffinati.values(), align='center')
         plt.xticks(x_pos, giorni)
-        plt.ylabel('Incasso')
+        plt.ylabel('Incasso (€)')
         plt.xlabel('Giorno')
         plt.title('Guadagno totale per giorno')
+        plt.xticks(rotation=45)
         plt.show()
-        plt.subplots_adjust(bottom=200)
 

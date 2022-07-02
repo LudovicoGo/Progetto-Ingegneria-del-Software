@@ -32,8 +32,19 @@ class Statistiche():
         return
 
 
+
+
      # TODO LUCA : rifinire meglio l'esportazione
     def esportaStatistiche(self):
+
+#   Controllo se prima ci sono gia statistiche a quella data, senno inutile sovrascrivere:
+        fileCheck = open('Dati/Statistiche.txt', 'r')
+        righe = fileCheck.readlines()
+        for riga in righe:
+            print(str(self.generaStatistiche())==riga)
+            if str(self.generaStatistiche())==riga: return
+        fileCheck.close()
+
         file_object = open("Dati/Statistiche.txt", 'a')
         file_object.write('Statistiche del : ')
         file_object.write(datetime.date.today().strftime('%d %b %Y '))
