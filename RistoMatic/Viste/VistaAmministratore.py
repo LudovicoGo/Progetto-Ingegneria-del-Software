@@ -119,7 +119,7 @@ class VistaAmministratore(QtWidgets.QWidget):
 
     def statisticheGestionali(self):
 
-        #vistaGrafico = VistaGrafico()
+        vistaGrafico = VistaGrafico()
 
         if self.calendar.print_days_selected() is None :
           # Non ho inserito , nulla, avro i campi del costruttore di genera statistiche economiche vuoto
@@ -129,6 +129,8 @@ class VistaAmministratore(QtWidgets.QWidget):
           msg.setInformativeText("Non hai inserito nessun range di date, per convenzione verranno prese le ultime 24 ore !")
           msg.exec_()
           statistiche = StatisticheGestionali(None,None)
+          ordiniAsporto,ordiniTavolo = statistiche.calcolaStatistiche()
+          vistaGrafico.graficoStatisticheGestionali(ordiniAsporto,ordiniTavolo)
           #print(statistiche.generaStatistiche())
          # vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
         else:
@@ -144,9 +146,9 @@ class VistaAmministratore(QtWidgets.QWidget):
             # Range di dati validi:
             else:
                 statistiche = StatisticheGestionali(start,end)
-                a,b = statistiche.generaStatistiche()
-
-                print(a)
+                ordiniAsporto,ordiniTavolo = statistiche.calcolaStatistiche()
+                vistaGrafico.graficoStatisticheGestionali(ordiniAsporto,ordiniTavolo)
+                newButton1.setEnabled(True)
                 #print('ORDINI ASPORTO: ', a)
                 #print('ORDINI TAVOLO: ', b)
                 #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))

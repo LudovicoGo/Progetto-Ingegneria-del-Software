@@ -12,6 +12,7 @@ class VistaGrafico():
     def graficoStatisticheEconomiche(self,datiRaffinati):
 
         giorni = []
+
         for sgiorno in datiRaffinati.keys():
            # dataSporca = sgiorno.isoformat()
             dataPulita = datetime.date(sgiorno.year,sgiorno.month,sgiorno.day).strftime('%m-%d')
@@ -32,23 +33,62 @@ class VistaGrafico():
 
 
 
+
+
+
 #   4 Grafici
     def graficoStatisticheGestionali(self,ordiniAsporto,ordiniTavolo):
 
-        fig, axes = plt.subplots(nrows=2, ncols=2)
-        plt.tight_layout()
 
+#        print('ordiniTavoli.values() = ', ordiniTavolo.values())
 
 #   Plotto il diagramma a blocchi: N°COMANDE TAVOLI AL GIORNO:
         giorni = []
         for sgiorno in ordiniTavolo.keys():  # I giorni vanno bene per tutti e quattro i grafici
-           # dataSporca = sgiorno.isoformat()
             dataPulita = datetime.date(sgiorno.year,sgiorno.month,sgiorno.day).strftime('%m-%d')
             giorni.append(dataPulita)
+
         numComandeTavolo = []
         for value in ordiniTavolo.values():
             numComandeTavolo.append(len(value))
+        numComandeAsporto = []
+        for value in ordiniAsporto.values():
+            numComandeAsporto.append(len(value))
 
+
+        elementiOrdineAsporto = {}
+        index = 0
+        asportoKey = list(ordiniAsporto.keys())
+        for listaComande in ordiniAsporto.values():
+            numElementi = 0
+            for comanda in listaComande:
+                  for elemento in comanda.elementiComanda:
+                      numElementi = numElementi + 1
+        #   OrdiniAsporto.keys()[OrdiniAsporto.values().index(listaComande)]
+            elementiOrdineAsporto[asportoKey[index]] = numElementi
+            index = index+1
+
+
+        totTavolo = 0
+        elementiOrdineTavolo = {}
+        index = 0
+        tavoloKey = list(ordiniTavolo.keys())
+        for listaComande in ordiniTavolo.values():
+            totTavolo = totTavolo + len(listaComande)
+            numElementi = 0
+            for comanda in listaComande:
+                  for elemento in comanda.elementiComanda:
+                      numElementi = numElementi + 1
+            elementiOrdineTavolo[tavoloKey[index]] = numElementi
+            index = index+1
+
+
+#        print('numComandeTavolo : ', numComandeTavolo)
+#        print('elementiOrdineTavolo.values() : ', elementiOrdineTavolo.values())
+
+
+# Numero di comande al TAVOLO al GIORNO
+        plt.subplot(2,2,1)
         x_pos = np.arange(len(giorni))
         plt.bar(x_pos, numComandeTavolo, align='center')
         plt.xticks(x_pos, giorni)
@@ -56,7 +96,40 @@ class VistaGrafico():
         plt.xlabel('Giorno')
         plt.title('n°com. tavoli X giorno')
         plt.xticks(rotation=45)
-        plt.plot(plt.bar)
+
+# Numero di comande d'ASPORTO al giorno
+        plt.subplot(2,2,2)
+        x_pos = np.arange(len(giorni))
+        plt.bar(x_pos, numComandeAsporto, align='center')
+        plt.xticks(x_pos, giorni)
+        plt.ylabel('n° com. asporto')
+        plt.xlabel('Giorno')
+        plt.title('n°com. asporto X giorno')
+        plt.xticks(rotation=45)
+
+
+#  Numero di ELEMENTI comande TAVOLO al GIORNO
+        plt.subplot(2,2,3)
+        x_pos = np.arange(len(giorni))
+        plt.bar(x_pos, elementiOrdineTavolo.values(), align='center')
+        plt.xticks(x_pos, giorni)
+        plt.ylabel('n° ele. tavolo')
+        plt.xlabel('Giorno')
+        plt.title('n°ele. tot com. tavolo X giorno')
+        plt.xticks(rotation=45)
+
+
+#  Numero di ELEMENTI comande d'ASPORTO al GIORNO
+        plt.subplot(2,2,4)
+        x_pos = np.arange(len(giorni))
+        plt.bar(x_pos, elementiOrdineAsporto.values(), align='center')
+        plt.xticks(x_pos, giorni)
+        plt.ylabel('n° ele. asporto')
+        plt.xlabel('Giorno')
+        plt.title('n°ele. tot com. asporto X giorno')
+        plt.xticks(rotation=45)
+
+
         plt.show()
 
 
@@ -64,6 +137,8 @@ class VistaGrafico():
 
 
 
-#   Grafi
+
+
+
 
 

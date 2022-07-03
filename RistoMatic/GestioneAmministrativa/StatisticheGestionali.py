@@ -48,7 +48,7 @@ class StatisticheGestionali(Statistiche):
                     if comanda.isAsporto() is True:
                         comandeAsporto.append(comanda)
                     elif comanda.isTavolo() is True:
-                        comandeAsporto.append(comanda)
+                        comandeTavolo.append(comanda)
             OrdiniAsporto[datetime.date(data.year,data.month,data.day)] = comandeAsporto
             OrdiniTavolo[datetime.date(data.year,data.month,data.day)] = comandeTavolo
 
@@ -138,7 +138,7 @@ class StatisticheGestionali(Statistiche):
             totTavolo = totTavolo + len(listaComande)
             numElementi = 0
             for comanda in listaComande:
-                  for elemento in comanda.elementiComanda:
+                  for eftlemento in comanda.elementiComanda:
                       numElementi = numElementi + 1
         #   OrdiniTavolo.keys()[OrdiniTavolo.values().index(listaComande)]
             elementiOrdineTavolo[tavoloKey[index]] = numElementi
