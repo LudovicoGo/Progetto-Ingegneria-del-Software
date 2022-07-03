@@ -144,7 +144,7 @@ class VistaAmministratore(QtWidgets.QWidget):
             # Range di dati validi:
             else:
                 statistiche = StatisticheGestionali(start,end)
-                a,b = statistiche.calcolaStatistiche()
+                a,b = statistiche.generaStatistiche()
 
                 print(a)
                 #print('ORDINI ASPORTO: ', a)

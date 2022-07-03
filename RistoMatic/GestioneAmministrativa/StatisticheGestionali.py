@@ -1,4 +1,5 @@
 import datetime
+import itertools
 import pickle
 
 import pandas
@@ -64,36 +65,58 @@ class StatisticheGestionali(Statistiche):
 #   Quante bevande / pietanze si sono presi in quei giorni'
 #   OrdiniAsporto = {'giornoMaxComande':'n_comande' , 'giornoMinComande':'n_comande' , 'MedieComandePeriodoTempo':'n_medioCom', 'Giorno con il maggior numero di elementi':'num_elementi' , 'Giorno con il minor numero di elementi':'num_elementi' , 'mediae elementi':'numMediaElementi'}
 #   OrdiniComande = ////
+# OSSERVAZIONE: le statistiche sul numero di elementi delle comande , non tengono conto della quantità, poichè servono solo per far
+#               vedere quante tipologie di pietanze sono state ordinate , senza vederne la quantità specifica
     def generaStatistiche(self):
         OrdiniAsporto , OrdiniTavolo = self.calcolaStatistiche()
 
-        giornoMaxComandeAsporto = max(OrdiniAsporto,key=OrdiniAsporto.get())
-        giornoMinComandeAsporto = min(OrdiniAsporto,key=OrdiniAsporto.get())
+        numComandeAsporto = {}
+    #    asportoKey = OrdiniAsporto.keys()
+        asportoKey = list(OrdiniAsporto.keys())
+        index = 0;
+        for value in OrdiniAsporto.values():
+            numComandeAsporto[asportoKey[index]] = len(value)
+            index = index+1
 
-        giornoMaxComandeTavolo = max(OrdiniTavolo,key=OrdiniTavolo.get())
-        giornoMinComandeTavolo = min(OrdiniTavolo,key=OrdiniTavolo.get())
+        numComandeTavolo = {}
+        tavoloKey = list(OrdiniTavolo.keys())
+        index = 0;
+        for value in OrdiniTavolo.values():
+            numComandeTavolo[tavoloKey[index]] = len(value)
+            index = index+1
+
+
+
+        giornoMaxComandeAsporto = max(numComandeAsporto,key=numComandeAsporto.get)
+        giornoMinComandeAsporto = min(numComandeAsporto,key=numComandeAsporto.get)
+
+        giornoMaxComandeTavolo = max(numComandeTavolo,key=numComandeTavolo.get)
+        giornoMinComandeTavolo = min(numComandeTavolo,key=numComandeTavolo.get)
 
 #   OrdineAsporto e OrdineComande hanno la stessa lunghezza(stesso numero di keys), ciò che cambia sono i values al loro interno !
 
         totAsporto = 0
         elementiOrdineAsporto = {}
+        index = 0
         for listaComande in OrdiniAsporto.values():
             totAsporto = totAsporto + len(listaComande)
             numElementi = 0
             for comanda in listaComande:
                   for elemento in comanda.elementiComanda:
                       numElementi = numElementi + 1
-            elementiOrdineAsporto[OrdiniAsporto.keys()[OrdiniAsporto.values().index(listaComande)]] = numElementi
+        #   OrdiniAsporto.keys()[OrdiniAsporto.values().index(listaComande)]
+            elementiOrdineAsporto[asportoKey[index]] = numElementi
+            index = index+1
 
         mediaComandeAsporto = round(totAsporto/len(OrdiniAsporto),2)
 
-        giornoNumOrdiniAsportoMax = max(elementiOrdineAsporto,key=elementiOrdineAsporto.get())
-        giornoNumOrdiniAsportoMin = min(elementiOrdineAsporto,key=elementiOrdineAsporto.get())
+        giornoNumOrdiniAsportoMax = max(elementiOrdineAsporto,key=elementiOrdineAsporto.get)
+        giornoNumOrdiniAsportoMin = min(elementiOrdineAsporto,key=elementiOrdineAsporto.get)
         mediaOrdiniComandeAsporto = round(sum(elementiOrdineAsporto.values())/len(elementiOrdineAsporto),1)
 
         AsportoPuliti = {}
-        AsportoPuliti['MAX : ',giornoMaxComandeAsporto]=OrdiniAsporto.get(giornoMaxComandeAsporto)
-        AsportoPuliti['MIN : ',giornoMinComandeAsporto]=OrdiniAsporto.get(giornoMinComandeAsporto)
+        AsportoPuliti['MAX : ',giornoMaxComandeAsporto]=elementiOrdineAsporto.get(giornoMaxComandeAsporto)
+        AsportoPuliti['MIN : ',giornoMinComandeAsporto]=elementiOrdineAsporto.get(giornoMinComandeAsporto)
         AsportoPuliti['Media comande nel periodo di tempo : ']=mediaComandeAsporto
         AsportoPuliti['MAX NUM ELEMENTI COMANDE : ',giornoNumOrdiniAsportoMax]=elementiOrdineAsporto.get(giornoNumOrdiniAsportoMax)
         AsportoPuliti['MIN NUM ELEMENTI COMANDE : ',giornoNumOrdiniAsportoMin]=elementiOrdineAsporto.get(giornoNumOrdiniAsportoMin)
@@ -104,34 +127,33 @@ class StatisticheGestionali(Statistiche):
         ######### TAVOLO ##########
 
 
-        giornoMaxComandeAsporto = max(OrdiniAsporto,key=OrdiniAsporto.get())
-        giornoMinComandeAsporto = min(OrdiniAsporto,key=OrdiniAsporto.get())
 
-        giornoMaxComandeTavolo = max(OrdiniTavolo,key=OrdiniTavolo.get())
-        giornoMinComandeTavolo = min(OrdiniTavolo,key=OrdiniTavolo.get())
 
 #   OrdineAsporto e OrdineComande hanno la stessa lunghezza(stesso numero di keys), ciò che cambia sono i values al loro interno !
 
         totTavolo = 0
         elementiOrdineTavolo = {}
+        index = 0
         for listaComande in OrdiniTavolo.values():
             totTavolo = totTavolo + len(listaComande)
             numElementi = 0
             for comanda in listaComande:
                   for elemento in comanda.elementiComanda:
                       numElementi = numElementi + 1
-            elementiOrdineTavolo[OrdiniTavolo.keys()[OrdiniTavolo.values().index(listaComande)]] = numElementi
+        #   OrdiniTavolo.keys()[OrdiniTavolo.values().index(listaComande)]
+            elementiOrdineTavolo[tavoloKey[index]] = numElementi
+            index = index+1
 
         mediaComandeTavolo = round(totAsporto/len(OrdiniTavolo),2)
 
-        giornoNumOrdiniTavoloMax = max(elementiOrdineTavolo,key=elementiOrdineTavolo.get())
-        giornoNumOrdiniTavoloMin = min(elementiOrdineTavolo,key=elementiOrdineTavolo.get())
+        giornoNumOrdiniTavoloMax = max(elementiOrdineTavolo,key=elementiOrdineTavolo.get)
+        giornoNumOrdiniTavoloMin = min(elementiOrdineTavolo,key=elementiOrdineTavolo.get)
         mediaOrdiniComandeTavolo = round(sum(elementiOrdineTavolo.values())/len(elementiOrdineTavolo),1)
 
         TavoloPuliti = {}
-        TavoloPuliti['MAX : ',giornoMaxComandeTavolo]=OrdiniTavolo.get(giornoMaxComandeTavolo)
-        TavoloPuliti['MIN : ',giornoMinComandeTavolo]=OrdiniTavolo.get(giornoMinComandeTavolo)
-        TavoloPuliti['Media comande nel periodo di tempo : ']=mediaComandeTavolo
+        TavoloPuliti['MAX : ',giornoMaxComandeTavolo]=elementiOrdineTavolo.get(giornoMaxComandeTavolo)
+        TavoloPuliti['MIN : ',giornoMinComandeTavolo]=elementiOrdineTavolo.get(giornoMinComandeTavolo)
+        TavoloPuliti['Media comande nel periodo di tempo : '] = mediaComandeTavolo
         TavoloPuliti['MAX NUM ELEMENTI COMANDE : ',giornoNumOrdiniTavoloMax]=elementiOrdineTavolo.get(giornoNumOrdiniTavoloMax)
         TavoloPuliti['MIN NUM ELEMENTI COMANDE : ',giornoNumOrdiniTavoloMin]=elementiOrdineTavolo.get(giornoNumOrdiniTavoloMin)
         TavoloPuliti['MEDIA NUM ELEMENTI COMANDE : ']=mediaOrdiniComandeTavolo
