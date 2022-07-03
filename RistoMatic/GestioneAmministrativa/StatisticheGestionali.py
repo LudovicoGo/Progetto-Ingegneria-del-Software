@@ -60,7 +60,7 @@ class StatisticheGestionali(Statistiche):
 
 
 
-#   TODO LUCA : Vedere perchè non mi tratta i dizionari come tali(OrdineAsporto , OrdineTavolo)
+
 #   Posso avere statistiche come segue: giorno con piu ordini , giorno con meno ordini , media ordini nel periodo di tempo
 #   Quante bevande / pietanze si sono presi in quei giorni'
 #   OrdiniAsporto = {'giornoMaxComande':'n_comande' , 'giornoMinComande':'n_comande' , 'MedieComandePeriodoTempo':'n_medioCom', 'Giorno con il maggior numero di elementi':'num_elementi' , 'Giorno con il minor numero di elementi':'num_elementi' , 'mediae elementi':'numMediaElementi'}
