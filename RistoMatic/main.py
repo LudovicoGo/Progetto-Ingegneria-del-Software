@@ -8,7 +8,7 @@ from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
 from Viste.VistaUnlockAmministratore import VistaUnlockAmministratore
-#TODO LUCA : SPAZIARE ASSE X
+
 testmode=False
 # main
 if __name__ == "__main__":

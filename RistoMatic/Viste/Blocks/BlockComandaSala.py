@@ -72,5 +72,6 @@ class BlockComandaSala(QtWidgets.QGroupBox):
         self.comanda.rimuoviElementoComanda(elemento)
 
     def stampa_preconto(self):
+
         pass #manda i dati alla stampante
 

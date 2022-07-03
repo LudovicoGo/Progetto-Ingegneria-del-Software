@@ -1,7 +1,7 @@
 import datetime
 import sys
 from PySide6 import QtWidgets
-from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox,QApplication
+from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox,QApplication, QDialog
 # TODO LUCA : Risolvere problema import VistaGrafico
 from RistoMatic.Viste.VistaGrafico import VistaGrafico
 from RistoMatic.GestioneAmministrativa.StatisticheEconomiche import StatisticheEconomiche
@@ -28,9 +28,6 @@ class VistaAmministratore(QtWidgets.QWidget):
         newButton1 = QPushButton("Salva statistiche")
         newButton1.setEnabled(False)
         newButton1.clicked.connect(self.salvaStatistiche)
-
-        print('newButton1 status iniziale : ' , newButton1.clicked)
-
 
         infoButton = QPushButton("Genera Statistiche Economiche")
         infoButton.clicked.connect(self.statisticheEconomiche)
@@ -72,13 +69,10 @@ class VistaAmministratore(QtWidgets.QWidget):
         if(self.statistiche is None) : return
         self.statistiche.esportaStatistiche()
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Critical)
+        msg.setWindowTitle('Statistiche RistoMatic')
         msg.setText("SUCCESSO !")
         msg.setInformativeText("Statistica salvata corretamente, prego controlla nella cartella ./Dati")
         msg.exec_()
-
-
-
 
 
 

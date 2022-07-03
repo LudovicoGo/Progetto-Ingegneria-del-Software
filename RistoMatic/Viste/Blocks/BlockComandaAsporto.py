@@ -30,8 +30,11 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
 
         for elemento in self.comanda.elementiComanda:
             block = BlockElementoComandaAsporto(elemento)
-            block.aggiorna_comanda.connect(self.aggiorna_totale)
-            block.elimina_elemento.connect(self.elimina_elemento)
+#             block.aggiorna_comanda.connect(self.aggiorna_totale)
+            block.aggiornaComanda.connect(self.aggiorna_totale)
+            block.aggiornaComanda.connect(self.aggiorna_totale)
+#            block.elimina_elemento.connect(self.elimina_elemento)
+            block.eliminaElemento.connect(self.elimina_elemento)
             self.list.addLayout(block)
 
         self.vbox.addLayout(self.list)
