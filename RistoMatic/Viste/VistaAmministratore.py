@@ -145,8 +145,8 @@ class VistaAmministratore(QtWidgets.QWidget):
                 return
             # Range di dati validi:
             else:
-                statistiche = StatisticheGestionali(start,end)
-                ordiniAsporto,ordiniTavolo = statistiche.calcolaStatistiche()
+                self.statistiche = StatisticheGestionali(start,end)
+                ordiniAsporto,ordiniTavolo = self.statistiche.calcolaStatistiche()
                 vistaGrafico.graficoStatisticheGestionali(ordiniAsporto,ordiniTavolo)
                 newButton1.setEnabled(True)
                 #print('ORDINI ASPORTO: ', a)

@@ -115,6 +115,7 @@ class StatisticheGestionali(Statistiche):
         mediaOrdiniComandeAsporto = round(sum(elementiOrdineAsporto.values())/len(elementiOrdineAsporto),1)
 
         AsportoPuliti = {}
+        AsportoPuliti['TIPOLOGIA :'] = 'STATISTICHE GESTIONALI'
         AsportoPuliti['MAX : ',giornoMaxComandeAsporto]=elementiOrdineAsporto.get(giornoMaxComandeAsporto)
         AsportoPuliti['MIN : ',giornoMinComandeAsporto]=elementiOrdineAsporto.get(giornoMinComandeAsporto)
         AsportoPuliti['Media comande nel periodo di tempo : ']=mediaComandeAsporto
@@ -151,6 +152,7 @@ class StatisticheGestionali(Statistiche):
         mediaOrdiniComandeTavolo = round(sum(elementiOrdineTavolo.values())/len(elementiOrdineTavolo),1)
 
         TavoloPuliti = {}
+        TavoloPuliti['TIPOLOGIA :'] = 'STATISTICHE GESTIONALI'
         TavoloPuliti['MAX : ',giornoMaxComandeTavolo]=elementiOrdineTavolo.get(giornoMaxComandeTavolo)
         TavoloPuliti['MIN : ',giornoMinComandeTavolo]=elementiOrdineTavolo.get(giornoMinComandeTavolo)
         TavoloPuliti['Media comande nel periodo di tempo : '] = mediaComandeTavolo

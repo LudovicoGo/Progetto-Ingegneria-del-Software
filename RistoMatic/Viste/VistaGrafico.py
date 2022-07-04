@@ -3,7 +3,7 @@ import numpy as np
 from PySide6 import QtWidgets
 from numpy import spacing
 
-from RistoMatic.GestioneAmministrativa import StatisticheEconomiche
+#from RistoMatic.GestioneAmministrativa import StatisticheEconomiche
 import datetime
 
 class VistaGrafico():

@@ -1,6 +1,5 @@
-from abc import abstractmethod
-#from RistoMatic.GestioneAmministrativa import StatisticheEconomiche
 import datetime
+from abc import abstractmethod
 
 class Statistiche():
 
@@ -35,6 +34,7 @@ class Statistiche():
 
 
      # TODO LUCA : rifinire meglio l'esportazione
+    # TODO LUCA : Capire perchè ho dizionari,liste nulle per gli ordini d'asporto
     def esportaStatistiche(self):
 
 #   Controllo se prima ci sono gia statistiche a quella data, senno inutile sovrascrivere:
@@ -46,7 +46,7 @@ class Statistiche():
         fileCheck.close()
 
         file_object = open("Dati/Statistiche.txt", 'a')
-        file_object.write('Statistiche del : ')
+        file_object.write('GIORNO GENERAZIONE STATISTICA : ')
         file_object.write(datetime.date.today().strftime('%d %b %Y '))
         file_object.write(str(self.generaStatistiche()))
         file_object.write('\n')

@@ -70,6 +70,7 @@ class StatisticheEconomiche(Statistiche):
         for singoloIncasso in datiGrezzi.values():
             totIncasso += singoloIncasso
 
+        datiRaffinati['TIPOLOGIA: '] = 'STATISTICHE ECONOMICHE'
         datiRaffinati[giornoMaxIncasso] = datiGrezzi.get(giornoMaxIncasso)
         datiRaffinati[giornoMinIncasso] = datiGrezzi.get(giornoMinIncasso)
         datiRaffinati["media incassi: "] = round(totIncasso/len(datiGrezzi),2)
