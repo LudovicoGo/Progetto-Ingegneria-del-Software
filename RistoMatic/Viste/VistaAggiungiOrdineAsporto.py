@@ -1,3 +1,5 @@
+from typing import re
+
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QComboBox
 
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
@@ -43,14 +45,38 @@ class VistaAggiungiOrdineAsporto(QWidget):
         self.cliente = Cliente("", "")
         self.ordine = OrdineAsporto(None, None, self.cliente)
 
+# VEDERE SE METTERE WHILE O IF
         self.nome = self.qlines["nome"].text()
-
-
-
         self.recapitoTelefonico = self.qlines["recapitoTelefonico"].text()
 
+        if (any(map(str.isdigit, self.nome)) is True  and any(map(str.isdigit, self.recapitoTelefonico)) is False) or (len(self.nome)==0 or len(self.recapitoTelefonico)==0):
+            msg = QMessageBox()
+            msg.setWindowTitle('ATTENZIONE!')
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("ERRORE!")
+            msg.setInformativeText("Compilazione ordine asporto ERRATA. Prestare attenzione !")
+            msg.exec()
+            return
 
-   #     self.oraConsegna = self.qlines["oraConsegna"].text()
+        elif any(map(str.isdigit, self.nome)) is True:
+            msg = QMessageBox()
+            msg.setWindowTitle('ATTENZIONE!')
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("ERRORE!")
+            msg.setInformativeText("Il nome NON PUO contenere NUMERI")
+            msg.exec()
+            return
+
+        elif any(map(str.isdigit, self.recapitoTelefonico)) is False:
+            msg = QMessageBox()
+            msg.setWindowTitle('ATTENZIONE!')
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("ERRORE!")
+            msg.setInformativeText("Il recapito-telefonico NON PUO contenere LETTERE")
+            msg.exec()
+            return
+
+  #     self.oraConsegna = self.qlines["oraConsegna"].text()
         self.oraConsegna = self.menuOra.currentText()
         nOrdini = 0
         for i in StatoSala.OrdiniAsporto:
