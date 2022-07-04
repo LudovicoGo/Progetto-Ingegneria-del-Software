@@ -33,6 +33,7 @@ class StatisticheGestionali(Statistiche):
              except EOFError:
                  break
 
+
          inizio = datetime.date(self.dataInizio.year,self.dataInizio.month,self.dataInizio.day)
          fine = datetime.date(self.dataFine.year,self.dataFine.month,self.dataFine.day)
          date_list = pandas.date_range(start=inizio,end=fine)
@@ -43,6 +44,7 @@ class StatisticheGestionali(Statistiche):
             comandeAsporto = []
             comandeTavolo = []
             for comanda in storicoComande:
+                print('INFO COMANDA : ' , comanda.getInfoComanda())
                 dataComanda = datetime.date(comanda.dataCreazione.year,comanda.dataCreazione.month,comanda.dataCreazione.day)
                 if dataComanda == datetime.date(data.year,data.month,data.day):
                     if comanda.isAsporto() is True:

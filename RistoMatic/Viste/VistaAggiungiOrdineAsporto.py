@@ -44,6 +44,9 @@ class VistaAggiungiOrdineAsporto(QWidget):
         self.ordine = OrdineAsporto(None, None, self.cliente)
 
         self.nome = self.qlines["nome"].text()
+
+
+
         self.recapitoTelefonico = self.qlines["recapitoTelefonico"].text()
 
 

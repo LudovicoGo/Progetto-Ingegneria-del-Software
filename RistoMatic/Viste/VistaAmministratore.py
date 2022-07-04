@@ -73,6 +73,7 @@ class VistaAmministratore(QtWidgets.QWidget):
         msg.setText("SUCCESSO !")
         msg.setInformativeText("Statistica salvata corretamente, prego controlla nella cartella ./Dati")
         msg.exec_()
+        newButton1.setEnabled(False)
 
 
 
@@ -131,6 +132,7 @@ class VistaAmministratore(QtWidgets.QWidget):
           statistiche = StatisticheGestionali(None,None)
           ordiniAsporto,ordiniTavolo = statistiche.calcolaStatistiche()
           vistaGrafico.graficoStatisticheGestionali(ordiniAsporto,ordiniTavolo)
+          newButton1.setEnabled(True)
           #print(statistiche.generaStatistiche())
          # vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
         else:
@@ -155,4 +157,4 @@ class VistaAmministratore(QtWidgets.QWidget):
                 #print('Tipo oggetto statistiche.calcolaStatistiche()' , type(statistiche.calcolaStatistiche()))
                 #vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
                 #print(statistiche.generaStatistiche())
-        pass
+
