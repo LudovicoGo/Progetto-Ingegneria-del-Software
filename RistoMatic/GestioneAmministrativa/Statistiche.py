@@ -33,8 +33,7 @@ class Statistiche():
 
 
 
-     # TODO LUCA : rifinire meglio l'esportazione
-    # TODO LUCA : Capire perchè ho dizionari,liste nulle per gli ordini d'asporto
+
     def esportaStatistiche(self):
 
 #   Controllo se prima ci sono gia statistiche a quella data, senno inutile sovrascrivere:
@@ -51,6 +50,14 @@ class Statistiche():
         file_object.write('\n')
         file_object.write('\n')
         file_object.close()
+
+
+
+
+    def setFiltro(self):
+         if ( self.dataInizio is None) or (self.dataFine is None) :
+              self.dataFine = datetime.date.today()
+              self.dataInizio = datetime.datetime.today() - datetime.timedelta(days=1)
 
 
 

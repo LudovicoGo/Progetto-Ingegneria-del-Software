@@ -21,9 +21,8 @@ class StatisticheEconomiche(Statistiche):
 
     # Dati "rozzi" , da lavorare
     def calcolaStatistiche(self):
-        if ( self.dataInizio is None) or (self.dataFine is None) :
-            self.dataFine = datetime.date.today()
-            self.dataInizio = datetime.datetime.today() - datetime.timedelta(days=1)
+
+        self.setFiltro()
 
 
       #  print('data inizio: ', self.dataInizio)
@@ -81,9 +80,17 @@ class StatisticheEconomiche(Statistiche):
 
 
     def getMassimoIncasso(self):
-        return self.generaStatistiche().get(list(self.generaStatistiche()[1]))
+        return round(self.generaStatistiche().get(list(self.generaStatistiche()[1])),2)
+
+    def getMinimoIncasso(self):
+        return round(self.generaStatistiche().get(list(self.generaStatistiche()[2])),2)
+
+    def getMediaIncasso(self):
+        return round(self.generaStatistiche().get(list(self.generaStatistiche()[3])),2)
 
 
+    def getTotaleIncasso(self):
+        return round(sum(self.calcolaStatistiche().values()),2)
 
 
 

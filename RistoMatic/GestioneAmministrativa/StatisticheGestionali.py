@@ -17,12 +17,9 @@ class StatisticheGestionali(Statistiche):
     # Totale ORDINI ASPORTO , ORDINI TAVOLI
 
     # Restituisce due dizionari con la seguente sintassi: dict = { data : lista_comande , ... }
-    # TODO LUCA VEDERE PER QUALE MOTIVO LA FUNZIONE VIENE RUNNATA DUE VOLTE
     def calcolaStatistiche(self):
 
-         if ( self.dataInizio is None) or (self.dataFine is None) :
-              self.dataFine = datetime.date.today()
-              self.dataInizio = datetime.datetime.today() - datetime.timedelta(days=1)
+         self.setFiltro()
 
 
          storicoComande = []
@@ -164,6 +161,41 @@ class StatisticheGestionali(Statistiche):
 
 
         return AsportoPuliti , TavoloPuliti
+
+
+
+    def getMediaOrdininiAsporto(self):
+        asporto,tavolo = self.generaStatistiche()
+        return round(asporto.get('Media comande nel periodo di tempo : '),2)
+
+    def getMediaOrdiniTavolo(self):
+        asporto,tavolo = self.generaStatistiche()
+        return round(tavolo.get('Media comande nel periodo di tempo : '),2)
+
+    def getTotaleOrdiniAsporto(self):
+        OrdiniAsporto , OrdiniTavolo = self.calcolaStatistiche()
+        numComandeAsporto = {}
+        asportoKey = list(OrdiniAsporto.keys())
+        index = 0;
+        for value in OrdiniAsporto.values():
+            numComandeAsporto[asportoKey[index]] = len(value)
+            index = index+1
+
+        return sum(numComandeAsporto.values())
+
+
+    def getTotaleOrdiniTavolo(self):
+        OrdiniAsporto , OrdiniTavolo = self.calcolaStatistiche()
+        numComandeTavolo = {}
+        tavoloKey = list(OrdiniTavolo.keys())
+        index = 0;
+        for value in OrdiniTavolo.values():
+            numComandeTavolo[tavoloKey[index]] = len(value)
+            index = index+1
+
+
+
+
 
 
 
