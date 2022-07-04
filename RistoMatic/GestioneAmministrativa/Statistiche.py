@@ -41,8 +41,7 @@ class Statistiche():
         fileCheck = open('Dati/Statistiche.txt', 'r')
         righe = fileCheck.readlines()
         for riga in righe:
-            print(str(self.generaStatistiche())==riga)
-            if str(self.generaStatistiche())==riga: return
+            if(riga.find(str(self.generaStatistiche())) != -1) : return
         fileCheck.close()
 
         file_object = open("Dati/Statistiche.txt", 'a')

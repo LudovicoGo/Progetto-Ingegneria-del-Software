@@ -80,6 +80,13 @@ class StatisticheEconomiche(Statistiche):
 
 
 
+    def getMassimoIncasso(self):
+        return self.generaStatistiche().get(list(self.generaStatistiche()[1]))
+
+
+
+
+
 
 
 

@@ -29,15 +29,21 @@ class VistaAmministratore(QtWidgets.QWidget):
         newButton1.setEnabled(False)
         newButton1.clicked.connect(self.salvaStatistiche)
 
+        global infoButton
         infoButton = QPushButton("Genera Statistiche Economiche")
         infoButton.clicked.connect(self.statisticheEconomiche)
 
+        global newButton
         newButton = QPushButton("Genera Statistiche Gestionali")
         newButton.clicked.connect(self.statisticheGestionali)
+
+        annullaButton = QPushButton('Reset')
+        annullaButton.clicked.connect(self.reset)
 
         buttonsLayout.addWidget(newButton1)
         buttonsLayout.addWidget(newButton)
         buttonsLayout.addWidget(infoButton)
+        buttonsLayout.addWidget(annullaButton)
 
         hLayout.addLayout(buttonsLayout)
 
@@ -74,6 +80,9 @@ class VistaAmministratore(QtWidgets.QWidget):
         msg.setInformativeText("Statistica salvata corretamente, prego controlla nella cartella ./Dati")
         msg.exec_()
         newButton1.setEnabled(False)
+        infoButton.setEnabled(True)
+        newButton.setEnabled(True)
+
 
 
 
@@ -89,6 +98,7 @@ class VistaAmministratore(QtWidgets.QWidget):
           msg.exec_()
           self.statistiche = StatisticheEconomiche(None,None)
           newButton1.setEnabled(True)
+          newButton.setEnabled(False)
         #newButton1.clicked.connect(self.salvaStatistiche)
           #print(statistiche.generaStatistiche())
           vistaGrafico.graficoStatisticheEconomiche(self.statistiche.calcolaStatistiche())
@@ -106,6 +116,7 @@ class VistaAmministratore(QtWidgets.QWidget):
             else:
                 self.statistiche = StatisticheEconomiche(start,end)
                 newButton1.setEnabled(True)
+                newButton.setEnabled(False)
                 vistaGrafico.graficoStatisticheEconomiche(self.statistiche.calcolaStatistiche())
                 #newButton1.clicked.connect(self.salvaStatistiche(statistiche))
                 #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))
@@ -133,6 +144,7 @@ class VistaAmministratore(QtWidgets.QWidget):
           ordiniAsporto,ordiniTavolo = statistiche.calcolaStatistiche()
           vistaGrafico.graficoStatisticheGestionali(ordiniAsporto,ordiniTavolo)
           newButton1.setEnabled(True)
+          infoButton.setEnabled(False)
           #print(statistiche.generaStatistiche())
          # vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
         else:
@@ -151,10 +163,19 @@ class VistaAmministratore(QtWidgets.QWidget):
                 ordiniAsporto,ordiniTavolo = self.statistiche.calcolaStatistiche()
                 vistaGrafico.graficoStatisticheGestionali(ordiniAsporto,ordiniTavolo)
                 newButton1.setEnabled(True)
+                infoButton.setEnabled(False)
                 #print('ORDINI ASPORTO: ', a)
                 #print('ORDINI TAVOLO: ', b)
                 #print('Tipo oggetto: vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche) : ' ,type(vistaGrafico.graficoStatisticheEconomiche(self,statistiche.calcolaStatistiche)))
                 #print('Tipo oggetto statistiche.calcolaStatistiche()' , type(statistiche.calcolaStatistiche()))
                 #vistaGrafico.graficoStatisticheEconomiche(statistiche.calcolaStatistiche())
                 #print(statistiche.generaStatistiche())
+
+
+
+
+    def reset(self):
+        newButton1.setEnabled(False)
+        infoButton.setEnabled(True)
+        newButton.setEnabled(True)
 

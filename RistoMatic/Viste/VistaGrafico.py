@@ -95,7 +95,7 @@ class VistaGrafico():
         plt.ylabel('n° com. tavoli')
         plt.xlabel('Giorno')
         plt.title('n°com. tavoli X giorno')
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=90)
 
 # Numero di comande d'ASPORTO al giorno
         plt.subplot(2,2,2)
@@ -105,7 +105,7 @@ class VistaGrafico():
         plt.ylabel('n° com. asporto')
         plt.xlabel('Giorno')
         plt.title('n°com. asporto X giorno')
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=90)
 
 
 #  Numero di ELEMENTI comande TAVOLO al GIORNO
@@ -116,7 +116,7 @@ class VistaGrafico():
         plt.ylabel('n° ele. tavolo')
         plt.xlabel('Giorno')
         plt.title('n°ele. tot com. tavolo X giorno')
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=90)
 
 
 #  Numero di ELEMENTI comande d'ASPORTO al GIORNO
@@ -127,9 +127,12 @@ class VistaGrafico():
         plt.ylabel('n° ele. asporto')
         plt.xlabel('Giorno')
         plt.title('n°ele. tot com. asporto X giorno')
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=90)
 
 
+        plt.tight_layout(pad=5.0)
+
+        plt.subplot_tool()
         plt.show()
 
 
