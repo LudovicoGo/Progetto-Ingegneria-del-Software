@@ -9,7 +9,9 @@ import pandas as pd
 
 
 # Aggiunto Qwidget
-class Calendario(QCalendarWidget):
+class VistaCalendario(QCalendarWidget):
+
+
     def __init__(self):
         super().__init__()
 
@@ -17,16 +19,13 @@ class Calendario(QCalendarWidget):
         self.to_date = None
 
         self.highlighter_format = QTextCharFormat()
-        # get the calendar default highlight setting
         self.highlighter_format.setBackground(self.palette().brush(QPalette.Highlight))
         self.highlighter_format.setForeground(self.palette().color(QPalette.HighlightedText))
-
-        # this will pass selected date value as a QDate object
         self.clicked.connect(self.select_range)
 
         super().dateTextFormat()
 
-    def highlight_range(self, format):
+    def highlight_range(self,format):
         if self.from_date and self.to_date:
             d1 = min(self.from_date, self.to_date)
             d2 = max(self.from_date, self.to_date)
@@ -48,7 +47,7 @@ class Calendario(QCalendarWidget):
             self.to_date = None
         # print(self.from_date, self.to_date, 'x')
 
-    def print_days_selected(self):
+    def acquisizioneGiorni(self):
 
 
 

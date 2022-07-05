@@ -3,7 +3,7 @@ import unittest
 
 from PySide6 import QtWidgets
 from PyQt5.QtCore import Qt
-from RistoMatic.Utility.Calendario import Calendario
+from RistoMatic.Viste.VistaCalendario import VistaCalendario
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
