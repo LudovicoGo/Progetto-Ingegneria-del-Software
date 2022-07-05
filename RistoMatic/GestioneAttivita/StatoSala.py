@@ -65,6 +65,8 @@ class StatoSala():
 
     @staticmethod
     def rimuoviComanda(comanda):
+# todo luca risolvere errore:   if (comanda.getStato()==StatoComanda.COMPLETATA or comanda.getStato() == StatoComanda.ANNULLATA ):
+#                              AttributeError: 'NoneType' object has no attribute 'getStato'
         if (comanda.getStato()==StatoComanda.COMPLETATA or comanda.getStato() == StatoComanda.ANNULLATA ):
             dati = []
             if os.path.isfile('Dati/Comande.pickle'):
@@ -189,11 +191,11 @@ class StatoSala():
     @staticmethod
     def rimuoviOrdineAsporto(ordine):
         dati = []
-        if os.path.isfile('Dati/Asporto.pickle'):
-            with open('Dati/Asporto.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Comande.pickle'):
+            with open('Dati/Comande.pickle', 'rb') as f:
                 dati = pickle.load(f)
-        dati.append(ordine)
-        with open('Dati/Asporto.pickle', 'wb') as handle:
+        dati.append(ordine.getComanda())
+        with open('Dati/Comande.pickle', 'wb') as handle:
             pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
 
         StatoSala.OrdiniAsporto.remove(ordine)

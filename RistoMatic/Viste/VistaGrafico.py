@@ -33,9 +33,6 @@ class VistaGrafico():
 
 
 
-
-
-
 #   4 Grafici
     def graficoStatisticheGestionali(self,ordiniAsporto,ordiniTavolo):
 

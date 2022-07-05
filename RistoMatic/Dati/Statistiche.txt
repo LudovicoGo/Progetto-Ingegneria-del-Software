@@ -1,5 +1,0 @@
-
-GIORNO GENERAZIONE STATISTICA : 05 Jul 2022 {'TIPOLOGIA: ': 'STATISTICHE ECONOMICHE', Timestamp('2022-07-04 00:00:00', freq='D'): 0.0, 'media incassi: ': 0.0}
-
-GIORNO GENERAZIONE STATISTICA : 05 Jul 2022 ({'TIPOLOGIA :': 'STATISTICHE GESTIONALI ASPORTO', ('MAX : ', datetime.date(2022, 7, 1)): 0, ('MIN : ', datetime.date(2022, 7, 1)): 0, 'Media comande nel periodo di tempo : ': 0.0, ('MAX NUM ELEMENTI COMANDE : ', datetime.date(2022, 7, 1)): 0, ('MIN NUM ELEMENTI COMANDE : ', datetime.date(2022, 7, 1)): 0, 'MEDIA NUM ELEMENTI COMANDE : ': 0.0}, {'TIPOLOGIA :': 'STATISTICHE GESTIONALI TAVOLI', ('MAX : ', datetime.date(2022, 7, 3)): 4, ('MIN : ', datetime.date(2022, 7, 1)): 0, 'Media comande nel periodo di tempo : ': 0.0, ('MAX NUM ELEMENTI COMANDE : ', datetime.date(2022, 7, 3)): 4, ('MIN NUM ELEMENTI COMANDE : ', datetime.date(2022, 7, 1)): 0, 'MEDIA NUM ELEMENTI COMANDE : ': 0.8})
-

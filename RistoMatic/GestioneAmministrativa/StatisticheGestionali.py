@@ -41,7 +41,7 @@ class StatisticheGestionali(Statistiche):
             comandeAsporto = []
             comandeTavolo = []
             for comanda in storicoComande:
-             #   print('INFO COMANDA : ' , comanda.getInfoComanda())
+                #print('INFO COMANDA : ' , comanda.getInfoOrdineAsporto())
                 dataComanda = datetime.date(comanda.dataCreazione.year,comanda.dataCreazione.month,comanda.dataCreazione.day)
                 if dataComanda == datetime.date(data.year,data.month,data.day):
                     if comanda.isAsporto() is True:

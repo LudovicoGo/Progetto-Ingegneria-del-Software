@@ -82,7 +82,7 @@ class BlockComandaAsporto(QtWidgets.QGroupBox):
 
 
     def elimina_ordine(self):
-        StatoSala.OrdiniAsporto.remove(self.ordine)
+        StatoSala.rimuoviOrdineAsporto(self.ordine)
         self.callback()
 
     def stampa_preconto(self):

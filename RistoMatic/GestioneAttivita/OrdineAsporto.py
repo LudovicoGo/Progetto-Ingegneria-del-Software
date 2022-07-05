@@ -53,3 +53,8 @@ class OrdineAsporto():
     def rimuoviElementoAporto(self, index):
         self.comanda.elementiComanda.remove(index)
 
+
+    def getComanda(self):
+        return self.comanda
+
+
