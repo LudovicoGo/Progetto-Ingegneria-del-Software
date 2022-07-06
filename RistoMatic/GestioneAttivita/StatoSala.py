@@ -216,3 +216,19 @@ class StatoSala():
                 prenotazione = i
         return StatoSala.Prenotazioni.index(prenotazione)
 
+
+
+#   Prende i dati dal file pickle
+    @staticmethod
+    def getDati(self):
+
+        with (open("Dati/Comande.pickle", "rb")) as openfile:
+           while True:
+             try:
+                storicoComande = pickle.load(openfile)
+                print(type(storicoComande))
+                print(str(storicoComande))
+                return storicoComande
+             except EOFError:
+                 break
+

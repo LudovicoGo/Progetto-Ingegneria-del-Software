@@ -40,13 +40,14 @@ class Statistiche():
         fileCheck = open('Dati/Statistiche.txt', 'r')
         righe = fileCheck.readlines()
         for riga in righe:
-            if(riga.find(str(self.generaStatistiche())) != -1) : return
+#            if(riga.find(str(self.generaStatistiche(True))) != -1) : return
+            if(riga.find(str(self.generaStatistiche)) != -1) : return
         fileCheck.close()
 
         file_object = open("Dati/Statistiche.txt", 'a')
         file_object.write('GIORNO GENERAZIONE STATISTICA : ')
         file_object.write(datetime.date.today().strftime('%d %b %Y '))
-        file_object.write(str(self.generaStatistiche()))
+        file_object.write(str(self.generaStatistiche))
         file_object.write('\n')
         file_object.write('\n')
         file_object.close()
@@ -58,6 +59,10 @@ class Statistiche():
          if ( self.dataInizio is None) or (self.dataFine is None) :
               self.dataFine = datetime.date.today()
               self.dataInizio = datetime.datetime.today() - datetime.timedelta(days=1)
+
+
+
+
 
 
 

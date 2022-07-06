@@ -8,7 +8,7 @@ import pickle
 import pandas
 
 from RistoMatic.GestioneAmministrativa.Statistiche import Statistiche
-from RistoMatic.GestioneAttivita import StatoSala
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 
 class StatisticheEconomiche(Statistiche):
 
@@ -27,14 +27,7 @@ class StatisticheEconomiche(Statistiche):
 
       #  print('data inizio: ', self.dataInizio)
       #  print('data fine: ',self.dataFine)
-        storicoComande = []
-        with (open("Dati/Comande.pickle", "rb")) as openfile:
-           while True:
-             try:
-                storicoComande = pickle.load(openfile)
-             except EOFError:
-                 break
-
+        storicoComande = StatoSala.getDati(self)
 
         inizio = datetime.date(self.dataInizio.year,self.dataInizio.month,self.dataInizio.day)
         fine = datetime.date(self.dataFine.year,self.dataFine.month,self.dataFine.day)
@@ -91,6 +84,7 @@ class StatisticheEconomiche(Statistiche):
 
     def getTotaleIncasso(self):
         return round(sum(self.calcolaStatistiche().values()),2)
+
 
 
 

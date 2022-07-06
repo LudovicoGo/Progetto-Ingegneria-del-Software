@@ -16,10 +16,13 @@ class BlockComandaPreparazione(QtWidgets.QGroupBox):
         self.vbox = QVBoxLayout()
         self.vbox.addStretch(1)
 
+# TODO CAPIRE PERCHE NON VA
         for elem in comanda.elementiComanda:
-            if not elem.getIsPronta():
-                btn = BlockElementoComandaPreparazione(elem)
-                self.vbox.addWidget(btn)
+         #  print(elem.elemento.areaPreparazione==1)
+        #   if elem.elemento.areaPreparazione==1 or elem.elemento.areaPreparazione==3:
+               if not elem.getIsPronta():
+                  btn = BlockElementoComandaPreparazione(elem)
+                  self.vbox.addWidget(btn)
 
         self.setLayout(self.vbox)
 
