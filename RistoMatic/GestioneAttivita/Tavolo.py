@@ -29,7 +29,7 @@ class Tavolo():
         if (not prenotazioni == None):
             now = datetime.datetime.now()
             for prenotazione in prenotazioni:
-                tavoloprenotato=prenotazione.getTavoloPrenotato()
+                tavoloprenotato=prenotazione.getRiferimentoTavolo()
                 dataprenotazione= prenotazione.dataPrenotazione
                 diff = ( dataprenotazione-now)
                 if tavoloprenotato == self.riferimentoTavolo and (diff.total_seconds()/3600 < 4):

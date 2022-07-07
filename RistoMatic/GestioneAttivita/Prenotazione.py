@@ -5,7 +5,7 @@ class Prenotazione():
 
     id = 1000
 
-    def __init__(self, dataPrenotazione, numeroPersone, statoPrenotazione, cliente: Cliente, riferimentoTavolo):
+    def __init__(self, dataPrenotazione, numeroPersone, cliente: Cliente, riferimentoTavolo):
         self.idPrenotazione = self.id
         Prenotazione.id += 1
         self.dataPrenotazione = dataPrenotazione
@@ -15,9 +15,6 @@ class Prenotazione():
         self.cliente = cliente
         self.riferimentoTavolo = riferimentoTavolo
 
-
-    def getTavoloPrenotato(self):
-        return self.riferimentoTavolo
 
     def getInfoPrenotazione(self):
         return {
