@@ -19,7 +19,7 @@ class StatoSala():
         pass
 
     @staticmethod
-    def getTavoli():
+    def getListaTavoli():
         return StatoSala.Tavoli
 
     @staticmethod
@@ -34,7 +34,7 @@ class StatoSala():
         elif isinstance(tavolo_ricerca, int):
             rif = tavolo_ricerca
 
-        for tavolo in StatoSala.getTavoli():
+        for tavolo in StatoSala.getListaTavoli():
             if tavolo.riferimentoTavolo == rif:
                 return tavolo
         return None
@@ -43,9 +43,12 @@ class StatoSala():
     def rimuoviTavolo(tavolo):
         StatoSala.Tavoli.remove(tavolo)
 
+    @staticmethod
+    def salvaDati():
+        pass
 
     @staticmethod
-    def getComande():
+    def getListaComande():
         return StatoSala.Comande
 
     @staticmethod
@@ -56,7 +59,7 @@ class StatoSala():
 
     @staticmethod
     def ricercaComanda(riferimento: int):
-        for comanda in StatoSala.getComande():
+        for comanda in StatoSala.getListaComande():
             if isinstance(comanda.rif, RistoMatic.GestioneAttivita.Tavolo.Tavolo) and comanda.rif.riferimentoTavolo == riferimento:
                 return comanda
             elif isinstance(comanda.rif, RistoMatic.GestioneAttivita.OrdineAsporto.OrdineAsporto) and comanda.rif.numeroOrdine == riferimento:

@@ -23,7 +23,7 @@ class VistaPreparazione(QtWidgets.QWidget):
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
 
-        for comanda in StatoSala.getComande():
+        for comanda in StatoSala.getListaComande():
             if not comanda.getStato() == StatoComanda.COMPLETATA:
                 self.layout.addWidget(BlockComandaPreparazione(comanda))
 
@@ -31,6 +31,6 @@ class VistaPreparazione(QtWidgets.QWidget):
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
 
-        for comanda in StatoSala.getComande():
+        for comanda in StatoSala.getListaComande():
             if not comanda.getStato()==StatoComanda.COMPLETATA:
                 self.layout.addWidget(BlockComandaPreparazione(comanda))
