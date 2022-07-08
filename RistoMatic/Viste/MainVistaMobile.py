@@ -21,7 +21,7 @@ class VistaMobile(QtWidgets.QWidget):
         self.crea()
 
     def crea(self):
-        for tavolo in StatoSala.getTavoli():
+        for tavolo in StatoSala.getListaTavoli():
             btn = BlockTavolo(tavolo)
             self.layout.addWidget(btn)
 

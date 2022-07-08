@@ -11,7 +11,7 @@ class VistaTavoli(QtWidgets.QWidget):
         super().__init__()
 
         self.layout = FlowLayout(self)
-        for tavolo in StatoSala.getTavoli():
+        for tavolo in StatoSala.getListaTavoli():
             self.layout.addWidget(BlockTavolo(tavolo))
 
 

@@ -17,12 +17,12 @@ class VistaComande(QtWidgets.QWidget):
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
 
-        for comanda in StatoSala.getComande():
+        for comanda in StatoSala.getListaComande():
             self.layout.addWidget(BlockComandaSala(comanda))
 
     def aggiorna(self):
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
 
-        for comanda in StatoSala.getComande():
+        for comanda in StatoSala.getListaComande():
             self.layout.addWidget(BlockComandaSala(comanda))

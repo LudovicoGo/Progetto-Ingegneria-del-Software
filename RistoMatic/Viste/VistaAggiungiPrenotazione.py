@@ -69,7 +69,7 @@ class VistaAggiungiPrenotazione(QWidget):
         self.vLayout.addWidget(testo)
 
     def giaPrenotato(self, riferimentoTavolo):
-        tavoli = StatoSala.getTavoli()
+        tavoli = StatoSala.getListaTavoli()
         prenotato = False
         for i in StatoSala.Prenotazioni:
             if i.riferimentoTavolo == riferimentoTavolo:
