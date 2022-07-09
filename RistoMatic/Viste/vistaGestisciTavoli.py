@@ -1,0 +1,2 @@
+class VistaGestisciTavoli():
+    pass

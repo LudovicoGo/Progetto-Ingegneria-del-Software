@@ -11,7 +11,7 @@ from Tests.TestPrenotazione import *
 from Tests.TestStatistiche import *
 from Tests.TestMenu import *
 
-testmode=True
+testmode=False
 # main
 if __name__ == "__main__":
     if (testmode):
