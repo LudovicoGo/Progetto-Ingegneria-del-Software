@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QPushButton, QHBoxLayout, QVBoxLayout, QListView
+
 from PySide6 import QtWidgets
 
 # TODO LUCA Vedere perchè non compaioni i tasti
@@ -27,12 +28,13 @@ class VistaGestisciMenu(QtWidgets.QWidget):
 #        self.hLayout.addLayout(self.buttonsLayout)
 
 
-
     def addMenu(self):
         print('addMenu')
 
 
     def deleteMenu(self):
         print('deleteMenu')
+
+
 
 
