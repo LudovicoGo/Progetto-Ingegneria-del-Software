@@ -68,21 +68,25 @@ class StatoSala():
 
     @staticmethod
     def rimuoviComanda(comanda):
-        if (not comanda.getStato()==StatoComanda.IN_PREPARAZIONE):
-            dati = []
-            if os.path.isfile('Dati/Comande.pickle'):
-                with open('Dati/Comande.pickle', 'rb') as f:
-                    dati = pickle.load(f)
-            dati.append(comanda)
-            with open('Dati/Comande.pickle', 'wb') as handle:
-                pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
+        try:
+            if (not comanda.getStato()==StatoComanda.IN_PREPARAZIONE):
+                dati = []
+                if os.path.isfile('Dati/Comande.pickle'):
+                    with open('Dati/Comande.pickle', 'rb') as f:
+                        dati = pickle.load(f)
+                dati.append(comanda)
+                with open('Dati/Comande.pickle', 'wb') as handle:
+                    pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
 
-            StatoSala.Comande.remove(comanda)
-            if isinstance(comanda.rif, RistoMatic.GestioneAttivita.Tavolo.Tavolo):
-                comanda.rif.setIsLibero(True)
-                comanda.rif.setNumeroCoperti(0)
-            return True
-        else:
+                StatoSala.Comande.remove(comanda)
+                if isinstance(comanda.rif, RistoMatic.GestioneAttivita.Tavolo.Tavolo):
+                    comanda.rif.setIsLibero(True)
+                    comanda.rif.setNumeroCoperti(0)
+                return True
+            else:
+                return False
+
+        except:
             return False
 
 
