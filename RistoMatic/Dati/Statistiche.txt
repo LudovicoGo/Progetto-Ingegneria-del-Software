@@ -5,3 +5,5 @@ GIORNO GENERAZIONE STATISTICA : 07 Jul 2022 <bound method StatisticheEconomiche.
 
 GIORNO GENERAZIONE STATISTICA : 07 Jul 2022 <bound method StatisticheGestionali.generaStatistiche of <RistoMatic.GestioneAmministrativa.StatisticheGestionali.StatisticheGestionali object at 0x0000019DDA2AD240>>
 
+GIORNO GENERAZIONE STATISTICA : 09 Jul 2022 <bound method StatisticheGestionali.generaStatistiche of <RistoMatic.GestioneAmministrativa.StatisticheGestionali.StatisticheGestionali object at 0x000001FF85DDC130>>
+
