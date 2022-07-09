@@ -226,14 +226,13 @@ class StatoSala():
 #   Prende i dati dal file pickle
     @staticmethod
     def getDati(self):
-
         with (open("Dati/Comande.pickle", "rb")) as openfile:
            while True:
              try:
                 storicoComande = pickle.load(openfile)
-                print(type(storicoComande))
-                print(str(storicoComande))
                 return storicoComande
+#   Se il file non esiste lo controllo direttamente dal Main
              except EOFError:
                  break
+
 

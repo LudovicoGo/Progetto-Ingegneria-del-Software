@@ -1,3 +1,4 @@
+import os
 import sys
 import unittest
 
@@ -8,8 +9,10 @@ from Viste.MainVistaSala import VistaSala
 from Tests.TestComanda import *
 from Tests.TestPrenotazione import *
 from Tests.TestAsporto import *
+from Tests.TestStatistiche import *
+from Tests.TestMenu import *
 
-testmode=False
+testmode=True
 # main
 if __name__ == "__main__":
     if (testmode):
