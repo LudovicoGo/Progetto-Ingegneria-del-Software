@@ -8,7 +8,7 @@ from Viste.MainVistaSala import VistaSala
 from Tests.TestComanda import *
 from Tests.TestPrenotazione import *
 
-testmode=True
+testmode=False
 # main
 if __name__ == "__main__":
     if (testmode):
