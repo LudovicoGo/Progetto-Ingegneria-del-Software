@@ -7,6 +7,7 @@ from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
 from Tests.TestComanda import *
 from Tests.TestPrenotazione import *
+from Tests.TestAsporto import *
 
 testmode=True
 # main
