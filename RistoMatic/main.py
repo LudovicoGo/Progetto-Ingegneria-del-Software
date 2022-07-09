@@ -5,8 +5,10 @@ from PySide6 import QtWidgets
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
+from Tests.TestComanda import *
+from Tests.TestPrenotazione import *
 
-testmode=False
+testmode=True
 # main
 if __name__ == "__main__":
     if (testmode):

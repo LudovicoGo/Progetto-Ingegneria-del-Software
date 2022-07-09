@@ -9,7 +9,7 @@ class TestPrenotazione(unittest.TestCase):
         data = datetime.datetime(2022, 6, 14, 19, 30, 0)
         data.now()
         cliente = Cliente("Angelo Rossi", "3334445556")
-        prenotazione = Prenotazione(data, 4, "Da confermare", cliente, 2)
+        prenotazione = Prenotazione(dataPrenotazione=data, numeroPersone=4, cliente=cliente, riferimentoTavolo=2)
 
         prenotazioni = [prenotazione]
 
