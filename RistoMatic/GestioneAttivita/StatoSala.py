@@ -68,8 +68,6 @@ class StatoSala():
 
     @staticmethod
     def rimuoviComanda(comanda):
-# todo luca risolvere errore:   if (comanda.getStato()==StatoComanda.COMPLETATA or comanda.getStato() == StatoComanda.ANNULLATA ):
-#                              AttributeError: 'NoneType' object has no attribute 'getStato'
         if (not comanda.getStato()==StatoComanda.IN_PREPARAZIONE):
             dati = []
             if os.path.isfile('Dati/Comande.pickle'):
