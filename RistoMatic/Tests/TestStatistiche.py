@@ -10,9 +10,6 @@ from RistoMatic.GestioneAmministrativa.Statistiche import Statistiche
 class TestStatistiche(unittest.TestCase):
 
 
-   def vistaAggiungiOrdineAsporto(self):
-#      Dati Cliente , Asporto :
-
     def testStatisticaNone(self):
 
         statistica = Statistiche(None,None)
@@ -25,4 +22,5 @@ class TestStatistiche(unittest.TestCase):
 
         self.assertEqual(statistica.getDataInizio(),dataInizio)
         self.assertEqual(statistica.getDataFine(),dataFine)
+
 
