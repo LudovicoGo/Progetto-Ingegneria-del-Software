@@ -23,14 +23,10 @@ class VistaAmministratore(QtWidgets.QWidget):
 
 
     def __init__(self):
+
         super().__init__()
-#       Serve per fare il login
 
         hLayout = QHBoxLayout()
-
-      #  self.listView = QListView()
-      #  hLayout.addWidget(self.listView)
-
         buttonsLayout = QVBoxLayout()
 
         global newButton1
