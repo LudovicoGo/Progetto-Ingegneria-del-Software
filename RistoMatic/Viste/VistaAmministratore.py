@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, 
 # TODO LUCA : Risolvere problema import VistaGrafico
 from RistoMatic.Viste.VistaCalendario import VistaCalendario
 from RistoMatic.Viste.VistaGestisciMenu import VistaGestisciMenu
+from RistoMatic.Viste.VistaGestisciTavoli import VistaGestisciTavoli
 from RistoMatic.Viste.VistaGrafico import VistaGrafico
 from RistoMatic.GestioneAmministrativa.StatisticheEconomiche import StatisticheEconomiche
 from RistoMatic.GestioneAmministrativa.StatisticheGestionali import StatisticheGestionali
@@ -207,5 +208,7 @@ class VistaAmministratore(QtWidgets.QWidget):
         self.menu.show()
 
     def tavoli(self):
-        pass
+        self.vistaTavoli = VistaGestisciTavoli()
+        self.vistaTavoli.setWindowTitle('Gestione dei tavoli')
+        self.vistaTavoli.show()
 

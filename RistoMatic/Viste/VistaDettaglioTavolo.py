@@ -75,10 +75,20 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
     def modifica_coperti(self):
         try:
             if not self.coperti.text() =="":
-                self.tavolo.setNumeroCoperti(int(self.coperti.text()))
-                if not self.wcomanda ==None:
+              if int(self.coperti.text()) > self.tavolo.getNumeroPosti() :
+                  msgBox = QMessageBox()
+                  msgBox.setText("Capienza massima tavolo raggiunta !")
+                  msgBox.exec()
+                  self.tavolo.setNumeroCoperti(1)
+                  self.coperti.setText("1")
+                  return
+              self.tavolo.setNumeroCoperti(int(self.coperti.text()))
+              if not self.wcomanda ==None:
                     self.wcomanda.aggiorna_totale()
+
         except:
-            print("Not int")
+            msgBox = QMessageBox()
+            msgBox.setText("Coperto non valido. Puoi inserire solo NUMERI !")
+            msgBox.exec()
             self.tavolo.setNumeroCoperti(1)
             self.coperti.setText("1")

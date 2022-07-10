@@ -2,6 +2,9 @@ import os
 import sys
 import unittest
 
+# TODO : In VistaAggiungiElementoMenu vedere perchè non caricano i menu
+
+
 from PySide6 import QtWidgets
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
