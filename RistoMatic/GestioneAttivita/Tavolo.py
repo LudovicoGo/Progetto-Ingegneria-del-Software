@@ -5,14 +5,18 @@ import datetime
 class Tavolo():
     counter_n_tavolo = 1
 
-    def __init__(self, posti):
+    def __init__(self, posti, riferimentoTav = 0):
         super(Tavolo, self).__init__()
-        self.riferimentoTavolo=Tavolo.counter_n_tavolo
+
         self.numeroPosti=posti
         self.numeroCoperti=0
         self.isLibero = True
+        if riferimentoTav == 0:
+            self.riferimentoTavolo = Tavolo.counter_n_tavolo
+            Tavolo.counter_n_tavolo = Tavolo.counter_n_tavolo + 1
+        elif riferimentoTav != 0:
+            self.riferimentoTavolo = riferimentoTav
         StatoSala.aggiungiTavolo(self)
-        Tavolo.counter_n_tavolo = Tavolo.counter_n_tavolo + 1
 
     def getInfoTavolo(self) -> dict:
         return {
