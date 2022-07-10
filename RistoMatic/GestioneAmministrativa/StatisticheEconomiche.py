@@ -29,6 +29,7 @@ class StatisticheEconomiche(Statistiche):
       #  print('data fine: ',self.dataFine)
         storicoComande = StatoSala.getDati(self)
 
+
         inizio = datetime.date(self.dataInizio.year,self.dataInizio.month,self.dataInizio.day)
         fine = datetime.date(self.dataFine.year,self.dataFine.month,self.dataFine.day)
         date_list = pandas.date_range(start=inizio,end=fine)

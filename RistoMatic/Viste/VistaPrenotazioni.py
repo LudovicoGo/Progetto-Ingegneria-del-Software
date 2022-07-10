@@ -120,6 +120,7 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         prenotazione = self.inserisciPrenotazione.show()
 
 
+
 #    def testButtonFunction(self):
 #        self.aggiungiPrenotazione()
 #        count = 1

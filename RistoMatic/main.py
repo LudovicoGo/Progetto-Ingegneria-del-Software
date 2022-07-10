@@ -1,13 +1,15 @@
+import os
 import sys
 import unittest
 
 from PySide6 import QtWidgets
-from PyQt5.QtCore import Qt
-from RistoMatic.Viste.VistaCalendario import VistaCalendario
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
 from Viste.MainVistaSala import VistaSala
-from Viste.VistaUnlockAmministratore import VistaUnlockAmministratore
+from Tests.TestComanda import *
+from Tests.TestPrenotazione import *
+from Tests.TestStatistiche import *
+from Tests.TestMenu import *
 
 testmode=False
 # main

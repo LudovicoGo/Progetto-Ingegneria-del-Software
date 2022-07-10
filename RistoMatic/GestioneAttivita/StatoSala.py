@@ -68,23 +68,25 @@ class StatoSala():
 
     @staticmethod
     def rimuoviComanda(comanda):
-# todo luca risolvere errore:   if (comanda.getStato()==StatoComanda.COMPLETATA or comanda.getStato() == StatoComanda.ANNULLATA ):
-#                              AttributeError: 'NoneType' object has no attribute 'getStato'
-        if (comanda.getStato()==StatoComanda.COMPLETATA or comanda.getStato() == StatoComanda.ANNULLATA ):
-            dati = []
-            if os.path.isfile('Dati/Comande.pickle'):
-                with open('Dati/Comande.pickle', 'rb') as f:
-                    dati = pickle.load(f)
-            dati.append(comanda)
-            with open('Dati/Comande.pickle', 'wb') as handle:
-                pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
+        try:
+            if (not comanda.getStato()==StatoComanda.IN_PREPARAZIONE):
+                dati = []
+                if os.path.isfile('Dati/Comande.pickle'):
+                    with open('Dati/Comande.pickle', 'rb') as f:
+                        dati = pickle.load(f)
+                dati.append(comanda)
+                with open('Dati/Comande.pickle', 'wb') as handle:
+                    pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
 
-            StatoSala.Comande.remove(comanda)
-            if isinstance(comanda.rif, RistoMatic.GestioneAttivita.Tavolo.Tavolo):
-                comanda.rif.setIsLibero(True)
-                comanda.rif.setNumeroCoperti(0)
-            return True
-        else:
+                StatoSala.Comande.remove(comanda)
+                if isinstance(comanda.rif, RistoMatic.GestioneAttivita.Tavolo.Tavolo):
+                    comanda.rif.setIsLibero(True)
+                    comanda.rif.setNumeroCoperti(0)
+                return True
+            else:
+                return False
+
+        except:
             return False
 
 
@@ -224,14 +226,13 @@ class StatoSala():
 #   Prende i dati dal file pickle
     @staticmethod
     def getDati(self):
-
         with (open("Dati/Comande.pickle", "rb")) as openfile:
            while True:
              try:
                 storicoComande = pickle.load(openfile)
-                print(type(storicoComande))
-                print(str(storicoComande))
                 return storicoComande
+#   Se il file non esiste lo controllo direttamente dal Main
              except EOFError:
                  break
+
 

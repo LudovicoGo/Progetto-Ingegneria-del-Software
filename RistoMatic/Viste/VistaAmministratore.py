@@ -4,6 +4,8 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QMessageBox,QApplication, QDialog
 # TODO LUCA : Risolvere problema import VistaGrafico
 from RistoMatic.Viste.VistaCalendario import VistaCalendario
+from RistoMatic.Viste.VistaGestisciMenu import VistaGestisciMenu
+from RistoMatic.Viste.VistaGestisciTavoli import VistaGestisciTavoli
 from RistoMatic.Viste.VistaGrafico import VistaGrafico
 from RistoMatic.GestioneAmministrativa.StatisticheEconomiche import StatisticheEconomiche
 from RistoMatic.GestioneAmministrativa.StatisticheGestionali import StatisticheGestionali
@@ -27,8 +29,8 @@ class VistaAmministratore(QtWidgets.QWidget):
 
         hLayout = QHBoxLayout()
 
-        self.listView = QListView()
-        hLayout.addWidget(self.listView)
+      #  self.listView = QListView()
+      #  hLayout.addWidget(self.listView)
 
         buttonsLayout = QVBoxLayout()
 
@@ -37,22 +39,38 @@ class VistaAmministratore(QtWidgets.QWidget):
         newButton1 = QPushButton("Salva statistiche")
         newButton1.setEnabled(False)
         newButton1.clicked.connect(self.salvaStatistiche)
+        newButton1.setStyleSheet('background-color: red')
 
         global infoButton
         infoButton = QPushButton("Genera Statistiche Economiche")
         infoButton.clicked.connect(self.statisticheEconomiche)
+        infoButton.setStyleSheet('background-color: blue')
 
         global newButton
         newButton = QPushButton("Genera Statistiche Gestionali")
         newButton.clicked.connect(self.statisticheGestionali)
+        newButton.setStyleSheet('background-color: blue')
+
 
         annullaButton = QPushButton('Reset')
         annullaButton.clicked.connect(self.reset)
+        annullaButton.setStyleSheet('background-color: green')
+
+        menuButton = QPushButton('Gestisci Menu')
+        menuButton.clicked.connect(self.menu)
+        menuButton.setStyleSheet('background-color: red')
+
+        tavoloButton = QPushButton('Gestisci Tavoli')
+        tavoloButton.clicked.connect(self.tavoli)
+        tavoloButton.setStyleSheet('background-color: red')
+
 
         buttonsLayout.addWidget(newButton1)
         buttonsLayout.addWidget(newButton)
         buttonsLayout.addWidget(infoButton)
         buttonsLayout.addWidget(annullaButton)
+        buttonsLayout.addWidget(menuButton)
+        buttonsLayout.addWidget(tavoloButton)
 
         hLayout.addLayout(buttonsLayout)
 
@@ -185,4 +203,14 @@ class VistaAmministratore(QtWidgets.QWidget):
         newButton1.setEnabled(False)
         infoButton.setEnabled(True)
         newButton.setEnabled(True)
+
+
+
+    def menu(self):
+        self.menu = VistaGestisciMenu()
+        self.menu.show()
+
+    def tavoli(self):
+        self.vistaTavoli = VistaGestisciTavoli()
+        self.vistaTavoli.show()
 

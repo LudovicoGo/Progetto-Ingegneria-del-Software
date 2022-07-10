@@ -51,6 +51,7 @@ class VistaAggiungiPrenotazione(QWidget):
     def selezionaData(self):
         self.dataSelezionata = self.data.selectedDate()
 
+
         self.year = self.dataSelezionata.year()
         self.day = self.dataSelezionata.day()
         self.month = self.dataSelezionata.month()

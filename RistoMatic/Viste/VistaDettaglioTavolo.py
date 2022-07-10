@@ -64,12 +64,12 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
             self.grid.addWidget(self.wcomanda, 2, 0, 1, 4)
 
     def rimuovi_comanda(self):
-        if StatoSala.rimuoviComanda(self.comanda):
+        if not self.comanda==None and StatoSala.rimuoviComanda(self.comanda):
             self.comanda = None
             self.wcomanda.deleteLater()
         else:
             msgBox = QMessageBox()
-            msgBox.setText("Impossibile rimuovere comanda")
+            msgBox.setText("Impossibile chiudere tavolo")
             msgBox.exec()
 
     def modifica_coperti(self):
