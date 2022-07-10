@@ -1,6 +1,10 @@
-from PySide6.QtWidgets import QPushButton, QHBoxLayout, QVBoxLayout, QListView
+import pickle
 
+from PySide6.QtCore import QTimer
+from PySide6.QtGui import QStandardItemModel, QStandardItem
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView, QVBoxLayout, QMessageBox
 from PySide6 import QtWidgets
+
 
 from RistoMatic.Viste.VistaAggiungiMenu import VistaAggiungiMenu
 
@@ -11,10 +15,16 @@ class VistaGestisciMenu(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.aggiorna()
+        self.listView = QListView()
+
 
         self.buttonsLayout = QHBoxLayout()
         self.vLayout = QVBoxLayout()
+
+        self.aggiorna = QTimer()
+        self.aggiorna.setInterval(5000)
+        self.aggiorna.timeout.connect(self.updateUi)
+        self.aggiorna.start()
 
         self.aggiungiMenu = QPushButton('Aggiungi menù')
         self.aggiungiMenu.clicked.connect(self.addMenu)
@@ -34,11 +44,34 @@ class VistaGestisciMenu(QtWidgets.QWidget):
         self.buttonsLayout.addWidget(self.modificaMenu)
         self.vLayout.addLayout(self.buttonsLayout)
 
-        self.listView = QListView()
         self.vLayout.addWidget(self.listView)
 
         self.setLayout(self.vLayout)
         #self.resize(600, 300)
+
+
+
+
+    def updateUi(self):
+
+        listViewModel = QStandardItemModel(self.listView)
+        listaMenu = self.readPickleMenu()
+
+        if listaMenu == '' or listaMenu is None :
+            print('listaMenu vuota o nulla')
+            return
+
+        else:
+           for menu in listaMenu:
+              qItem = QStandardItem()
+#             titolo = f"Nome menu: {menu.nomeMenu}, costo coperto: {menu.costoCoperto}"
+              qItem.setText('bbla')
+              qItem.setEditable(False)
+              font = qItem.font()
+              font.setPointSize(20)
+              qItem.setFont(font)
+              listViewModel.appendRow(qItem)
+        self.listView.setModel(listViewModel)
 
 
 
@@ -47,6 +80,7 @@ class VistaGestisciMenu(QtWidgets.QWidget):
         self.vistaAggiungiMenu = VistaAggiungiMenu()
         self.vistaAggiungiMenu.setWindowTitle('Menù')
         self.vistaAggiungiMenu.show()
+
 
 
 #  Clicco sul menu con il mouse e dopo lo rimuovo
@@ -64,10 +98,22 @@ class VistaGestisciMenu(QtWidgets.QWidget):
         pass
 
 
-#  Aggiorna la vista dopo che abbiamo lavorato con i menu ,ad esempio se vengono aggiunti o rimossi i menu , il metodo
-#  viene chiamato e richiama alla fine se-stesso
-    def aggiorna(self):
-        pass
+
+#  e se il menu fosse vuoto ?
+    def readPickleMenu(self):
+        try:
+            f = open("Dati/Menu.pickle", "rb")
+            storicoMenu = pickle.load(f)
+            f.close()
+            print(storicoMenu==None)
+            return storicoMenu
+        except EOFError:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("ERRORE!")
+                msg.setInformativeText("Errore lettura del file: Dati/Menu.pickle")
+                msg.exec_()
+                return
 
 
 

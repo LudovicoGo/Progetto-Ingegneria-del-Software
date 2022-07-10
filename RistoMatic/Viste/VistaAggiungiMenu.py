@@ -1,49 +1,43 @@
+import pickle
+
 from PySide6 import QtWidgets
-from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QPushButton, QListView
-from RistoMatic.Viste.VistaAggiungiElementoMenu import VistaAggiungiElementoMenu
+from PySide6.QtWidgets import QListView, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QLabel
+
+from RistoMatic.GestioneAmministrativa.Menu import Menu
 
 
 class VistaAggiungiMenu(QtWidgets.QWidget):
 
     def __init__(self):
-
         super().__init__()
 
-        self.aggiorna()
 
-        self.buttonsLayout = QHBoxLayout()
-        self.vLayout = QVBoxLayout()
+        self.vLayout =QVBoxLayout()
+        self.qlines = {}
 
-        self.aggiungiElemento = QPushButton('Aggiungi elemento')
-        self.aggiungiElemento.clicked.connect(self.addElemento)
+        self.addInfoText("nomeMenu", "Nome Menu")
+        self.addInfoText("costoCoperto", "Costo coperto")
 
-        self.eliminaElemento = QPushButton('Rimuovi Elemento')
-        self.eliminaElemento.clicked.connect(self.deleteElemento)
-
-
-        self.buttonsLayout.addWidget(self.aggiungiElemento)
-        self.buttonsLayout.addWidget(self.eliminaElemento)
-        self.vLayout.addLayout(self.buttonsLayout)
-
-        self.listView = QListView()
-        self.vLayout.addWidget(self.listView)
+        self.salvaMenu = QPushButton('Salva menu')
+        self.salvaMenu.clicked.connect(self.saveMenu)
+        self.vLayout.addWidget(self.salvaMenu)
 
         self.setLayout(self.vLayout)
 
 
 
-    def addElemento(self):
-        self.vistaElemento = VistaAggiungiElementoMenu()
-        self.vistaElemento.setWindowTitle('Elemento menù')
-        self.vistaElemento.show()
+    def addInfoText(self, nome, label):
+        self.vLayout.addWidget(QLabel(label))
+        testo = QLineEdit(self)
+        self.qlines[nome] = testo
+        self.vLayout.addWidget(testo)
 
-    def deleteElemento(self):
-        pass
-
-
-    def aggiorna(self):
-        pass
-
-
+# Li salva su un file .pickle contenuto nella cartella Dati del progetto
+    def saveMenu(self):
+        menu = Menu(self.qlines['nomeMenu'].text(),float(self.qlines['costoCoperto'].text()))
+        with open('Dati/menu.pickle', 'ab+') as f:
+             pickle.dump(menu, f)
+             f.close()
+        self.close()
 
 

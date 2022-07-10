@@ -19,6 +19,8 @@ class VistaAggiungiElementoMenu(QtWidgets.QWidget):
         self.salvaElemento.clicked.connect(self.saveElemento)
         self.vLayout.addWidget(self.salvaElemento)
 
+        self.setLayout(self.vLayout)
+
 
 
     def addInfoText(self, nome, label):
@@ -27,5 +29,9 @@ class VistaAggiungiElementoMenu(QtWidgets.QWidget):
         self.qlines[nome] = testo
         self.vLayout.addWidget(testo)
 
+
     def saveElemento(self):
+        nomePietanza = self.qlines["nomeElemento"].text()
+        areaPreparazione = self.qlines['areaPreparazione'].text()
+        prezzoPietanza =float(self.qlines['prezzoElemento'].text())
         pass

@@ -4,7 +4,8 @@ from RistoMatic.GestioneAttivita.Enum import Zone
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 
 class Menu:
-    def __init__(self, nome_menu, costo_coperto=0):
+    # costo_coperto = 0
+    def __init__(self, nome_menu, costo_coperto):
         self.costoCoperto=costo_coperto
         self.dataCreazione = datetime.datetime.now()
         self.nomeMenu=nome_menu
