@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView, 
 from PySide6 import QtWidgets
 
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
+from RistoMatic.Viste.VistaAggiungiTavolo import VistaAggiungiTavolo
 
 
 class VistaGestisciTavoli(QtWidgets.QWidget):
@@ -39,18 +40,22 @@ class VistaGestisciTavoli(QtWidgets.QWidget):
         hLayout.addLayout(buttonsLayout)
 
         self.setLayout(hLayout)
-        self.resize(600, 300)
+        self.resize(1000, 1000)
         self.setWindowTitle("Gestione tavoli")
 
     def nuovoTavolo(self):
         print('nuovoTavolo')
+        self.inserisciTavolo = VistaAggiungiTavolo(callback=self.aggiornaUi())
+        tavolo = self.inserisciTavolo.show()
 
     def eliminaTavolo(self):
         print('eliminaTavolo')
 
     def visualizzaAltreInformazioni(self):
         print('VisualizzaAltreInformazioni')
-
+        self.aggiornaUi()
+        for tavolo in StatoSala.Tavoli:
+            print(tavolo.getInfoTavolo())
 
     def aggiornaUi(self):
         listViewModel = QStandardItemModel(self.listView)
