@@ -1,54 +1,87 @@
+from PySide6.QtCore import QTimer
+from PySide6.QtGui import QStandardItemModel, QStandardItem
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView, QVBoxLayout
 from PySide6 import QtWidgets
-from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QPushButton, QListView, QComboBox
+
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
+from RistoMatic.Viste.VistaAggiungiTavolo import VistaAggiungiTavolo
 
 
 class VistaGestisciTavoli(QtWidgets.QWidget):
-
-# definire qualcosa per la callback
     def __init__(self):
         super().__init__()
 
-        self.aggiorna()
+        hLayout = QHBoxLayout()
 
-        self.buttonsLayout = QHBoxLayout()
-        self.vLayout = QVBoxLayout()
-
-        self.aggiungiTavolo = QPushButton('Aggiungi Tavolo')
-        self.aggiungiTavolo.clicked.connect(self.addTavolo)
-
-        self.eliminaTavolo= QPushButton('Elimina Tavolo')
-        self.eliminaTavolo.clicked.connect(self.deleteTavolo)
-
-        self.sceltaPosti = QComboBox()
-        posti = [str(i) for i in range(1,51)]
-        self.sceltaPosti.addItems(posti)
-
-        self.buttonsLayout.addWidget(self.aggiungiTavolo)
-        self.buttonsLayout.addWidget(self.eliminaTavolo)
-        self.vLayout.addWidget(self.sceltaPosti)
-
-        self.vLayout.addLayout(self.buttonsLayout)
+    #    self.aggiorna = QTimer()
+    #    self.aggiorna.setInterval(5000)
+    #    self.aggiorna.timeout.connect(self.aggiornaUi)
+    #    self.aggiorna.start()
 
         self.listView = QListView()
-        self.vLayout.addWidget(self.listView)
+        self.aggiornaUi()
+        hLayout.addWidget(self.listView)
 
-        self.setLayout(self.vLayout)
+        buttonsLayout = QVBoxLayout()
+        infoButton = QPushButton("Tasto 1")
+        infoButton.clicked.connect(self.visualizzaAltreInformazioni)
+
+        newButton = QPushButton("Crea nuovo tavolo")
+        newButton.clicked.connect(self.nuovoTavolo)
+
+        delButton = QPushButton("Elimina tavolo selezionato")
+        delButton.clicked.connect(self.eliminaTavolo)
+
+        buttonsLayout.addWidget(newButton)
+        buttonsLayout.addWidget(infoButton)
+        buttonsLayout.addWidget(delButton)
+
+        buttonsLayout.addStretch()
+        hLayout.addLayout(buttonsLayout)
+
+        self.setLayout(hLayout)
+        self.resize(1000, 1000)
+        self.setWindowTitle("Gestione tavoli")
+
+    def nuovoTavolo(self):
+        print('nuovoTavolo')
+        self.inserisciTavolo = VistaAggiungiTavolo(callback=self.aggiornaUi())
+        tavolo = self.inserisciTavolo.show()
+
+    def eliminaTavolo(self):
+        print('eliminaTavolo')
+        selected = self.listView.selectedIndexes()[0].data()
+
+        riferimentoTavolo = selected.split(', ')[0].strip().split()[2]
+        print(riferimentoTavolo)
+
+        numeroPosti = selected.split(', ')[1].strip().split()[3]
+        print(numeroPosti)
 
 
 
+    def visualizzaAltreInformazioni(self):
+        print('VisualizzaAltreInformazioni')
+        self.aggiornaUi()
+        for tavolo in StatoSala.Tavoli:
+            print(tavolo.getInfoTavolo())
 
-#  Clicco con il mouse su crea tavolo e dopo ne aggiungo uno nuovo
-    def addTavolo(self):
-        pass
+    def aggiornaUi(self):
+        listViewModel = QStandardItemModel(self.listView)
+        StatoSala.Tavoli.sort(key=lambda x: x.getRiferimentoTavolo())
+        for tavolo in StatoSala.Tavoli:  # mostra le infromazioni del tavolo per ogni tavolo nella lista Tavoli di stato sala
+            qItem = QStandardItem()
+            titolo = f"Numero tavolo: {tavolo.riferimentoTavolo}, Numero posti massimo: {tavolo.numeroPosti}"
+            qItem.setText(titolo)
+            qItem.setEditable(False)
+            font = qItem.font()
+            font.setPointSize(20)
+            qItem.setFont(font)
+            listViewModel.appendRow(qItem)
+        self.listView.setModel(listViewModel)
 
-
-
-#  Clicco sul tavolo con il mouse e dopo lo rimuovo
-    def deleteTavolo(self):
-        pass
-
-#  Aggiorna la vista dopo che abbiamo lavorato con i tavoli ,ad esempio se vengono aggiunti o rimossi i tavoli, il metodo
-#  viene chiamato e richiama alla fine se-stesso
-    def aggiorna(self):
-        pass
-
+    def getGenericButton(self, titolo, onClick):
+        button = QPushButton(titolo)
+        button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        button.clicked.connect(onClick)
+        return
