@@ -203,6 +203,7 @@ class VistaAmministratore(QtWidgets.QWidget):
 
     def menu(self):
         self.menu = VistaGestisciMenu()
+        self.menu.setWindowTitle('Gestione dei menù')
         self.menu.show()
 
     def tavoli(self):
