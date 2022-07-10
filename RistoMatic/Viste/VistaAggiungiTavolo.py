@@ -1,8 +1,9 @@
 import datetime
+import pickle
 from PySide6 import QtCore
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QCheckBox, \
     QCalendarWidget, QComboBox
-
+import os
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 from RistoMatic.GestioneAttivita.Tavolo import Tavolo
 
@@ -43,6 +44,11 @@ class VistaAggiungiTavolo(QWidget):
         numero = self.qlines["riferimentoTavolo"].text()
 
 
+
+
+
+
+
         print(numero)
         check = self.box.checkState()
         if check != 2:  # se c'è la spunta il numero del tavolo viene generato automaticamente
@@ -65,6 +71,9 @@ class VistaAggiungiTavolo(QWidget):
         elif check == 2:
             print('2')
             tavolo = Tavolo(numeroPosti)
+
+        with open('Dati/Tavoli.pickle', 'wb') as handle:
+            pickle.dump(StatoSala.Tavoli, handle, pickle.HIGHEST_PROTOCOL)
 
         self.close()
 

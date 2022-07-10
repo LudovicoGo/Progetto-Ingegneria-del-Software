@@ -35,18 +35,12 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         newButton = QPushButton("Aggiungi Prenotazione")
         newButton.clicked.connect(self.aggiungiPrenotazione)
 
-        delButton = QPushButton("Elimina Prenotazione")
+        delButton = QPushButton("Elimina Prenotazione selezionata")
         delButton.clicked.connect(self.eliminaPrenotazione)
 
         buttonsLayout.addWidget(newButton)
         buttonsLayout.addWidget(infoButton)
         buttonsLayout.addWidget(delButton)
-
-        ##############################################
-        #testButton = QPushButton("TEST (stampa lista)")
-        #testButton.clicked.connect(self.testButtonFunction)
-        #buttonsLayout.addWidget(testButton)
-        ##############################################
 
         buttonsLayout.addStretch()
         hLayout.addLayout(buttonsLayout)
@@ -101,12 +95,9 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         recapitoTelefonico = selected.split(', ')[4].strip().split()[2]
         print(recapitoTelefonico)
 
-
         print(nomeCliente)
         print(riferimentoTavolo)
         print(dataPrenotazione)
-
-
         index = StatoSala.ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo)
 
         print(index)
@@ -114,20 +105,8 @@ class VistaPrenotazioni(QtWidgets.QWidget):
         self.aggiornaUi()
 
     def aggiungiPrenotazione(self):
-#        print("aggiungiPrenotazione")
-
         self.inserisciPrenotazione = VistaAggiungiPrenotazione(callback=self.aggiornaUi())
         prenotazione = self.inserisciPrenotazione.show()
-
-
-
-#    def testButtonFunction(self):
-#        self.aggiungiPrenotazione()
-#        count = 1
-#        for i in StatoSala.Prenotazioni:
-#            print(count, i.getInfoPrenotazione())
-#            count += 1
-#        self.aggiornaUi()
 
 
 

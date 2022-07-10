@@ -13,10 +13,10 @@ class VistaGestisciTavoli(QtWidgets.QWidget):
 
         hLayout = QHBoxLayout()
 
-    #    self.aggiorna = QTimer()
-    #    self.aggiorna.setInterval(5000)
-    #    self.aggiorna.timeout.connect(self.aggiornaUi)
-    #    self.aggiorna.start()
+        self.aggiorna = QTimer()
+        self.aggiorna.setInterval(5000)
+        self.aggiorna.timeout.connect(self.aggiornaUi)
+        self.aggiorna.start()
 
         self.listView = QListView()
         self.aggiornaUi()
@@ -51,12 +51,13 @@ class VistaGestisciTavoli(QtWidgets.QWidget):
     def eliminaTavolo(self):
         print('eliminaTavolo')
         selected = self.listView.selectedIndexes()[0].data()
+        riferimentoTavolo = int(selected.split(', ')[0].strip().split()[2])
+        print('num tav',riferimentoTavolo)
+    #    numeroPosti = int(selected.split(', ')[1].strip().split()[3])
 
-        riferimentoTavolo = selected.split(', ')[0].strip().split()[2]
-        print(riferimentoTavolo)
+        StatoSala.eliminaTavoloPerRiferimento(riferimentoTavolo)
+        self.aggiornaUi()
 
-        numeroPosti = selected.split(', ')[1].strip().split()[3]
-        print(numeroPosti)
 
 
 

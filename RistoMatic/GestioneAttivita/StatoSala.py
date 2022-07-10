@@ -215,6 +215,18 @@ class StatoSala():
 
 
     @staticmethod
+    def eliminaTavoloPerRiferimento(riferimentoTavolo):
+        index = 0
+        for i in StatoSala.Tavoli:
+            rif = i.getRiferimentoTavolo()
+            if rif == riferimentoTavolo:
+                print('RIFERIMENTO UGUALE')
+                index = StatoSala.Tavoli.index(i)
+        del StatoSala.Tavoli[index]
+
+
+
+    @staticmethod
     def ricercaNomeDataTavolo(self, nomeCliente, dataPrenotazione, riferimentoTavolo):
         for i in StatoSala.Prenotazioni:
             if i.cliente.nomeCliente == nomeCliente and i.riferimentoTavolo == int(riferimentoTavolo):

@@ -11,6 +11,7 @@ class Tavolo():
         self.numeroPosti=posti
         self.numeroCoperti=0
         self.isLibero = True
+        self.riferimentoTavolo = riferimentoTav
         if riferimentoTav == 0:
             self.riferimentoTavolo = Tavolo.counter_n_tavolo
             Tavolo.counter_n_tavolo = Tavolo.counter_n_tavolo + 1
@@ -21,7 +22,8 @@ class Tavolo():
     def getInfoTavolo(self) -> dict:
         return {
             "riferimentoTavolo": self.riferimentoTavolo,
-            "coperti": self.coperti,
+            "posti": self.numeroPosti,
+            "coperti": self.numeroCoperti,
             "libero": self.isLibero
         }
 
