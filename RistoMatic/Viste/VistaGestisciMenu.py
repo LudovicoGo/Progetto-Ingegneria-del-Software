@@ -7,6 +7,7 @@ from PySide6 import QtWidgets
 
 
 from RistoMatic.Viste.VistaAggiungiMenu import VistaAggiungiMenu
+from RistoMatic.Viste.VistaMenu import VistaMenu
 
 
 class VistaGestisciMenu(QtWidgets.QWidget):
@@ -21,10 +22,10 @@ class VistaGestisciMenu(QtWidgets.QWidget):
         self.buttonsLayout = QHBoxLayout()
         self.vLayout = QVBoxLayout()
 
-        self.aggiorna = QTimer()
-        self.aggiorna.setInterval(5000)
-        self.aggiorna.timeout.connect(self.updateUi)
-        self.aggiorna.start()
+#        self.aggiorna = QTimer()
+#        self.aggiorna.setInterval(5000)
+#        self.aggiorna.timeout.connect(self.updateUi)
+#        self.aggiorna.start()
 
         self.aggiungiMenu = QPushButton('Aggiungi menù')
         self.aggiungiMenu.clicked.connect(self.addMenu)
@@ -95,7 +96,10 @@ class VistaGestisciMenu(QtWidgets.QWidget):
 
 # Clicco sul menù con il mouse e dopo premendo il pulsante AGGIORNA , lo vado a modificare
     def updateMenu(self):
-        pass
+        self.modificaMenu = VistaMenu()
+        self.modificaMenu.setWindowTitle('Menù')
+        self.modificaMenu.show()
+
 
 
 
