@@ -1,5 +1,4 @@
 from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QScrollArea
-
 #from RistoMatic.Viste.VistaAmministratore import VistaAmministratore
 #from RistoMatic.Viste.VistaAmministratore import VistaAmministratore
 from RistoMatic.Viste.VistaAsporto import VistaAsporto

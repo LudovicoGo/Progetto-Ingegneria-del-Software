@@ -11,10 +11,13 @@ class VistaMobile(QtWidgets.QWidget):
 
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("Vista Mobile")
+
         self.layout = FlowLayout(self)
         self.timer = QTimer()
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
+
 
     def aggiorna(self):
         for i in reversed(range(self.layout.count())):

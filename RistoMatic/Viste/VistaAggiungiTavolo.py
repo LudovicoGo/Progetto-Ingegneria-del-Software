@@ -12,6 +12,7 @@ class VistaAggiungiTavolo(QWidget):
 
     def __init__(self, callback):
         super(VistaAggiungiTavolo, self).__init__()
+        self.setWindowTitle("Aggiungi tavolo")
         self.callback = callback
         self.vLayout = QVBoxLayout()
         self.qlines = {}
@@ -43,12 +44,6 @@ class VistaAggiungiTavolo(QWidget):
 
         numero = self.qlines["riferimentoTavolo"].text()
 
-
-
-
-
-
-
         print(numero)
         check = self.box.checkState()
         if check != 2:  # se c'è la spunta il numero del tavolo viene generato automaticamente
@@ -76,5 +71,3 @@ class VistaAggiungiTavolo(QWidget):
             pickle.dump(StatoSala.Tavoli, handle, pickle.HIGHEST_PROTOCOL)
 
         self.close()
-
-

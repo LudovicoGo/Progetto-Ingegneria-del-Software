@@ -23,8 +23,8 @@ class VistaGestisciTavoli(QtWidgets.QWidget):
         hLayout.addWidget(self.listView)
 
         buttonsLayout = QVBoxLayout()
-        infoButton = QPushButton("Tasto 1")
-        infoButton.clicked.connect(self.visualizzaAltreInformazioni)
+    #    testButton = QPushButton("Test button")
+    #    testButton.clicked.connect(self.visualizzaAltreInformazioni)
 
         newButton = QPushButton("Crea nuovo tavolo")
         newButton.clicked.connect(self.nuovoTavolo)
@@ -33,14 +33,14 @@ class VistaGestisciTavoli(QtWidgets.QWidget):
         delButton.clicked.connect(self.eliminaTavolo)
 
         buttonsLayout.addWidget(newButton)
-        buttonsLayout.addWidget(infoButton)
+    #    buttonsLayout.addWidget(testButton)
         buttonsLayout.addWidget(delButton)
 
         buttonsLayout.addStretch()
         hLayout.addLayout(buttonsLayout)
 
         self.setLayout(hLayout)
-        self.resize(1000, 1000)
+        self.resize(1000, 600)
         self.setWindowTitle("Gestione tavoli")
 
     def nuovoTavolo(self):
@@ -48,24 +48,24 @@ class VistaGestisciTavoli(QtWidgets.QWidget):
         self.inserisciTavolo = VistaAggiungiTavolo(callback=self.aggiornaUi())
         tavolo = self.inserisciTavolo.show()
 
+
+
     def eliminaTavolo(self):
         print('eliminaTavolo')
         selected = self.listView.selectedIndexes()[0].data()
         riferimentoTavolo = int(selected.split(', ')[0].strip().split()[2])
         print('num tav',riferimentoTavolo)
-    #    numeroPosti = int(selected.split(', ')[1].strip().split()[3])
+   #    numeroPosti = int(selected.split(', ')[1].strip().split()[3])
 
         StatoSala.eliminaTavoloPerRiferimento(riferimentoTavolo)
         self.aggiornaUi()
-
-
-
 
     def visualizzaAltreInformazioni(self):
         print('VisualizzaAltreInformazioni')
         self.aggiornaUi()
         for tavolo in StatoSala.Tavoli:
             print(tavolo.getInfoTavolo())
+
 
     def aggiornaUi(self):
         listViewModel = QStandardItemModel(self.listView)
