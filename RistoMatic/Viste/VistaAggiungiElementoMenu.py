@@ -43,6 +43,6 @@ class VistaAggiungiElementoMenu(QtWidgets.QWidget):
 
     def saveElemento(self):
         elemento = ElementoMenu(self.qlines["nomeElemento"].text(),self.box.currentText(),float(self.qlines['prezzoElemento'].text()))
-        self.menu.listaElementi[self.qlines["nomeElemento"].text()]=elemento
+        self.menu.aggiungiElementoMenu(elemento)
         self.cb()
         self.close()
