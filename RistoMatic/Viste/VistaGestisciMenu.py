@@ -1,14 +1,14 @@
 import pickle
 
-from PySide6.QtCore import QTimer
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView, QVBoxLayout, QMessageBox
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QHBoxLayout, QListView, QVBoxLayout, QLabel
 from PySide6 import QtWidgets
 
 
 from RistoMatic.Viste.VistaAggiungiMenu import VistaAggiungiMenu
-from RistoMatic.Viste.VistaMenu import VistaMenu
-
+from RistoMatic.Viste.VistaModificaMenu import VistaMenu
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 
 class VistaGestisciMenu(QtWidgets.QWidget):
 
@@ -22,18 +22,13 @@ class VistaGestisciMenu(QtWidgets.QWidget):
         self.buttonsLayout = QHBoxLayout()
         self.vLayout = QVBoxLayout()
 
-#        self.aggiorna = QTimer()
-#        self.aggiorna.setInterval(5000)
-#        self.aggiorna.timeout.connect(self.updateUi)
-#        self.aggiorna.start()
-
         self.aggiungiMenu = QPushButton('Aggiungi menù')
         self.aggiungiMenu.clicked.connect(self.addMenu)
 
         self.eliminaMenu = QPushButton('Elimina menù')
         self.eliminaMenu.clicked.connect(self.deleteMenu)
 
-        self.scegliMenu = QPushButton('Menu per la serata')
+        self.scegliMenu = QPushButton('Imposta come attivo')
         self.scegliMenu.clicked.connect(self.selectMenu)
 
         self.modificaMenu = QPushButton('Modifica menu')
@@ -45,80 +40,53 @@ class VistaGestisciMenu(QtWidgets.QWidget):
         self.buttonsLayout.addWidget(self.modificaMenu)
         self.vLayout.addLayout(self.buttonsLayout)
 
+        self.attivo = QLabel(f"Attivo: {StatoSala.getMenuAttivo().getNomeMenu()}")
+        self.vLayout.addWidget(self.attivo)
         self.vLayout.addWidget(self.listView)
 
         self.setLayout(self.vLayout)
-        #self.resize(600, 300)
 
+        self.update_ui()
 
-
-
-    def updateUi(self):
-
+    def update_ui(self):
         listViewModel = QStandardItemModel(self.listView)
-        listaMenu = self.readPickleMenu()
+        dictMenu = StatoSala.getDictMenu()
+        if len(dictMenu) > 0:
+            for key in dictMenu.keys():
+                qItem = QStandardItem()
+                titolo = f"{key}, costo coperto: {dictMenu[key].getCostoCoperto()}"
+                qItem.setText(titolo)
+                qItem.setEditable(False)
+                font = qItem.font()
+                font.setPointSize(20)
+                qItem.setFont(font)
+                listViewModel.appendRow(qItem)
+            self.listView.setModel(listViewModel)
 
-        if listaMenu == '' or listaMenu is None :
-            print('listaMenu vuota o nulla')
-            return
-
-        else:
-           for menu in listaMenu:
-              qItem = QStandardItem()
-#             titolo = f"Nome menu: {menu.nomeMenu}, costo coperto: {menu.costoCoperto}"
-              qItem.setText('bbla')
-              qItem.setEditable(False)
-              font = qItem.font()
-              font.setPointSize(20)
-              qItem.setFont(font)
-              listViewModel.appendRow(qItem)
-        self.listView.setModel(listViewModel)
-
-
-
-#  Clicco sul menu con il mouse e dopo ne aggiungo uno nuovo
     def addMenu(self):
-        self.vistaAggiungiMenu = VistaAggiungiMenu()
+        cb = self.update_ui
+        self.vistaAggiungiMenu = VistaAggiungiMenu(cb)
         self.vistaAggiungiMenu.setWindowTitle('Menù')
         self.vistaAggiungiMenu.show()
 
-
-
-#  Clicco sul menu con il mouse e dopo lo rimuovo
     def deleteMenu(self):
-        pass
+        selected = self.listView.selectedIndexes()[0].data()
+        key = selected.split(', ')[0].strip()
+        if not key == "Default":
+            StatoSala.rimuoviMenu(key)
+        self.update_ui()
 
-
-# Clicco su menù con il mouse e dopo lo seleziono come predefinito per la serata
     def selectMenu(self):
-        pass
+        selected = self.listView.selectedIndexes()[0].data()
+        key = selected.split(', ')[0].strip()
+        StatoSala.setMenuAttivo(key)
+        self.attivo.setText(f"Attivo: {StatoSala.getMenuAttivo().getNomeMenu()}")
 
 
 # Clicco sul menù con il mouse e dopo premendo il pulsante AGGIORNA , lo vado a modificare
     def updateMenu(self):
-        self.modificaMenu = VistaMenu()
+        selected = self.listView.selectedIndexes()[0].data()
+        key = selected.split(', ')[0].strip()
+        self.modificaMenu = VistaMenu(key)
         self.modificaMenu.setWindowTitle('Menù')
         self.modificaMenu.show()
-
-
-
-
-#  e se il menu fosse vuoto ?
-    def readPickleMenu(self):
-        try:
-            f = open("Dati/Menu.pickle", "rb")
-            storicoMenu = pickle.load(f)
-            f.close()
-            print(storicoMenu==None)
-            return storicoMenu
-        except EOFError:
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Critical)
-                msg.setText("ERRORE!")
-                msg.setInformativeText("Errore lettura del file: Dati/Menu.pickle")
-                msg.exec_()
-                return
-
-
-
-

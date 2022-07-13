@@ -4,14 +4,14 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QListView, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QLabel
 
 from RistoMatic.GestioneAmministrativa.Menu import Menu
-
+from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 
 class VistaAggiungiMenu(QtWidgets.QWidget):
 
-    def __init__(self):
+    def __init__(self, callback):
         super().__init__()
 
-
+        self.callback=callback
         self.vLayout =QVBoxLayout()
         self.qlines = {}
 
@@ -34,10 +34,9 @@ class VistaAggiungiMenu(QtWidgets.QWidget):
 
 # Li salva su un file .pickle contenuto nella cartella Dati del progetto
     def saveMenu(self):
-        menu = Menu(self.qlines['nomeMenu'].text(),float(self.qlines['costoCoperto'].text()))
-        with open('Dati/menu.pickle', 'ab+') as f:
-             pickle.dump(menu, f)
-             f.close()
+        menu = Menu(self.qlines["nomeMenu"].text(),self.qlines["costoCoperto"].text())
+        StatoSala.aggiungiMenu(menu)
+        self.callback()
         self.close()
 
 

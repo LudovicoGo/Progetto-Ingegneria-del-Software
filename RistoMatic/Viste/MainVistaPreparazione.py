@@ -14,23 +14,29 @@ class VistaPreparazione(QtWidgets.QWidget):
         super().__init__()
         self.setWindowTitle("Vista Cucina")
 
-        # generazione dati di esempio
-        for i in range(0, 2):
-            tavolo = Tavolo(randint(1, 10))
+        StatoSala.start()
 
         self.layout = FlowLayout(self)
         self.timer = QTimer()
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
 
-        for comanda in StatoSala.getListaComande():
-            if not comanda.getStato() == StatoComanda.COMPLETATA:
-                self.layout.addWidget(BlockComandaPreparazione(comanda))
+        lista=StatoSala.getListaComande()
+        if len(lista)>0:
+            for comanda in lista:
+                if not comanda.getStato() == StatoComanda.COMPLETATA:
+                    self.layout.addWidget(BlockComandaPreparazione(comanda))
+        else:
+            self.layout.addWidget(QtWidgets.QLabel("Nessuna comanda presente"))
 
     def aggiorna(self):
         for i in reversed(range(self.layout.count())):
             self.layout.itemAt(i).widget().setParent(None)
 
-        for comanda in StatoSala.getListaComande():
-            if not comanda.getStato()==StatoComanda.COMPLETATA:
-                self.layout.addWidget(BlockComandaPreparazione(comanda))
+        lista=StatoSala.getListaComande()
+        if len(lista) > 0:
+            for comanda in lista:
+                if not comanda.getStato()==StatoComanda.COMPLETATA:
+                    self.layout.addWidget(BlockComandaPreparazione(comanda))
+        else:
+            self.layout.addWidget(QtWidgets.QLabel("Nessuna comanda presente"))

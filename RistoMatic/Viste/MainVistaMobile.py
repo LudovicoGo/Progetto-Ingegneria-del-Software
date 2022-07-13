@@ -18,6 +18,7 @@ class VistaMobile(QtWidgets.QWidget):
         self.timer.timeout.connect(self.aggiorna)
         self.timer.start(5000)
 
+        self.crea()
 
     def aggiorna(self):
         for i in reversed(range(self.layout.count())):

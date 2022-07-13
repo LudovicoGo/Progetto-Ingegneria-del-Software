@@ -19,12 +19,30 @@ class StatoSala():
         pass
 
     @staticmethod
+    def start():
+        if os.path.isfile('Dati/Tavoli.pickle'):
+            with open('Dati/Tavoli.pickle', 'rb') as f:
+                dati = pickle.load(f)
+            StatoSala.Tavoli=dati
+
+        dict=StatoSala.getDictMenu()
+        StatoSala.setMenuAttivo("Default")
+
+    @staticmethod
     def getListaTavoli():
         return StatoSala.Tavoli
 
     @staticmethod
     def aggiungiTavolo(tavolo):
         StatoSala.Tavoli.append(tavolo)
+
+        dati = []
+        if os.path.isfile('Dati/Tavoli.pickle'):
+            with open('Dati/Comande.pickle', 'rb') as f:
+                dati = pickle.load(f)
+        dati.append(tavolo)
+        with open('Dati/Tavoli.pickle', 'wb') as handle:
+            pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
 
     @staticmethod
     def ricercaTavolo(tavolo_ricerca):
@@ -42,6 +60,13 @@ class StatoSala():
     @staticmethod
     def rimuoviTavolo(tavolo):
         StatoSala.Tavoli.remove(tavolo)
+        dati = []
+        if os.path.isfile('Dati/Tavoli.pickle'):
+            with open('Dati/Tavoli.pickle', 'rb') as f:
+                dati = pickle.load(f)
+        dati.remove(tavolo)
+        with open('Dati/Tavoli.pickle', 'wb') as handle:
+            pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
 
     @staticmethod
     def salvaDati():
@@ -109,22 +134,34 @@ class StatoSala():
 
     @staticmethod
     def getMenuAttivo():
-        if StatoSala.Menu == None:
-            StatoSala.setMenuAttivo(StatoSala.getDictMenu()["Default"])
+        if StatoSala.Menu == None or StatoSala.Menu==False:
+            dictMenu=StatoSala.getDictMenu()
+            StatoSala.setMenuAttivo(dictMenu["Default"])
         return StatoSala.Menu
 
     @staticmethod
-    def setMenuAttivo(menu):
+    def setMenuAttivo(key):
+        menu = StatoSala.cercaMenu(key)
         StatoSala.Menu=menu
 
     @staticmethod
-    def rimuoviMenu(menu):
+    def rimuoviMenu(key):
+        if not key=="Default" and os.path.isfile('Dati/Menu.pickle'):
+            with open('Dati/Menu.pickle', 'rb') as f:
+                menus = pickle.load(f)
+                menus.pop(key)
+                with open('Dati/Menu.pickle', 'wb') as handle:
+                    pickle.dump(menus, handle, pickle.HIGHEST_PROTOCOL)
+
+    @staticmethod
+    def cercaMenu(key):
         if os.path.isfile('Dati/Menu.pickle'):
             with open('Dati/Menu.pickle', 'rb') as f:
                 menus = pickle.load(f)
-                menus.remove(menu)
-                with open('Dati/Menu.pickle', 'wb') as handle:
-                    pickle.dump(menus, handle, pickle.HIGHEST_PROTOCOL)
+                try:
+                    return menus[key]
+                except:
+                    return False
 
 
     @staticmethod
