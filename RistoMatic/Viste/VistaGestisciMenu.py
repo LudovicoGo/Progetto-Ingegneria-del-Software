@@ -15,7 +15,7 @@ class VistaGestisciMenu(QtWidgets.QWidget):
 # definire qualcosa per la callback
     def __init__(self):
         super().__init__()
-
+        self.setWindowTitle('Gestione dei menù')
         self.listView = QListView()
 
 

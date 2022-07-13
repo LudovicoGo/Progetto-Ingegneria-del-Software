@@ -10,9 +10,9 @@ class VistaTavoli(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.layout = FlowLayout(self)
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.aggiornaUi)
-        self.timer.start(5000)
+        #self.timer = QTimer()
+        #self.timer.timeout.connect(self.aggiornaUi)
+        #self.timer.start(5000)
         self.aggiornaUi()
 
     def aggiornaUi(self):

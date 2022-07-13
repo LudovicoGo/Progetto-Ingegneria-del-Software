@@ -14,9 +14,9 @@ class VistaMobile(QtWidgets.QWidget):
         self.setWindowTitle("Vista Mobile")
 
         self.layout = FlowLayout(self)
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.aggiorna)
-        self.timer.start(5000)
+        #self.timer = QTimer()
+        #self.timer.timeout.connect(self.aggiorna)
+        #self.timer.start(5000)
 
         self.crea()
 

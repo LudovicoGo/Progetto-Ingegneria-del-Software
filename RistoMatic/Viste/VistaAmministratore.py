@@ -53,7 +53,7 @@ class VistaAmministratore(QtWidgets.QWidget):
         annullaButton.setStyleSheet('background-color: green')
 
         menuButton = QPushButton('Gestisci Menu')
-        menuButton.clicked.connect(self.menu)
+        menuButton.clicked.connect(self.showMenu)
         menuButton.setStyleSheet('background-color: red')
 
         tavoloButton = QPushButton('Gestisci Tavoli')
@@ -202,9 +202,8 @@ class VistaAmministratore(QtWidgets.QWidget):
 
 
 
-    def menu(self):
+    def showMenu(self):
         self.menu = VistaGestisciMenu()
-        self.menu.setWindowTitle('Gestione dei menù')
         self.menu.show()
 
     def tavoli(self):
