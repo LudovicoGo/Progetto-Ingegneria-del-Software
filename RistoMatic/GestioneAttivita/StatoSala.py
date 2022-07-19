@@ -59,14 +59,19 @@ class StatoSala():
 
     @staticmethod
     def rimuoviTavolo(tavolo):
-        StatoSala.Tavoli.remove(tavolo)
-        dati = []
-        if os.path.isfile('Dati/Tavoli.pickle'):
-            with open('Dati/Tavoli.pickle', 'rb') as f:
-                dati = pickle.load(f)
-        dati.remove(tavolo)
-        with open('Dati/Tavoli.pickle', 'wb') as handle:
-            pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
+        if (tavolo.getIsLibero()):
+            try:
+                StatoSala.Tavoli.remove(tavolo)
+                dati = []
+                if os.path.isfile('Dati/Tavoli.pickle'):
+                    with open('Dati/Tavoli.pickle', 'rb') as f:
+                        dati = pickle.load(f)
+                dati.remove(tavolo)
+                with open('Dati/Tavoli.pickle', 'wb') as handle:
+                    pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
+            except:
+                print("errore eliminazione")
+
 
     @staticmethod
     def salvaDati():

@@ -19,6 +19,9 @@ class Tavolo():
             self.riferimentoTavolo = riferimentoTav
         StatoSala.aggiungiTavolo(self)
 
+    def __eq__(self,obj):
+            return self.riferimentoTavolo==obj.riferimentoTavolo
+
     def getInfoTavolo(self) -> dict:
         return {
             "riferimentoTavolo": self.riferimentoTavolo,
@@ -28,7 +31,7 @@ class Tavolo():
         }
 
     def getIsLibero(self) -> bool:
-        return (not self.isLibero and not self.getIsPrenotato())
+        return (self.isLibero and not self.getIsPrenotato())
 
     def getIsPrenotato(self) -> bool:
         prenotazioni=StatoSala.getListaPrenotazioni()

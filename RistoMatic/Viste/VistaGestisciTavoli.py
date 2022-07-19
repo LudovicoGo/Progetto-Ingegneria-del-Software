@@ -56,8 +56,8 @@ class VistaGestisciTavoli(QtWidgets.QWidget):
         riferimentoTavolo = int(selected.split(', ')[0].strip().split()[2])
         print('num tav',riferimentoTavolo)
    #    numeroPosti = int(selected.split(', ')[1].strip().split()[3])
-
-        StatoSala.eliminaTavoloPerRiferimento(riferimentoTavolo)
+        tavolo = StatoSala.ricercaTavolo(riferimentoTavolo)
+        StatoSala.rimuoviTavolo(tavolo)
         self.aggiornaUi()
 
     def visualizzaAltreInformazioni(self):

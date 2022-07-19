@@ -21,9 +21,9 @@ class VistaAggiungiElementoMenu(QtWidgets.QWidget):
         self.addInfoText("prezzoElemento", "Prezzo pietanza/bevanda")
 
         self.box = QComboBox()
-        self.box.addItem("1")
-        self.box.addItem("2")
-        self.box.addItems("3")
+        self.box.addItem("Cucina")
+        self.box.addItem("Bar")
+        self.box.addItem("F")
         self.vLayout.addWidget(self.box)
 
         self.salvaElemento = QPushButton('Aggiungi Elemento al Menù')
@@ -42,7 +42,16 @@ class VistaAggiungiElementoMenu(QtWidgets.QWidget):
 
 
     def saveElemento(self):
-        elemento = ElementoMenu(self.qlines["nomeElemento"].text(),self.box.currentText(),float(self.qlines['prezzoElemento'].text()))
+        text = self.box.currentText()
+        zona=Zone.CUCINA
+        if(text=="Cucina"):
+            zona=Zone.CUCINA
+        elif(text=="Bar"):
+            zona = Zone.BAR
+        elif (text=="F"):
+            zona = Zone.FORNO
+
+        elemento = ElementoMenu(self.qlines["nomeElemento"].text(),zona,float(self.qlines['prezzoElemento'].text()))
         self.menu.aggiungiElementoMenu(elemento)
         self.cb()
         self.close()

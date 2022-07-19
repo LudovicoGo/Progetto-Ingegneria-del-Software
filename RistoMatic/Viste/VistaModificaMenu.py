@@ -2,6 +2,7 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QListView, QLineEdit, QLabel
 from PySide6.QtGui import QStandardItemModel, QStandardItem, QCloseEvent
 
+from RistoMatic.GestioneAttivita.Enum import Zone
 from RistoMatic.Viste.VistaAggiungiElementoMenu import VistaAggiungiElementoMenu
 from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 
@@ -19,7 +20,6 @@ class VistaMenu(QtWidgets.QWidget):
         self.vLayout = QVBoxLayout()
         self.listView = QListView()
         self.qlines = {}
-#  Ci deve stare il nome del menu quindi : self.addInfoText("nomeMenu" , f"Nome menu: {<NOME_MENU>}")
         self.addInfoText("nomeMenu", "Nome menù: ")
 
         self.aggiungiElemento = QPushButton('Nuova pietanza')
@@ -42,7 +42,16 @@ class VistaMenu(QtWidgets.QWidget):
         if len(listaelementi) > 0:
             for key in listaelementi:
                 qItem = QStandardItem()
-                titolo = f"{listaelementi[key].getNomeElemento()}, prezzo: {listaelementi[key].getPrezzoElemento()}, Zona: {listaelementi[key].getAreaPreparazione()}"
+
+                zona = listaelementi[key].getAreaPreparazione()
+                text=""
+                if (zona == Zone.CUCINA):
+                    text = "Cucina"
+                elif (zona == Zone.BAR):
+                    text = "Bar"
+                elif (zona == Zone.FORNO):
+                    text = "Forno"
+                titolo = f"{listaelementi[key].getNomeElemento()}, prezzo: {listaelementi[key].getPrezzoElemento()}, Zona: {text}"
                 qItem.setText(titolo)
                 qItem.setEditable(False)
                 font = qItem.font()
