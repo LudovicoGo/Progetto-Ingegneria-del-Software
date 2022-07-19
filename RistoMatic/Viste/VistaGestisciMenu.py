@@ -16,7 +16,9 @@ class VistaGestisciMenu(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Gestione dei menù')
+        self.resize(1000, 600)
         self.listView = QListView()
+
 
 
         self.buttonsLayout = QHBoxLayout()

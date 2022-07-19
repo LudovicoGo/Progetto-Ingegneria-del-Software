@@ -86,7 +86,7 @@ class VistaAggiungiPrenotazione(QWidget):
         riferimentoTavolo = int(self.qlines["riferimentoTavolo"].text())
 
         cliente = Cliente("", "")
-        self.prenotazione = Prenotazione('', -1, '', cliente, -1)
+        self.prenotazione = Prenotazione('', -1, cliente, -1)
 
         nome = self.qlines["nome"].text()
         recapitoTelefonico = self.qlines["recapitoTelefonico"].text()

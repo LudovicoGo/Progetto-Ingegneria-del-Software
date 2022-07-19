@@ -12,6 +12,9 @@ class VistaMenu(QtWidgets.QWidget):
         super().__init__()
 
         self.key = key
+
+        self.resize(600, 600)
+
         self.menu = StatoSala.cercaMenu(self.key)
         self.vLayout = QVBoxLayout()
         self.listView = QListView()
