@@ -1,14 +1,13 @@
 ****************************** PIZZERIA AMADEUS ******************************************
 
 Località: Termoli, Molise Cb
-data: 03 Jul 2022
+data: 23 Jul 2022
 
         quant.  prz sing pezz.
-*) birra   x3  3  
+*) birra   x2  3  
 
 
 
-Costo totale coperto:  2
-Totale:    11€
+Totale:    6€
 
 ***************************************************************************************

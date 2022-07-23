@@ -12,7 +12,7 @@ class VistaPreparazione(QtWidgets.QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Vista Cucina")
+        self.setWindowTitle("Vista Preparazione")
 
         StatoSala.start()
 
