@@ -48,7 +48,7 @@ class VistaAggiungiElementoMenu(QtWidgets.QWidget):
             zona=Zone.CUCINA
         elif(text=="Bar"):
             zona = Zone.BAR
-        elif (text=="F"):
+        elif (text=="Forno"):
             zona = Zone.FORNO
 
         elemento = ElementoMenu(self.qlines["nomeElemento"].text(),zona,float(self.qlines['prezzoElemento'].text()))

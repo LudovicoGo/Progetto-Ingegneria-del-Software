@@ -39,17 +39,27 @@ class VistaAggiungiTavolo(QWidget):
         self.vLayout.addWidget(testo)
 
     def aggiungiTavolo(self):
-        print('aggiungiTavolo')
+        #print('aggiungiTavolo')
         numeroPosti = self.qlines["numeroPosti"].text()
 
         numero = self.qlines["riferimentoTavolo"].text()
 
-        print(numero)
+       # print(numero)
         check = self.box.checkState()
         if check != 2:  # se c'è la spunta il numero del tavolo viene generato automaticamente
-            print('1')
-            numero = int(numero)
-            print(numero)
+          #  print('1')
+            try:
+              numero = int(numero)
+            except:
+              msg = QMessageBox()
+              msg.setIcon(QMessageBox.Critical)
+              msg.setWindowTitle('Errore input')
+              msg.setText("Attenzione!")
+              msg.setInformativeText("Controlla se hai inserito correttamente tutti i dati nei campi")
+              msg.exec_()
+              return
+
+
             numeroEsistente = False
 
             for tavolo in StatoSala.Tavoli:
@@ -64,7 +74,7 @@ class VistaAggiungiTavolo(QWidget):
             if numeroEsistente == False:
                 tavolo = Tavolo(int(numeroPosti), numero)
         elif check == 2:
-            print('2')
+            #print('2')
             tavolo = Tavolo(numeroPosti)
 
         with open('Dati/Tavoli.pickle', 'wb') as handle:

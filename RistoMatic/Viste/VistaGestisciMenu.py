@@ -12,7 +12,7 @@ from RistoMatic.GestioneAttivita.StatoSala import StatoSala
 
 class VistaGestisciMenu(QtWidgets.QWidget):
 
-# definire qualcosa per la callback
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Gestione dei menù')
@@ -92,3 +92,4 @@ class VistaGestisciMenu(QtWidgets.QWidget):
         self.modificaMenu = VistaMenu(key)
         self.modificaMenu.setWindowTitle('Menù')
         self.modificaMenu.show()
+
