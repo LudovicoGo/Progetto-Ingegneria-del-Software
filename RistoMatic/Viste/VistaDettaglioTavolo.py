@@ -73,9 +73,16 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
             msgBox.exec()
 
     def modifica_coperti(self):
-        try:
+
             if not self.coperti.text() =="":
-              if int(self.coperti.text()) > self.tavolo.getNumeroPosti() :
+              if self.coperti.text().isnumeric() is False  :
+                  msgBox = QMessageBox()
+                  msgBox.setText("Coperto non valido. Puoi inserire solo NUMERI !")
+                  msgBox.exec()
+                  self.tavolo.setNumeroCoperti(1)
+                  self.coperti.setText("1")
+                  return
+              if int(self.coperti.text()) > int(self.tavolo.getNumeroPosti()) :
                   msgBox = QMessageBox()
                   msgBox.setText("Capienza massima tavolo raggiunta !")
                   msgBox.exec()
@@ -83,12 +90,8 @@ class BlockDettaglioTavolo(QtWidgets.QWidget):
                   self.coperti.setText("1")
                   return
               self.tavolo.setNumeroCoperti(int(self.coperti.text()))
-              if not self.wcomanda ==None:
+            if not self.wcomanda ==None:
                     self.wcomanda.aggiorna_totale()
+                    return
 
-        except:
-            msgBox = QMessageBox()
-            msgBox.setText("Coperto non valido. Puoi inserire solo NUMERI !")
-            msgBox.exec()
-            self.tavolo.setNumeroCoperti(1)
-            self.coperti.setText("1")
+
