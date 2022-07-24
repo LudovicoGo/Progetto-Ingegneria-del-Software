@@ -245,6 +245,7 @@ class StatoSala():
         with open('Dati/Comande.pickle', 'wb') as handle:
             pickle.dump(dati, handle, pickle.HIGHEST_PROTOCOL)
 
+        StatoSala.rimuoviComanda(ordine.getComanda())
         StatoSala.OrdiniAsporto.remove(ordine)
 
 

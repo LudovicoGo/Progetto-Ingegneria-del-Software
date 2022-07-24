@@ -22,11 +22,10 @@ class VistaPreparazione(QtWidgets.QWidget):
         self.timer.start(5000)
 
         lista=StatoSala.getListaComande()
-        if len(lista)>0:
-            for comanda in lista:
-                if not comanda.getStato() == StatoComanda.COMPLETATA:
-                    self.layout.addWidget(BlockComandaPreparazione(comanda))
-        else:
+        for comanda in lista:
+            if not comanda.getStato() == StatoComanda.COMPLETATA:
+                self.layout.addWidget(BlockComandaPreparazione(comanda))
+        if self.layout.count()==0:
             self.layout.addWidget(QtWidgets.QLabel("Nessuna comanda presente"))
 
     def aggiorna(self):
@@ -34,9 +33,8 @@ class VistaPreparazione(QtWidgets.QWidget):
             self.layout.itemAt(i).widget().setParent(None)
 
         lista=StatoSala.getListaComande()
-        if len(lista) > 0:
-            for comanda in lista:
-                if not comanda.getStato()==StatoComanda.COMPLETATA:
-                    self.layout.addWidget(BlockComandaPreparazione(comanda))
-        else:
+        for comanda in lista:
+            if not comanda.getStato()==StatoComanda.COMPLETATA:
+                self.layout.addWidget(BlockComandaPreparazione(comanda))
+        if self.layout.count() == 0:
             self.layout.addWidget(QtWidgets.QLabel("Nessuna comanda presente"))
