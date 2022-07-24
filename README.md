@@ -7,11 +7,11 @@
 ## REGOLE PER IL CORRETTO UTILIZZO :
 
 1) Scaricare tutta la repository
-2) utilizzare un ide , ad esempio PyCharm , per far partire l'applicazione
+2) Utilizzare un ide , ad esempio PyCharm , per far partire l'applicazione
 
 
 ### Nota 1: Evitare di cambiare l'ordine dei file e delle cartelle
-### Nota 2: Non runnare/avviare la cartella RistoMatic separatamente delle altre !
+### Nota 2: Non runnare/avviare la cartella RistoMatic separatamente dalle altre !
 
 
 
