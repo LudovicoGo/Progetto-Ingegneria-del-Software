@@ -2,9 +2,6 @@ import os
 import sys
 import unittest
 
-# TODO : In VistaAggiungiElementoMenu vedere perchè non caricano i menu
-
-
 from PySide6 import QtWidgets
 from Viste.MainVistaMobile import VistaMobile
 from Viste.MainVistaPreparazione import VistaPreparazione
@@ -14,6 +11,8 @@ from Tests.TestPrenotazione import *
 from Tests.TestStatistiche import *
 from Tests.TestMenu import *
 
+
+# Settare testmode=True per poter avviare correttamente i test
 testmode=False
 # main
 if __name__ == "__main__":
