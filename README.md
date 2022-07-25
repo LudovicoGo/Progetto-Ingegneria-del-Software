@@ -24,3 +24,19 @@
 
 1) Come faccio a selezionare le date dal calendario per effettuare una statistica ?
 #### Ristomatic-risponde : Semplice ! Tieni premuto maiusc+tasto-sx-mouse e seleziona le date di tuo interesse
+
+
+
+
+
+
+
+
+
+## Librerie principali utilizzate:
+
+1) PySide6
+2) matplotlib
+3) cryptografy
+
+ 
