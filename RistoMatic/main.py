@@ -12,7 +12,7 @@ from Tests.TestStatistiche import *
 from Tests.TestMenu import *
 
 
-# Settare testmode=True per poter avviare correttamente i test
+# Settare testmode=True per poter avviare correttamente i test (VEDERE DIRECTORY TEST)
 testmode=False
 # main
 if __name__ == "__main__":
