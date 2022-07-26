@@ -9,9 +9,10 @@
 1) Scaricare tutta la repository
 2) Utilizzare un ide , ad esempio PyCharm , per far partire l'applicazione
 
-
+## Per accedere alla parte 'amministratore' : nome-utente = 'a' , password = '1234'
 ### Nota 1: Evitare di cambiare l'ordine dei file e delle cartelle
 ### Nota 2: Non runnare/avviare la cartella RistoMatic separatamente dalle altre !
+
 
 
 
@@ -38,5 +39,8 @@
 1) PySide6
 2) matplotlib
 3) cryptografy
+
+
+
 
  
